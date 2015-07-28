@@ -1,0 +1,399 @@
+<!--
+* Copyright (C) 2010, Freescale Semiconductor, Inc. All Rights Reserved.
+* The CFG element contains a list of recognized usb devices.
+*  DEV elements provide a name, class, vid and pid for each device.
+*
+* Each LIST element contains a list of update instructions.
+*  "Install" - Erase media and install firmware.
+*  "Update" - Update firmware only.
+*
+* Each CMD element contains one update instruction of attribute type.
+*  "pull" - Does UtpRead(body, file) transaction.
+*  "push" - Does UtpWrite(body, file) transaction.
+*  "drop" - Does UtpCommand(body) then waits for device to disconnect.
+*  "boot" - Finds configured device, forces it to "body" device and downloads "file".
+*  "find" - Waits for "timeout" seconds for the "body" device to connect.
+*  "show" - Parse and show device info in "file".  
+*<STATE name="Recovery" dev="IMX28"/>
+*<DEV name="IMX28" vid="15A2" pid="004F"/>
+*
+* FIXME: 
+* Currently, the sd image can use with uboot or without uboot
+* Nand image not uses uboot (only imx28_ivt_linux.sb)
+*
+-->
+
+<UCL>
+  <CFG>
+    <STATE name="Recovery" dev="IMX28"/>
+    <STATE name="Updater"   dev="Updater" />  
+    <DEV name="IMX28" vid="15A2" pid="004F"/>
+    <DEV name="Updater" vid="066F" pid="37FF" />
+  </CFG>
+  
+<!--
+*
+* Загрузка по USB и выполнение imx28_ivt_uboot.sb 
+*
+-->
+
+<LIST name="Run imx28_ivt_uboot.sb" desc="Run uboot">
+<CMD type="boot" body="Recovery" file="files/imx28_ivt_uboot.sb" timeout="60" if="HabDisable">Booting update firmware.</CMD>
+<CMD type="boot" body="Recovery" file="files/imx28_ivt_uboot.sb" timeout="60" if="HabEnable">Booting update firmware.</CMD>
+<CMD type="find" body="Updater" timeout="20"/>
+<CMD type="push" body="$ echo Update Complete!">Done</CMD>
+</LIST>
+
+<!--
+*
+* Загрузка по USB и выполнение imx28_ivt_linux.sb
+*
+-->
+
+<LIST name="Run imx28_ivt_linux.sb" desc="Run Linux">
+<CMD type="boot" body="Recovery" file="files/imx28_ivt_linux.sb" timeout="60" if="HabDisable">Booting update firmware.</CMD>
+<CMD type="boot" body="Recovery" file="files/imx28_ivt_linux.sb" timeout="60" if="HabEnable">Booting update firmware.</CMD>
+<CMD type="find" body="Updater" timeout="20"/>
+<CMD type="push" body="$ echo Update Complete!">Done</CMD>
+</LIST>
+
+
+
+<!--
+*
+* Загрузка по USB и запись в SPI Flash загрузчика (imx28_ivt_uboot_spi.sb), ядра (uImage) и файловой системы (rootfs.tar.bz2)
+*
+-->
+
+<LIST name="SPI-Write All" desc="Choose SPI NOR as media to Flash Linux">
+<CMD type="boot" body="Recovery" file="updater.sb" if="HabDisable">Booting update firmware.</CMD>
+<CMD type="boot" body="Recovery" file="updater_ivt.sb" if="HabEnable">Booting update firmware.</CMD>
+<CMD type="find" body="Updater" timeout="180"/>
+
+<CMD type="push" body="mknod class/mtd,mtd2,/dev/mtd2"/>
+<CMD type="push" body="$ flash_eraseall /dev/mtd2">Erasing boot partition</CMD>
+<CMD type="push" body="send" file="files/imx28_ivt_uboot_spi.sb">Sending firmware</CMD>
+<CMD type="push" body="$ dd if=$FILE of=/dev/mtd2">Flashing firmware</CMD>
+<CMD type="push" body="mknod class/mtd,mtd3,/dev/mtd3"/>
+<CMD type="push" body="send" file="files/uImage">Sending uImage</CMD>
+<CMD type="push" body="$ flashcp -v $FILE /dev/mtd3">Programming uImage</CMD>
+<CMD type="push" body="mknod class/mtd,mtd4,/dev/mtd4"/>
+<CMD type="push" body="mknod block,mtdblock4,/dev/mtdblock4,block"/>
+<CMD type="push" body="send" file="files/rootfs.jffs2">Sending rootfs</CMD>
+<CMD type="push" body="$ flashcp -v $FILE /dev/mtd4">Programming rootfs</CMD>
+
+
+<CMD type="push" body="$ echo Update Complete!">Done</CMD>
+</LIST>
+
+
+<!--
+*
+* Загрузка по USB и запись в SPI Flash загрузчика (imx28_ivt_uboot_spi.sb) - работает, проверено 10/06/2013
+*
+-->
+
+<LIST name="SPI-Write u-boot" desc="Choose SPI NOR as media to Flash Linux">
+<CMD type="boot" body="Recovery" file="updater.sb" if="HabDisable">Booting update firmware.</CMD>
+<CMD type="boot" body="Recovery" file="updater_ivt.sb" if="HabEnable">Booting update firmware.</CMD>
+<CMD type="find" body="Updater" timeout="180"/>
+
+<CMD type="push" body="mknod class/mtd,mtd2,/dev/mtd2"/>
+<CMD type="push" body="$ flash_eraseall /dev/mtd2">Erasing boot partition</CMD>
+<CMD type="push" body="send" file="files/imx28_ivt_uboot_spi.sb">Sending firmware</CMD>
+<CMD type="push" body="$ dd if=$FILE of=/dev/mtd2">Flashing firmware</CMD>
+<CMD type="push" body="$ echo Update Complete!">Done</CMD>
+</LIST>
+
+<!--
+*
+* Загрузка по USB и запись в SPI Flash ядра (uImage)- работает, проверено 11/06/2013
+*
+-->
+
+<LIST name="SPI-Write uImage" desc="Choose SPI NOR as media to Flash Linux">
+<CMD type="boot" body="Recovery" file="updater.sb" if="HabDisable">Booting update firmware.</CMD>
+<CMD type="boot" body="Recovery" file="updater_ivt.sb" if="HabEnable">Booting update firmware.</CMD>
+<CMD type="find" body="Updater" timeout="180"/>
+
+
+<CMD type="push" body="mknod class/mtd,mtd3,/dev/mtd3"/>
+<CMD type="push" body="send" file="files/uImage">Sending uImage</CMD>
+<CMD type="push" body="$ flashcp -v $FILE /dev/mtd3">Programming uImage</CMD>
+<CMD type="push" body="$ echo Update Complete!">Done</CMD>
+</LIST>
+
+<!--
+*
+* Загрузка по USB и запись в SPI Flash файловой системы (rootfs.tar.bz2)
+*
+-->
+
+
+<LIST name="SPI-Write rootfs" desc="Choose SPI NOR as media to Flash Linux">
+<CMD type="boot" body="Recovery" file="updater.sb" if="HabDisable">Booting update firmware.</CMD>
+<CMD type="boot" body="Recovery" file="updater_ivt.sb" if="HabEnable">Booting update firmware.</CMD>
+<CMD type="find" body="Updater" timeout="180"/>
+
+<CMD type="push" body="mknod class/mtd,mtd4,/dev/mtd4"/>
+<CMD type="push" body="mknod block,mtdblock4,/dev/mtdblock4,block"/>
+<CMD type="push" body="send" file="files/rootfs.jffs2">Sending rootfs</CMD>
+<CMD type="push" body="$ flashcp -v $FILE /dev/mtd4">Programming uImage</CMD>
+<CMD type="push" body="$ echo Update Complete!">Done</CMD>
+</LIST>
+
+<!--
+*
+* Загрузка по USB и запись в NAND Flash ядра (imx28_ivt_linux.sb) и файловой системы (rootfs.tar.bz2)
+*
+-->
+
+
+<LIST name="NAND-Write Linux&rootfs" desc="Install on singlechip NAND">
+<CMD type="boot" body="Recovery" file="updater.sb" timeout="60" if="HabDisable">Booting update firmware.</CMD>
+<CMD type="boot" body="Recovery" file="updater_ivt.sb" timeout="60" if="HabEnable">Booting update firmware.</CMD>
+<CMD type="find" body="Updater" timeout="180"/>
+<CMD type="push" body="mknod class/mtd,mtd0,/dev/mtd0"/>
+<CMD type="push" body="mknod class/mtd,mtd1,/dev/mtd1"/>
+<CMD type="push" body="mknod class/misc,ubi_ctrl,/dev/ubi_ctrl"/>
+<!-- UBI image support
+* If the user has ubi image, he can use below command to program ubi image to certain mtd device.
+* <CMD type="push" body="pipe ubiformat /dev/mtdX -y -f - -S @FILESIZE" file="files/ubi.img">Sending and writting rootfs</CMD>
+*
+* If @FILESIZE is not supported at host tool, please replace it with real file size in byte.
+-->
+<!--
+****************************TAKE CARE************************************
+* Adding below line if the user wants to erase all blocks including bad blocks.
+* Users may use this option only when the bad block flag is changed between two
+* operations, like the first operation is for WinCE, and the second opertion is for
+* Linux.
+* Besides, ONLY adding below line at R&D periods, as this may will cause the whole
+* Nand chip unstable.
+*
+* echo 1 > /sys/devices/platform/gpmi-nfc.0/ignorebad
+*
+-->
+<CMD type="push" body="$ flash_eraseall /dev/mtd0">Erasing rootfs partition</CMD>
+<CMD type="push" body="$ flash_eraseall /dev/mtd1">Erasing rootfs partition</CMD>
+<!--
+****************************TAKE CARE************************************
+* If the user sets ignorebad flag above, please clear it here
+* echo 0 > /sys/devices/platform/gpmi-nfc.0/ignorebad
+*
+-->
+<CMD type="push" body="send" file="files/imx28_ivt_linux.sb">Sending firmware</CMD>
+<CMD type="push" body="$ kobs-ng init $FILE">Flashing firmware</CMD>
+
+<CMD type="push" body="$ ubiattach /dev/ubi_ctrl -m 1 -d 0">Attaching UBI partition</CMD>
+<CMD type="push" body="mknod class/ubi,ubi0,/dev/ubi0"/>
+<CMD type="push" body="$ ubimkvol /dev/ubi0 -n 0 -N rootfs0 -s 126000000">Creating UBI volumes</CMD>
+<CMD type="push" body="$ ubimkvol /dev/ubi0 -n 1 -N data -s 100000000">Creating UBI volumes</CMD>
+<CMD type="push" body="$ mkdir -p /mnt/ubi0; mount -t ubifs ubi0_0 /mnt/ubi0" />
+<CMD type="push" body="pipe tar -jxv -C /mnt/ubi0" file="files/rootfs.tar.bz2">Transfer rootfs</CMD>
+<CMD type="push" body="frf">Finish Flashing NAND</CMD>
+<CMD type="push" body="$ umount /mnt/ubi0">Unmounting</CMD>
+<CMD type="push" body="$ echo Update Complete!">Done</CMD>
+ <!--
+    The below commands will trigger reboot
+    <CMD type="push" body="!3">Done</CMD>
+ -->
+</LIST>
+
+
+<!--
+*
+* Загрузка по USB и запись в NAND Flash ядра (imx28_ivt_linux.sb) и файловой системы (rootfs.tar.bz2)
+*
+-->
+
+
+<LIST name="NAND-Test&rootfs" desc="Install on singlechip NAND">
+<CMD type="boot" body="Recovery" file="updater.sb" timeout="60" if="HabDisable">Booting update firmware.</CMD>
+<CMD type="boot" body="Recovery" file="updater_ivt.sb" timeout="60" if="HabEnable">Booting update firmware.</CMD>
+<CMD type="find" body="Updater" timeout="180"/>
+
+<CMD type="push" body="mknod class/mtd,mtd1,/dev/mtd1"/>
+<CMD type="push" body="mknod class/misc,ubi_ctrl,/dev/ubi_ctrl"/>
+<!-- UBI image support
+* If the user has ubi image, he can use below command to program ubi image to certain mtd device.
+* <CMD type="push" body="pipe ubiformat /dev/mtdX -y -f - -S @FILESIZE" file="files/ubi.img">Sending and writting rootfs</CMD>
+*
+* If @FILESIZE is not supported at host tool, please replace it with real file size in byte.
+-->
+<!--
+****************************TAKE CARE************************************
+* Adding below line if the user wants to erase all blocks including bad blocks.
+* Users may use this option only when the bad block flag is changed between two
+* operations, like the first operation is for WinCE, and the second opertion is for
+* Linux.
+* Besides, ONLY adding below line at R&D periods, as this may will cause the whole
+* Nand chip unstable.
+*
+* echo 1 > /sys/devices/platform/gpmi-nfc.0/ignorebad
+*
+-->
+<CMD type="push" body="$ flash_eraseall /dev/mtd0">Erasing rootfs partition</CMD>
+<CMD type="push" body="$ flash_eraseall /dev/mtd1">Erasing rootfs partition</CMD>
+<!--
+****************************TAKE CARE************************************
+* If the user sets ignorebad flag above, please clear it here
+* echo 0 > /sys/devices/platform/gpmi-nfc.0/ignorebad
+*
+-->
+
+<CMD type="push" body="$ ubiattach /dev/ubi_ctrl -m 1 -d 0">Attaching UBI partition</CMD>
+<CMD type="push" body="mknod class/ubi,ubi0,/dev/ubi0"/>
+<CMD type="push" body="$ ubimkvol /dev/ubi0 -n 0 -N rootfs0 -s 126000000">Creating UBI volumes</CMD>
+<CMD type="push" body="$ ubimkvol /dev/ubi0 -n 1 -N data -s 100000000">Creating UBI volumes</CMD>
+<CMD type="push" body="$ mkdir -p /mnt/ubi0; mount -t ubifs ubi0_0 /mnt/ubi0" />
+<CMD type="push" body="pipe tar -jxv -C /mnt/ubi0" file="files/rootfs.tar.bz2">Transfer rootfs</CMD>
+<CMD type="push" body="frf">Finish Flashing NAND</CMD>
+<CMD type="push" body="$ umount /mnt/ubi0">Unmounting</CMD>
+<CMD type="push" body="$ echo Update Complete!">Done</CMD>
+ <!--
+    The below commands will trigger reboot
+    <CMD type="push" body="!3">Done</CMD>
+ -->
+</LIST>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
+*
+* Загрузка по USB и запись в NAND Flash 3 ядра (imx28_ivt_linux.sb) и файловой системы (rootfs.tar.bz2)
+*
+-->
+
+
+<LIST name="NAND-Write Linux V3&rootfs" desc="Install on singlechip NAND">
+<CMD type="boot" body="Recovery" file="updater.sb" timeout="60" if="HabDisable">Booting update firmware.</CMD>
+<CMD type="boot" body="Recovery" file="updater_ivt.sb" timeout="60" if="HabEnable">Booting update firmware.</CMD>
+<CMD type="find" body="Updater" timeout="180"/>
+<CMD type="push" body="mknod class/mtd,mtd0,/dev/mtd0"/>
+<CMD type="push" body="mknod class/mtd,mtd1,/dev/mtd1"/>
+<CMD type="push" body="mknod class/misc,ubi_ctrl,/dev/ubi_ctrl"/>
+<!-- UBI image support
+* If the user has ubi image, he can use below command to program ubi image to certain mtd device.
+* <CMD type="push" body="pipe ubiformat /dev/mtdX -y -f - -S @FILESIZE" file="files/ubi.img">Sending and writting rootfs</CMD>
+*
+* If @FILESIZE is not supported at host tool, please replace it with real file size in byte.
+-->
+<!--
+****************************TAKE CARE************************************
+* Adding below line if the user wants to erase all blocks including bad blocks.
+* Users may use this option only when the bad block flag is changed between two
+* operations, like the first operation is for WinCE, and the second opertion is for
+* Linux.
+* Besides, ONLY adding below line at R&D periods, as this may will cause the whole
+* Nand chip unstable.
+*
+* echo 1 > /sys/devices/platform/gpmi-nfc.0/ignorebad
+*
+-->
+<CMD type="push" body="$ flash_eraseall /dev/mtd0">Erasing rootfs partition</CMD>
+<CMD type="push" body="$ flash_eraseall /dev/mtd1">Erasing rootfs partition</CMD>
+<!--
+****************************TAKE CARE************************************
+* If the user sets ignorebad flag above, please clear it here
+* echo 0 > /sys/devices/platform/gpmi-nfc.0/ignorebad
+*
+-->
+<CMD type="push" body="send" file="files/imx28_ivt_linux.sb">Sending firmware</CMD>
+<CMD type="push" body="$ kobs-ng init $FILE">Flashing firmware</CMD>
+
+<CMD type="push" body="$ ubiattach /dev/ubi_ctrl -m 1 -d 0">Attaching UBI partition</CMD>
+<CMD type="push" body="mknod class/ubi,ubi0,/dev/ubi0"/>
+<CMD type="push" body="$ ubimkvol /dev/ubi0 -n 0 -N rootfs0 -s 126000000">Creating UBI volumes</CMD>
+<CMD type="push" body="$ ubimkvol /dev/ubi0 -n 1 -N data -s 100000000">Creating UBI volumes</CMD>
+<CMD type="push" body="$ mkdir -p /mnt/ubi0; mount -t ubifs ubi0_0 /mnt/ubi0" />
+<CMD type="push" body="pipe tar -jxv -C /mnt/ubi0" file="files/rootfs.tar.bz2">Transfer rootfs</CMD>
+<CMD type="push" body="frf">Finish Flashing NAND</CMD>
+<CMD type="push" body="$ umount /mnt/ubi0">Unmounting</CMD>
+<CMD type="push" body="$ echo Update Complete!">Done</CMD>
+ <!--
+    The below commands will trigger reboot
+    <CMD type="push" body="!3">Done</CMD>
+ -->
+</LIST>
+
+
+<!--
+*
+* Загрузка по USB и запись в NAND Flash ядра (imx28_ivt_linux.sb) и файловой системы Debian (rootfs-deb.tar.bz2)
+*
+-->
+
+
+<LIST name="NAND-Write Linux&Debian" desc="Install on singlechip NAND">
+<CMD type="boot" body="Recovery" file="updater.sb" timeout="60" if="HabDisable">Booting update firmware.</CMD>
+<CMD type="boot" body="Recovery" file="updater_ivt.sb" timeout="60" if="HabEnable">Booting update firmware.</CMD>
+<CMD type="find" body="Updater" timeout="180"/>
+<CMD type="push" body="mknod class/mtd,mtd0,/dev/mtd0"/>
+<CMD type="push" body="mknod class/mtd,mtd1,/dev/mtd1"/>
+<CMD type="push" body="mknod class/misc,ubi_ctrl,/dev/ubi_ctrl"/>
+<!-- UBI image support
+* If the user has ubi image, he can use below command to program ubi image to certain mtd device.
+* <CMD type="push" body="pipe ubiformat /dev/mtdX -y -f - -S @FILESIZE" file="files/ubi.img">Sending and writting rootfs</CMD>
+*
+* If @FILESIZE is not supported at host tool, please replace it with real file size in byte.
+-->
+<!--
+****************************TAKE CARE************************************
+* Adding below line if the user wants to erase all blocks including bad blocks.
+* Users may use this option only when the bad block flag is changed between two
+* operations, like the first operation is for WinCE, and the second opertion is for
+* Linux.
+* Besides, ONLY adding below line at R&D periods, as this may will cause the whole
+* Nand chip unstable.
+*
+* echo 1 > /sys/devices/platform/gpmi-nfc.0/ignorebad
+*
+-->
+<CMD type="push" body="$ flash_eraseall /dev/mtd0">Erasing rootfs partition</CMD>
+<CMD type="push" body="$ flash_eraseall /dev/mtd1">Erasing rootfs partition</CMD>
+<!--
+****************************TAKE CARE************************************
+* If the user sets ignorebad flag above, please clear it here
+* echo 0 > /sys/devices/platform/gpmi-nfc.0/ignorebad
+*
+-->
+<CMD type="push" body="send" file="files/imx28_ivt_linux_debian.sb">Sending firmware</CMD>
+<CMD type="push" body="$ kobs-ng init $FILE">Flashing firmware</CMD>
+
+<CMD type="push" body="$ ubiattach /dev/ubi_ctrl -m 1 -d 0">Attaching UBI partition</CMD>
+<CMD type="push" body="mknod class/ubi,ubi0,/dev/ubi0"/>
+<CMD type="push" body="$ ubimkvol /dev/ubi0 -n 0 -N rootfs0 -s 512000000">Creating UBI volumes</CMD>
+<CMD type="push" body="$ ubimkvol /dev/ubi0 -n 1 -N data -s 100000000">Creating UBI volumes</CMD>
+<CMD type="push" body="$ mkdir -p /mnt/ubi0; mount -t ubifs ubi0_0 /mnt/ubi0" />
+<CMD type="push" body="pipe tar -jxv -C /mnt/ubi0" file="files/rootfs-deb.tar.bz2">Transfer rootfs</CMD>
+<CMD type="push" body="frf">Finish Flashing NAND</CMD>
+<CMD type="push" body="$ umount /mnt/ubi0">Unmounting</CMD>
+<CMD type="push" body="$ echo Update Complete!">Done</CMD>
+ <!--
+    The below commands will trigger reboot
+    <CMD type="push" body="!3">Done</CMD>
+ -->
+</LIST>
+
+
+
+</UCL>
