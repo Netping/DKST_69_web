@@ -7,16 +7,16 @@
                             №
                         </th>
                         <th>
-                            Название<a href="#"><span class="form-question fa fa-question"></span></a>
+                            {{Lang::get("notifications_config.name")}}<a href="#"><span class="form-question fa fa-question"></span></a>
                         </th>
                         <th>
-                            Адрес<a href="#"><span class="form-question fa fa-question"></span></a>
+                            {{Lang::get("notifications_config.address")}}<a href="#"><span class="form-question fa fa-question"></span></a>
                         </th>
                         <th>
-                            Порт<a href="#"><span class="form-question fa fa-question"></span></a>
+                            {{Lang::get("notifications_config.port")}}<a href="#"><span class="form-question fa fa-question"></span></a>
                         </th>
                         <th>
-                            Удалить
+                            {{Lang::get("notifications_config.remove")}}
                         </th>
                     </tr>
                     <tr>
@@ -28,7 +28,7 @@
                     </tr>
                     <tr>
                         <td colspan="5" class="text-right table-no-border">
-                            <button class="btn btn-default"><span class="fa fa-plus"></span> Добавить</button>
+                            <button class="btn btn-default"><span class="fa fa-plus"></span> {{Lang::get("notifications_config.add")}}</button>
                         </td>
                     </tr>
                 </table>
@@ -41,13 +41,13 @@
                             №
                         </th>
                         <th>
-                            Название<a href="#"><span class="form-question fa fa-question"></span></a>
+                            {{Lang::get("notifications_config.name")}}<a href="#"><span class="form-question fa fa-question"></span></a>
                         </th>
                         <th>
-                            Адрес<a href="#"><span class="form-question fa fa-question"></span></a>
+                            {{Lang::get("notifications_config.address")}}<a href="#"><span class="form-question fa fa-question"></span></a>
                         </th>
                         <th>
-                            Удалить
+                            {{Lang::get("notifications_config.remove")}}
                         </th>
                     </tr>
                     <tr>
@@ -58,7 +58,7 @@
                     </tr>
                     <tr>
                         <td colspan="5" class="text-right table-no-border">
-                            <button class="btn btn-default"><span class="fa fa-plus"></span> Добавить</button>
+                            <button class="btn btn-default"><span class="fa fa-plus"></span> {{Lang::get("notifications_config.add")}}</button>
                         </td>
                     </tr>
                 </table>
@@ -68,7 +68,7 @@
 
                     <div class="form-group">
                         <label for="hostname" class="col-sm-6 col-md-4 control-label text-left">
-                            Адрес SMTP сервера<a href="#"><span class="form-question fa fa-question"></span></a>
+                            {{Lang::get("notifications_config.smtp_server")}}<a href="#"><span class="form-question fa fa-question"></span></a>
                         </label>
 
                         <div class="col-sm-6 col-md-4">
@@ -81,7 +81,7 @@
                     </div>
                     <div class="form-group">
                         <label for="location" class="col-sm-6 col-md-4 control-label text-left">
-                            Порт SMTP сервера<a href="#"><span class="form-question fa fa-question"></span></a>
+                            {{Lang::get("notifications_config.smtp_port")}}<a href="#"><span class="form-question fa fa-question"></span></a>
                         </label>
 
                         <div class="col-sm-6 col-md-4">
@@ -95,7 +95,7 @@
                     </div>
                     <div class="form-group">
                         <label for="contacts" class="col-sm-6 col-md-4 control-label text-left">
-                            TLS шифрование<a href="#"><span class="form-question fa fa-question"></span></a>
+                            {{Lang::get("notifications_config.tls")}}<a href="#"><span class="form-question fa fa-question"></span></a>
                         </label>
 
                         <div class="col-sm-6 col-md-4">
@@ -109,7 +109,7 @@
                     </div>
                     <div class="form-group">
                         <label for="hostname" class="col-sm-6 col-md-4 control-label text-left">
-                            Имя пользователя<a href="#"><span class="form-question fa fa-question"></span></a>
+                            {{Lang::get("notifications_config.username")}}<a href="#"><span class="form-question fa fa-question"></span></a>
                         </label>
 
                         <div class="col-sm-6 col-md-4">
@@ -122,7 +122,7 @@
                     </div>
                     <div class="form-group">
                         <label for="hostname" class="col-sm-6 col-md-4 control-label text-left">
-                            Пароль<a href="#"><span class="form-question fa fa-question"></span></a>
+                            {{Lang::get("notifications_config.password")}}<a href="#"><span class="form-question fa fa-question"></span></a>
                         </label>
 
                         <div class="col-sm-6 col-md-4">
@@ -135,7 +135,7 @@
                     </div>
                     <div class="form-group">
                         <label for="hostname" class="col-sm-6 col-md-4 control-label text-left">
-                           От кого (from:)<a href="#"><span class="form-question fa fa-question"></span></a>
+                           {{Lang::get("notifications_config.from")}}<a href="#"><span class="form-question fa fa-question"></span></a>
                         </label>
 
                         <div class="col-sm-6 col-md-4">
@@ -147,7 +147,7 @@
                         <hr class="col-sm-12 col-md-8" />
                     </div>
 
-                    <h2>E-mail адреса:</h2>
+                    <h2{{Lang::get("notifications_config.emails")}}:</h2>
 
                     <table class="users">
                         <tr>
@@ -155,13 +155,13 @@
                                 №
                             </th>
                             <th>
-                                Название<a href="#"><span class="form-question fa fa-question"></span></a>
+                                {{Lang::get("notifications_config.name")}}<a href="#"><span class="form-question fa fa-question"></span></a>
                             </th>
                             <th>
-                                Адрес<a href="#"><span class="form-question fa fa-question"></span></a>
+                                {{Lang::get("notifications_config.address")}}<a href="#"><span class="form-question fa fa-question"></span></a>
                             </th>
                             <th>
-                                Удалить
+                                {{Lang::get("notifications_config.remove")}}
                             </th>
                         </tr>
                         <tr>
@@ -172,17 +172,10 @@
                         </tr>
                         <tr>
                             <td colspan="5" class="text-right table-no-border">
-                                <button class="btn btn-default"><span class="fa fa-plus"></span> Добавить</button>
+                                <button class="btn btn-default"><span class="fa fa-plus"></span> {{Lang::get("notifications_config.add")}}</button>
                             </td>
                         </tr>
                     </table>
 
-
-                    <div class="row">
-                        <div class="col-sm-12 col-md-8">
-                            <hr />
-                            <input type="submit" class="btn btn-primary" value="Применить" />
-                        </div>
-                    </div>
                 </form>
 @stop

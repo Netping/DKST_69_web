@@ -3,7 +3,7 @@
 <h2>Общая информация</h2>
 
 <div class="form-group">
-    <label for="hostname" class="col-sm-6 col-md-4 control-label text-left">Имя устройства (hostname)<a
+    <label for="hostname" class="col-sm-6 col-md-4 control-label text-left">{{Lang::get('admin.device_name')}}<a
             href="#"><span
             class="form-question fa fa-question"></span></a></label>
 
@@ -17,7 +17,7 @@
     <hr class="col-sm-12 col-md-8"/>
 </div>
 <div class="form-group">
-    <label for="location" class="col-sm-6 col-md-4 control-label text-left">Местонахождение устройства<a
+    <label for="location" class="col-sm-6 col-md-4 control-label text-left">{{Lang::get('admin.device_location')}}<a
             href="#"><span class="form-question fa fa-question"></span></a></label>
 
     <div class="col-sm-6 col-md-4">
@@ -30,7 +30,7 @@
     <hr class="col-sm-12 col-md-8"/>
 </div>
 <div class="form-group">
-    <label for="contacts" class="col-sm-6 col-md-4 control-label text-left">Контактные данные<a href="#"><span
+    <label for="contacts" class="col-sm-6 col-md-4 control-label text-left">{{Lang::get('admin.contacts')}}<a href="#"><span
             class="form-question fa fa-question"></span></a></label>
 
     <div class="col-sm-6 col-md-4">
@@ -43,7 +43,7 @@
     <hr class="col-sm-12 col-md-8"/>
 </div>
 
-<h2>Пользователи</h2>
+<h2>{{Lang::get('admin.users')}}</h2>
 
 <table class="users">
     <tr>
@@ -51,16 +51,16 @@
             №
         </th>
         <th>
-            Имя пользователя<a href="#"><span class="form-question fa fa-question"></span></a>
+            {{Lang::get('admin.username')}}<a href="#"><span class="form-question fa fa-question"></span></a>
         </th>
         <th>
-            Пароль<a href="#"><span class="form-question fa fa-question"></span></a>
+            {{Lang::get('admin.password')}}<a href="#"><span class="form-question fa fa-question"></span></a>
         </th>
         <th>
-            Уровень доступа<a href="#"><span class="form-question fa fa-question"></span></a>
+            {{Lang::get('admin.access_level')}}<a href="#"><span class="form-question fa fa-question"></span></a>
         </th>
         <th>
-            Удалить
+            {{Lang::get('admin.remove')}}
         </th>
     </tr>
     <tr>
@@ -69,22 +69,22 @@
         <td><input type="password" class="form-control"/></td>
         <td class="text-center">
             <select class="form-control">
-                <option>админ</option>
-                <option>гость</option>
+                <option>{{Lang::get('admin.access_level_admin')}}</option>
+                <option>{{Lang::get('admin.access_level_guest')}}</option>
             </select>
         </td>
         <td class="text-center"><span class="fa fa-times"></span></td>
     </tr>
     <tr>
         <td colspan="5" class="text-right table-no-border">
-            <button class="btn btn-default"><span class="fa fa-plus"></span> Добавить</button>
+            <button class="btn btn-default"><span class="fa fa-plus"></span> {{Lang::get('admin.add')}}</button>
         </td>
     </tr>
 </table>
-<h2>Настройки доступа</h2>
+<h2>{{Lang::get('admin.access_config')}}</h2>
 
 <div class="form-group">
-    <label for="read-community" class="col-sm-6 col-md-4 control-label text-left">Community чтения<a
+    <label for="read-community" class="col-sm-6 col-md-4 control-label text-left">{{Lang::get('admin.access_read')}}<a
             href="#"><span
             class="form-question fa fa-question"></span></a></label>
 
@@ -99,7 +99,7 @@
 </div>
 
 <div class="form-group">
-    <label for="write-community" class="col-sm-6 col-md-4 control-label text-left">Community записи<a
+    <label for="write-community" class="col-sm-6 col-md-4 control-label text-left">{{Lang::get('admin.access_write')}}<a
             href="#"><span
             class="form-question fa fa-question"></span></a></label>
 
@@ -113,7 +113,7 @@
     <hr class="col-sm-12 col-md-8"/>
 </div>
 <div class="form-group">
-    <label for="filter" class="col-sm-6 col-md-4 control-label text-left">Фильтр доступа<a
+    <label for="filter" class="col-sm-6 col-md-4 control-label text-left">{{Lang::get('admin.access_filter')}}<a
             href="#"><span class="form-question fa fa-question"></span></a></label>
 
     <div class="col-sm-6 col-md-4">
@@ -132,10 +132,10 @@
             №
         </th>
         <th>
-            Подсеть доступа<a href="#"><span class="form-question fa fa-question"></span></a>
+            {{Lang::get('admin.access_subnet')}}<a href="#"><span class="form-question fa fa-question"></span></a>
         </th>
         <th>
-            Удалить
+            {{Lang::get('admin.remove')}}
         </th>
     </tr>
     <tr>
@@ -145,14 +145,14 @@
     </tr>
     <tr>
         <td colspan="3" class="text-right table-no-border">
-            <button class="btn btn-default"><span class="fa fa-plus"></span> Добавить</button>
+            <button class="btn btn-default"><span class="fa fa-plus"></span> {{Lang::get('admin.add')}}</button>
         </td>
     </tr>
 </table>
-<h2>Настройки NTP</h2>
+<h2>{{Lang::get('admin.ntp_config')}}</h2>
 
 <div class="form-group">
-<label for="timezone" class="col-sm-6 col-md-4 control-label text-left">Часовой пояс<a
+<label for="timezone" class="col-sm-6 col-md-4 control-label text-left">{{Lang::get('admin.timezone')}}<a
         href="#"><span class="form-question fa fa-question"></span></a></label>
 
 <div class="col-sm-6 col-md-4">
@@ -359,19 +359,19 @@
             №
         </th>
         <th>
-            NTP-сервер<a href="#"><span class="form-question fa fa-question"></span></a>
+            {{Lang::get('admin.ntp_server')}}<a href="#"><span class="form-question fa fa-question"></span></a>
         </th>
         <th>
-            Статус<a href="#"><span class="form-question fa fa-question"></span></a>
+            {{Lang::get('admin.status')}}<a href="#"><span class="form-question fa fa-question"></span></a>
         </th>
         <th>
-            Удалить
+            {{Lang::get('admin.remove')}}
         </th>
     </tr>
     <tr>
         <td class="text-center">1</td>
         <td><input type="text" class="form-control"/></td>
-        <td class="text-center"><span class="italic">нет связи</span>
+        <td class="text-center"><span class="italic">{{Lang::get('admin.not_connect')}}</span>
             <button class="refresh"><span class="fa fa-refresh"></span></button>
         </td>
         <td class="text-center"><span class="fa fa-times"></span></td>
@@ -382,10 +382,10 @@
         </td>
     </tr>
 </table>
-<h2>Встроенные часы (RTC)</h2>
+<h2>{{Lang::get('admin.rtc')}}</h2>
 
 <div class="form-group">
-    <label for="date" class="col-sm-6 col-md-4 control-label text-left">Дата и время<a
+    <label for="date" class="col-sm-6 col-md-4 control-label text-left">{{Lang::get('admin.date_time')}}<a
             href="#"><span class="form-question fa fa-question"></span></a></label>
 
     <div class="col-sm-6 col-md-4">
@@ -395,10 +395,10 @@
 
         <div class="row" id="datetime">
             <div class="col-xs-5">
-                <input type="text" class="form-control input-sm" id="date" placeholder="дата">
+                <input type="text" class="form-control input-sm" id="date" placeholder="{{Lang::get('admin.date')}}">
             </div>
             <div class="col-xs-5">
-                <input type="text" class="form-control input-sm" id="time" placeholder="время">
+                <input type="text" class="form-control input-sm" id="time" placeholder="{{Lang::get('admin.time')}}">
             </div>
             <div class="col-xs-2">
                 <button class="btn btn-default btn-sm"><span class="fa fa-times"></span></button>
@@ -412,7 +412,7 @@
 <div class="row">
     <div class="col-sm-12 col-md-8">
         <hr/>
-        <input type="submit" class="btn btn-primary" value="Применить"/>
+        <input type="submit" class="btn btn-primary" value="{{Lang::get('admin.apply')}}"/>
     </div>
 </div>
 </form>
