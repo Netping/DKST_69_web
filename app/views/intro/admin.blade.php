@@ -5,7 +5,7 @@
 <div class="form-group">
     <label for="hostname" class="col-sm-6 col-md-4 control-label text-left">{{Lang::get('admin.device_name')}}<a
             href="#"><span
-            class="form-question fa fa-question"></span></a></label>
+            class="form-question fa fa-question" data-toggle="tooltip"  title="some tooltip"></span></a></label>
 
     <div class="col-sm-6 col-md-4">
         <input onkeyup="allSettingsSave()" type="text" class="form-control" id="hostname" placeholder="" value="{{$admin->hostname}}">
@@ -18,7 +18,7 @@
 </div>
 <div class="form-group">
     <label for="location" class="col-sm-6 col-md-4 control-label text-left">{{Lang::get('admin.device_location')}}<a
-            href="#"><span class="form-question fa fa-question"></span></a></label>
+            href="#"><span class="form-question fa fa-question" data-toggle="tooltip"  title="some tooltip"></span></a></label>
 
     <div class="col-sm-6 col-md-4">
         <input onkeyup="allSettingsSave()" type="text" class="form-control" id="location" value="{{$admin->location}}" placeholder="">
@@ -31,7 +31,7 @@
 </div>
 <div class="form-group">
     <label for="contacts" class="col-sm-6 col-md-4 control-label text-left">{{Lang::get('admin.contacts')}}<a href="#"><span
-            class="form-question fa fa-question"></span></a></label>
+            class="form-question fa fa-question" data-toggle="tooltip"  title="some tooltip"></span></a></label>
 
     <div class="col-sm-6 col-md-4">
         <input onkeyup="allSettingsSave()" type="text" class="form-control" id="contacts" value="{{$admin->contacts}}" placeholder="">
@@ -51,13 +51,13 @@
             №
         </th>
         <th>
-            {{Lang::get('admin.username')}}<a href="#"><span class="form-question fa fa-question"></span></a>
+            {{Lang::get('admin.username')}}<a href="#"><span class="form-question fa fa-question" data-toggle="tooltip"  title="some tooltip"></span></a>
         </th>
         <th>
-            {{Lang::get('admin.password')}}<a href="#"><span class="form-question fa fa-question"></span></a>
+            {{Lang::get('admin.password')}}<a href="#"><span class="form-question fa fa-question" data-toggle="tooltip"  title="some tooltip"></span></a>
         </th>
         <th>
-            {{Lang::get('admin.access_level')}}<a href="#"><span class="form-question fa fa-question"></span></a>
+            {{Lang::get('admin.access_level')}}<a href="#"><span class="form-question fa fa-question" data-toggle="tooltip"  title="some tooltip"></span></a>
         </th>
         <th>
             {{Lang::get('admin.remove')}}
@@ -97,7 +97,7 @@
 <div class="form-group">
     <label for="access_read" class="col-sm-6 col-md-4 control-label text-left">{{Lang::get('admin.access_read')}}<a
             href="#"><span
-            class="form-question fa fa-question"></span></a></label>
+            class="form-question fa fa-question" data-toggle="tooltip"  title="some tooltip"></span></a></label>
 
     <div class="col-sm-6 col-md-4">
         <input onkeyup="allSettingsSave()" type="text" class="form-control" id="access_read" value="{{$admin->access_read}}" placeholder="">
@@ -112,7 +112,7 @@
 <div class="form-group">
     <label for="access_write" class="col-sm-6 col-md-4 control-label text-left">{{Lang::get('admin.access_write')}}<a
             href="#"><span
-            class="form-question fa fa-question"></span></a></label>
+            class="form-question fa fa-question" data-toggle="tooltip"  title="some tooltip"></span></a></label>
 
     <div class="col-sm-6 col-md-4">
         <input onkeyup="allSettingsSave()" type="text" class="form-control" id="access_write" value="{{$admin->access_write}}" placeholder="">
@@ -125,7 +125,7 @@
 </div>
 <div class="form-group">
     <label for="access_filter" class="col-sm-6 col-md-4 control-label text-left">{{Lang::get('admin.access_filter')}}<a
-            href="#"><span class="form-question fa fa-question"></span></a></label>
+            href="#"><span class="form-question fa fa-question" data-toggle="tooltip"  title="some tooltip"></span></a></label>
 
     <div class="col-sm-6 col-md-4">
         <input onkeyup="allSettingsSave()" type="text" class="form-control" id="access_filter" value="{{$admin->access_filter}}" placeholder="">
@@ -143,7 +143,7 @@
             №
         </th>
         <th>
-            {{Lang::get('admin.access_subnet')}}<a href="#"><span class="form-question fa fa-question"></span></a>
+            {{Lang::get('admin.access_subnet')}}<a href="#"><span class="form-question fa fa-question" data-toggle="tooltip"  title="some tooltip"></span></a>
         </th>
         <th>
             {{Lang::get('admin.remove')}}
@@ -171,7 +171,7 @@
 
 <div class="form-group">
 <label for="timezone" class="col-sm-6 col-md-4 control-label text-left">{{Lang::get('admin.timezone')}}<a
-        href="#"><span class="form-question fa fa-question"></span></a></label>
+        href="#"><span class="form-question fa fa-question" data-toggle="tooltip"  title="some tooltip"></span></a></label>
 
 <div class="col-sm-6 col-md-4">
 
@@ -227,10 +227,10 @@
             №
         </th>
         <th>
-            {{Lang::get('admin.ntp_server')}}<a href="#"><span class="form-question fa fa-question"></span></a>
+            {{Lang::get('admin.ntp_server')}}<a href="#"><span class="form-question fa fa-question" data-toggle="tooltip"  title="some tooltip"></span></a>
         </th>
         <th>
-            {{Lang::get('admin.status')}}<a href="#"><span class="form-question fa fa-question"></span></a>
+            {{Lang::get('admin.status')}}<a href="#"><span class="form-question fa fa-question" data-toggle="tooltip"  title="some tooltip"></span></a>
         </th>
         <th>
             {{Lang::get('admin.remove')}}
@@ -260,22 +260,22 @@
 
 <div class="form-group">
     <label for="date" class="col-sm-6 col-md-4 control-label text-left">{{Lang::get('admin.date_time')}}<a
-            href="#"><span class="form-question fa fa-question"></span></a></label>
+            href="#"><span class="form-question fa fa-question" data-toggle="tooltip"  title="some tooltip"></span></a></label>
 
     <div class="col-sm-6 col-md-4">
-        <p class="form-control-static">02.11.2014, 00:00:00
-            <button class="datetime-edit"><span class="fa fa-pencil"></span></button>
+        <p class="form-control-static"><span id="showDate">{{date("d.m.Y",time() - $admin->datetime_offset)}}</span>, <span id="showTime">{{date("G:i:s",time() - $admin->datetime_offset)}}</span>
+            <button class="datetime-edit" onclick="showChangeDateTime();"><span class="fa fa-pencil"></span></button>
         </p>
 
-        <div class="row" id="datetime">
+        <div class="row hidden" id="datetime">
             <div class="col-xs-5">
-                <input onkeyup="allSettingsSave()" type="text" class="form-control input-sm" id="date" value="{{$admin->date}}" placeholder="{{Lang::get('admin.date')}}">
+                <input onkeyup="dateTimeChange()" type="text" class="form-control input-sm" id="date" value="" placeholder="">
             </div>
             <div class="col-xs-5">
-                <input onkeyup="allSettingsSave()" type="text" class="form-control input-sm" id="time" value="{{$admin->time}}" placeholder="{{Lang::get('admin.time')}}">
+                <input onkeyup="dateTimeChange()" type="text" class="form-control input-sm" id="time" value="" placeholder="">
             </div>
             <div class="col-xs-2">
-                <button class="btn btn-default btn-sm"><span class="fa fa-times"></span></button>
+                <button class="btn btn-default btn-sm" onclick="hideChangeDateTime()"><span class="fa fa-times"></span></button>
             </div>
         </div>
     </div>
@@ -291,6 +291,9 @@
 @section("add_js")
 <script type="text/javascript">
 
+
+var datetime_offset = parseInt({{$admin->datetime_offset}})*1000;
+
 $(document).ready(function()
 {
     $.each($("#timezone option"),function(index,value)
@@ -300,9 +303,45 @@ $(document).ready(function()
             $("#timezone").val('{{$admin->timezone}}');
         }
     });
+
+    //запускаем часы
+    startTime();
 });
-    
+
+
+//анимация часов
+var t;
+function startTime()
+{
+    console.log("startTime");
+
+    var currentTime = (Date.now() - (datetime_offset) );
+    var tm=new Date(currentTime);
+    var h=tm.getHours();
+    var m=tm.getMinutes();
+    var s=tm.getSeconds();
+    m=checkTime(m);
+    s=checkTime(s);
+
+    $("#showTime").html( h+":"+m+":"+s );
+    $("#time").html( h+":"+m+":"+s );
+
+    t=setTimeout('startTime()',500);
+}
+
+function checkTime(i)
+{
+    if (i<10)
+    {
+    i="0" + i;
+    }
+    return i;
+}
+//
+
+
 function allSettingsSave () {
+    console.log("allSettingsSave",datetime_offset);
     var jsonData = {};
     jsonData.hostname = $("#hostname").val();
     jsonData.location = $("#location").val();
@@ -311,8 +350,9 @@ function allSettingsSave () {
     jsonData.access_write = $("#access_write").val();
     jsonData.access_filter = $("#access_filter").val();
     jsonData.timezone = $("#timezone option:selected").val();
-    jsonData.date = $("#date").val();
-    jsonData.time = $("#time").val();
+    jsonData.datetime_offset = parseInt( datetime_offset / 1000 );
+    // jsonData.date = $("#date").val();
+    // jsonData.time = $("#time").val();
 
     console.log(jsonData);
 
@@ -341,19 +381,6 @@ function allUsersSave () {
         // console.log(index,value);
     });
     
-    console.log(jsonData);
-    // return false;
-
-    jsonData.hostname = $("#hostname").val();
-    jsonData.location = $("#location").val();
-    jsonData.contacts = $("#contacts").val();
-    jsonData.access_read = $("#access_read").val();
-    jsonData.access_write = $("#access_write").val();
-    jsonData.access_filter = $("#access_filter").val();
-    jsonData.timezone = $("#timezone").val();
-    jsonData.date = $("#date").val();
-    jsonData.time = $("#time").val();
-
     $.ajax({
         url:"admin/save/users",
         method:"POST",
@@ -514,8 +541,43 @@ function ntpRefresh(id)
     console.log("ntpRefresh");
 }
 
+function showChangeDateTime()
+{
+    $("#datetime").removeClass("hidden");
+    $("#date").val( $("#showDate").text() );
+    $("#time").val( $("#showTime").text() );
+    clearTimeout(t);
+}
 
+function hideChangeDateTime()
+{
+    $("#datetime").addClass("hidden");
 
+    var curDate = $("#date").val();
+    var date_arr = curDate.split(".");
+
+    console.log(date_arr);
+
+    var newDatetime = new Date(date_arr[1]+"/"+date_arr[0]+"/"+date_arr[2]+" "+ $("#time").val() );//+" "+$("#time").val()).getTime();
+    
+
+    datetime_offset = Date.now() - newDatetime;
+
+    console.log(curDate,datetime_offset);
+
+    startTime();
+
+    allSettingsSave();
+}
+
+function dateTimeChange()
+{
+    console.log("dateTimeChange");
+    $("#showDate").html( $("#date").val() );
+    $("#showTime").html( $("#time").val() );
+
+    // allSettingsSave();
+}
 
 </script>
 

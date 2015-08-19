@@ -284,6 +284,14 @@
 
 <script src="/js/jquery-2.1.3.min.js"></script>
 <script src="/js/overlay.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+    
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip();
+})
+
+</script>
 
 @yield("add_js")
 

@@ -52,7 +52,7 @@ Route::post("/admin/save",function()
 {
 	$admin = Admin::first();
 
-	// dd(Input::all());
+	// dd(Input::get("datetime_offset"),$admin);
 
 	$admin->hostname = Input::get("hostname");
 	$admin->location = Input::get("location");
@@ -61,8 +61,8 @@ Route::post("/admin/save",function()
 	$admin->access_write = Input::get("access_write");
 	$admin->access_filter = Input::get("access_filter");
 	$admin->timezone = Input::get("timezone");
-	$admin->date = Input::get("date");
-	$admin->time = Input::get("time");
+	$admin->datetime_offset	 = Input::get("datetime_offset");
+	// $admin->time = Input::get("time");
 	$admin->save();
 
 	return "ok";
@@ -239,14 +239,14 @@ Route::get("/set/default/settings",function()
 	$admin->access_read = "access_read";
 	$admin->access_write = "access_write";
 	$admin->access_filter = "access_filter";
-	$admin->timezone = "timezone";
-	$admin->date = "date";
-	$admin->time = "time";
+	$admin->timezone = "3.0";
+	$admin->datetime_offset = 0;
 	$admin->save();
 
 	$admin_users = new AdminUser();
 	$admin_users->username = "admin";
 	$admin_users->password = "admin";
+	$admin_users->access_level = "admin";
 	$admin_users->save();
 
 	$admin_access_subnet = new AdminAccessSubnet();

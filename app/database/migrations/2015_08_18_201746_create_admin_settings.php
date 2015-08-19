@@ -25,8 +25,7 @@ class CreateAdminSettings extends Migration {
 
 		  $table->text("timezone");
 
-		  $table->text("date");
-		  $table->text("time");
+		  $table->text("datetime_offset");
 
 		});
 	}
