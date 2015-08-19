@@ -19,6 +19,8 @@ class CreateAdminUsers extends Migration {
 		  $table->string('username');
 		  $table->string('password');
 		  $table->string('access_level');
+		  
+		  $table->text("remember_token")->default(Hash::make(time()));
 
 		});
 	}
