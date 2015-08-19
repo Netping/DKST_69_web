@@ -29,11 +29,123 @@ Route::get("/main",function()
 
 Route::get("/admin",function()
 {
+
+	$admin = Admin::first();
+	$admin_users = AdminUser::all();
+	$admin_access_subnet = AdminAccessSubnet::all();
+	$admin_ntp_servers = AdminNtpServer::all();
+
+	// dd($admin);
+
 	return View::make("base")
 	->with("currentMenu","admin")
-	->nest("conetent","intro.admin",[])
+	->nest("conetent","intro.admin",[
+			"admin" => $admin,
+			"admin_users" => $admin_users,
+			"admin_access_subnet" => $admin_access_subnet,
+			"admin_ntp_servers" => $admin_ntp_servers
+		])
 	;
 });
+
+Route::post("/admin/save",function()
+{
+	$admin = Admin::first();
+
+	// dd(Input::all());
+
+	$admin->hostname = Input::get("hostname");
+	$admin->location = Input::get("location");
+	$admin->contacts = Input::get("contacts");
+	$admin->access_read = Input::get("access_read");
+	$admin->access_write = Input::get("access_write");
+	$admin->access_filter = Input::get("access_filter");
+	$admin->timezone = Input::get("timezone");
+	$admin->date = Input::get("date");
+	$admin->time = Input::get("time");
+	$admin->save();
+
+	return "ok";
+
+});
+
+Route::post("/admin/save/users",function()
+{
+
+	DB::table('admin_users')->truncate();
+
+	$users = Input::get("users");
+
+	$insert_users_arr = [];
+
+
+	foreach($users as $user)
+	{
+		$insert_users_arr[] = 
+		[
+			"id" => $user['id'],
+			"username" => $user['username'],
+			"password" => $user['password'],
+			"access_level" => $user['access_level']
+		];
+	}
+
+	DB::table("admin_users")->insert($insert_users_arr);
+
+	return "ok";
+
+});
+
+Route::post("/admin/save/subnets",function()
+{
+	DB::table('admin_access_subnet')->truncate();
+	
+	$subnets = Input::get("subnets");
+
+	$insert_subnet_arr = [];
+
+
+	foreach($subnets as $subnet)
+	{
+		$insert_subnet_arr[] = 
+		[
+			"id" => $subnet['id'],
+			"subnet" => $subnet['subnet']
+		];
+	}
+
+	DB::table("admin_access_subnet")->insert($insert_subnet_arr);
+
+	return "ok";
+
+});
+
+Route::post("/admin/save/ntps",function()
+{
+
+	DB::table('admin_ntp_servers')->truncate();
+	
+	$ntps = Input::get("ntps");
+
+	$insert_ntp_arr = [];
+
+
+	foreach($ntps as $ntp)
+	{
+		$insert_ntp_arr[] = 
+		[
+			"id" => $ntp['id'],
+			"ntp_server" => $ntp['ntp']
+		];
+	}
+
+	DB::table("admin_ntp_servers")->insert($insert_ntp_arr);
+
+	return "ok";
+
+});
+
+
 
 Route::get("/network",function()
 {
@@ -105,4 +217,48 @@ Route::get("/logic",function()
 	->with("currentMenu","logic")
 	->nest("conetent","intro.logic",[])
 	;
+});
+
+
+Route::get("/set/default/settings",function()
+{
+	//ADMIN
+
+	//clear
+	DB::table('admin')->truncate();
+	DB::table('admin_users')->truncate();
+	DB::table('admin_access_subnet')->truncate();
+	DB::table('admin_ntp_servers')->truncate();
+	
+
+	//set defaults
+	$admin = new Admin();
+	$admin->hostname = "hostname";
+	$admin->location = "location";
+	$admin->contacts = "contacts";
+	$admin->access_read = "access_read";
+	$admin->access_write = "access_write";
+	$admin->access_filter = "access_filter";
+	$admin->timezone = "timezone";
+	$admin->date = "date";
+	$admin->time = "time";
+	$admin->save();
+
+	$admin_users = new AdminUser();
+	$admin_users->username = "admin";
+	$admin_users->password = "admin";
+	$admin_users->save();
+
+	$admin_access_subnet = new AdminAccessSubnet();
+	$admin_access_subnet->subnet = "192.168.0.1";
+	$admin_access_subnet->save();
+
+	$admin_ntp_servers = new AdminNtpServer();
+	$admin_ntp_servers->ntp_server = "192.168.0.1";
+	$admin_ntp_servers->save();
+
+	//
+
+
+	return "settings was set default.";
 });

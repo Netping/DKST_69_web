@@ -6,7 +6,15 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Admin' => $baseDir . '/app/models/Admin.php',
+    'AdminAccessSubnet' => $baseDir . '/app/models/AdminAccessSubnet.php',
+    'AdminNtpServer' => $baseDir . '/app/models/AdminNtpServer.php',
+    'AdminUser' => $baseDir . '/app/models/AdminUser.php',
     'BaseController' => $baseDir . '/app/controllers/BaseController.php',
+    'CreateAdminAccessSubnet' => $baseDir . '/app/database/migrations/2015_08_18_202323_create_admin_access_subnet.php',
+    'CreateAdminNtpServers' => $baseDir . '/app/database/migrations/2015_08_18_202348_create_admin_ntp_servers.php',
+    'CreateAdminSettings' => $baseDir . '/app/database/migrations/2015_08_18_201746_create_admin_settings.php',
+    'CreateAdminUsers' => $baseDir . '/app/database/migrations/2015_08_18_202207_create_admin_users.php',
     'DatabaseSeeder' => $baseDir . '/app/database/seeds/DatabaseSeeder.php',
     'HomeController' => $baseDir . '/app/controllers/HomeController.php',
     'IlluminateQueueClosure' => $vendorDir . '/laravel/framework/src/Illuminate/Queue/IlluminateQueueClosure.php',

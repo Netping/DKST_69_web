@@ -1,5 +1,5 @@
 @section("content")
-<form class="form-horizontal">
+<form onsubmit="return false;" class="form-horizontal">
 <h2>Общая информация</h2>
 
 <div class="form-group">
@@ -8,11 +8,11 @@
             class="form-question fa fa-question"></span></a></label>
 
     <div class="col-sm-6 col-md-4">
-        <input type="text" class="form-control" id="hostname" placeholder="">
+        <input onkeyup="allSettingsSave()" type="text" class="form-control" id="hostname" placeholder="" value="{{$admin->hostname}}">
 
-        <div class="validation-error">
+<!--         <div class="validation-error">
             Допускаются только латинские символы и буквы
-        </div>
+        </div> -->
     </div>
     <hr class="col-sm-12 col-md-8"/>
 </div>
@@ -21,7 +21,7 @@
             href="#"><span class="form-question fa fa-question"></span></a></label>
 
     <div class="col-sm-6 col-md-4">
-        <input type="text" class="form-control" id="location" placeholder="">
+        <input onkeyup="allSettingsSave()" type="text" class="form-control" id="location" value="{{$admin->location}}" placeholder="">
 
         <div class="validation-error">
 
@@ -34,7 +34,7 @@
             class="form-question fa fa-question"></span></a></label>
 
     <div class="col-sm-6 col-md-4">
-        <input type="text" class="form-control" id="contacts" placeholder="">
+        <input onkeyup="allSettingsSave()" type="text" class="form-control" id="contacts" value="{{$admin->contacts}}" placeholder="">
 
         <div class="validation-error">
 
@@ -63,33 +63,44 @@
             {{Lang::get('admin.remove')}}
         </th>
     </tr>
-    <tr>
-        <td class="text-center">1</td>
-        <td><input type="text" class="form-control"/></td>
-        <td><input type="password" class="form-control"/></td>
-        <td class="text-center">
-            <select class="form-control">
-                <option>{{Lang::get('admin.access_level_admin')}}</option>
-                <option>{{Lang::get('admin.access_level_guest')}}</option>
-            </select>
-        </td>
-        <td class="text-center"><span class="fa fa-times"></span></td>
-    </tr>
+    
+    <tbody class="users_table_tbody">
+        @foreach($admin_users as $user)
+        <tr id="user_{{$user->id}}" data-id="{{$user->id}}">
+            <td class="text-center">{{$user->id}}</td>
+            <td><input type="text" class="form-control username" onkeyup="allUsersSave()" value="{{$user->username}}" /></td>
+            <td><input type="password" value="{{$user->password}}" onkeyup="allUsersSave()" class="form-control password"/></td>
+            <td class="text-center">
+                <select class="form-control access_level" onchange="allUsersSave()">
+                    @if($user->access_level =="admin")
+                    <option value="admin" selected="">{{Lang::get('admin.access_level_admin')}}</option>
+                    <option value="guest">{{Lang::get('admin.access_level_guest')}}</option>
+                    @else
+                    <option value="admin">{{Lang::get('admin.access_level_admin')}}</option>
+                    <option value="guest" selected="">{{Lang::get('admin.access_level_guest')}}</option>
+                    @endif
+                </select>
+            </td>
+            <td class="text-center"><span class="fa fa-times" onclick="removeUser({{$user->id}})"></span></td>
+        </tr>
+        @endforeach
+    </tbody>
+
     <tr>
         <td colspan="5" class="text-right table-no-border">
-            <button class="btn btn-default"><span class="fa fa-plus"></span> {{Lang::get('admin.add')}}</button>
+            <button class="btn btn-default" onclick="addUser();"><span class="fa fa-plus"></span> {{Lang::get('admin.add')}}</button>
         </td>
     </tr>
 </table>
 <h2>{{Lang::get('admin.access_config')}}</h2>
 
 <div class="form-group">
-    <label for="read-community" class="col-sm-6 col-md-4 control-label text-left">{{Lang::get('admin.access_read')}}<a
+    <label for="access_read" class="col-sm-6 col-md-4 control-label text-left">{{Lang::get('admin.access_read')}}<a
             href="#"><span
             class="form-question fa fa-question"></span></a></label>
 
     <div class="col-sm-6 col-md-4">
-        <input type="text" class="form-control" id="read-community" placeholder="">
+        <input onkeyup="allSettingsSave()" type="text" class="form-control" id="access_read" value="{{$admin->access_read}}" placeholder="">
 
         <div class="validation-error">
 
@@ -99,12 +110,12 @@
 </div>
 
 <div class="form-group">
-    <label for="write-community" class="col-sm-6 col-md-4 control-label text-left">{{Lang::get('admin.access_write')}}<a
+    <label for="access_write" class="col-sm-6 col-md-4 control-label text-left">{{Lang::get('admin.access_write')}}<a
             href="#"><span
             class="form-question fa fa-question"></span></a></label>
 
     <div class="col-sm-6 col-md-4">
-        <input type="text" class="form-control" id="write-community" placeholder="">
+        <input onkeyup="allSettingsSave()" type="text" class="form-control" id="access_write" value="{{$admin->access_write}}" placeholder="">
 
         <div class="validation-error">
 
@@ -113,11 +124,11 @@
     <hr class="col-sm-12 col-md-8"/>
 </div>
 <div class="form-group">
-    <label for="filter" class="col-sm-6 col-md-4 control-label text-left">{{Lang::get('admin.access_filter')}}<a
+    <label for="access_filter" class="col-sm-6 col-md-4 control-label text-left">{{Lang::get('admin.access_filter')}}<a
             href="#"><span class="form-question fa fa-question"></span></a></label>
 
     <div class="col-sm-6 col-md-4">
-        <input type="text" class="form-control" id="filter" placeholder="">
+        <input onkeyup="allSettingsSave()" type="text" class="form-control" id="access_filter" value="{{$admin->access_filter}}" placeholder="">
 
         <div class="validation-error">
 
@@ -126,7 +137,7 @@
     <hr class="col-sm-12 col-md-8"/>
 </div>
 
-<table class="users">
+<table class="users subnet_table">
     <tr>
         <th>
             №
@@ -138,16 +149,23 @@
             {{Lang::get('admin.remove')}}
         </th>
     </tr>
-    <tr>
-        <td class="text-center">1</td>
-        <td><input type="text" class="form-control"/></td>
-        <td class="text-center"><span class="fa fa-times"></span></td>
-    </tr>
+
+    <tbody class="subnets_table_tbody">    
+        @foreach($admin_access_subnet as $subnet)
+        <tr id="subnet_{{$subnet->id}}" data-id="{{$subnet->id}}">
+            <td class="text-center">{{$subnet->id}}</td>
+            <td><input type="text" value="{{$subnet->subnet}}" class="form-control subnet" onkeyup="allSubnetSave();" /></td>
+            <td class="text-center"><span class="fa fa-times" onclick="removeSubnet({{$subnet->id}});"></span></td>
+        </tr>
+        @endforeach
+    </tbody>
+
     <tr>
         <td colspan="3" class="text-right table-no-border">
-            <button class="btn btn-default"><span class="fa fa-plus"></span> {{Lang::get('admin.add')}}</button>
+            <button class="btn btn-default" onclick="addSubnet();"><span class="fa fa-plus"></span> {{Lang::get('admin.add')}}</button>
         </td>
     </tr>
+
 </table>
 <h2>{{Lang::get('admin.ntp_config')}}</h2>
 
@@ -156,204 +174,54 @@
         href="#"><span class="form-question fa fa-question"></span></a></label>
 
 <div class="col-sm-6 col-md-4">
-    <select type="text" class="form-control" id="timezone" placeholder="">
 
-        <option timeZoneId="1" gmtAdjustment="GMT-12:00" useDaylightTime="0" value="-12">(GMT-12:00) International
-            Date Line West
-        </option>
-        <option timeZoneId="2" gmtAdjustment="GMT-11:00" useDaylightTime="0" value="-11">(GMT-11:00) Midway Island,
-            Samoa
-        </option>
-        <option timeZoneId="3" gmtAdjustment="GMT-10:00" useDaylightTime="0" value="-10">(GMT-10:00) Hawaii</option>
-        <option timeZoneId="4" gmtAdjustment="GMT-09:00" useDaylightTime="1" value="-9">(GMT-09:00) Alaska</option>
-        <option timeZoneId="5" gmtAdjustment="GMT-08:00" useDaylightTime="1" value="-8">(GMT-08:00) Pacific Time (US
-            & Canada)
-        </option>
-        <option timeZoneId="6" gmtAdjustment="GMT-08:00" useDaylightTime="1" value="-8">(GMT-08:00) Tijuana, Baja
-            California
-        </option>
-        <option timeZoneId="7" gmtAdjustment="GMT-07:00" useDaylightTime="0" value="-7">(GMT-07:00) Arizona</option>
-        <option timeZoneId="8" gmtAdjustment="GMT-07:00" useDaylightTime="1" value="-7">(GMT-07:00) Chihuahua, La
-            Paz, Mazatlan
-        </option>
-        <option timeZoneId="9" gmtAdjustment="GMT-07:00" useDaylightTime="1" value="-7">(GMT-07:00) Mountain Time
-            (US & Canada)
-        </option>
-        <option timeZoneId="10" gmtAdjustment="GMT-06:00" useDaylightTime="0" value="-6">(GMT-06:00) Central
-            America
-        </option>
-        <option timeZoneId="11" gmtAdjustment="GMT-06:00" useDaylightTime="1" value="-6">(GMT-06:00) Central Time
-            (US & Canada)
-        </option>
-        <option timeZoneId="12" gmtAdjustment="GMT-06:00" useDaylightTime="1" value="-6">(GMT-06:00) Guadalajara,
-            Mexico City, Monterrey
-        </option>
-        <option timeZoneId="13" gmtAdjustment="GMT-06:00" useDaylightTime="0" value="-6">(GMT-06:00) Saskatchewan
-        </option>
-        <option timeZoneId="14" gmtAdjustment="GMT-05:00" useDaylightTime="0" value="-5">(GMT-05:00) Bogota, Lima,
-            Quito, Rio Branco
-        </option>
-        <option timeZoneId="15" gmtAdjustment="GMT-05:00" useDaylightTime="1" value="-5">(GMT-05:00) Eastern Time
-            (US & Canada)
-        </option>
-        <option timeZoneId="16" gmtAdjustment="GMT-05:00" useDaylightTime="1" value="-5">(GMT-05:00) Indiana
-            (East)
-        </option>
-        <option timeZoneId="17" gmtAdjustment="GMT-04:00" useDaylightTime="1" value="-4">(GMT-04:00) Atlantic Time
-            (Canada)
-        </option>
-        <option timeZoneId="18" gmtAdjustment="GMT-04:00" useDaylightTime="0" value="-4">(GMT-04:00) Caracas, La
-            Paz
-        </option>
-        <option timeZoneId="19" gmtAdjustment="GMT-04:00" useDaylightTime="0" value="-4">(GMT-04:00) Manaus</option>
-        <option timeZoneId="20" gmtAdjustment="GMT-04:00" useDaylightTime="1" value="-4">(GMT-04:00) Santiago
-        </option>
-        <option timeZoneId="21" gmtAdjustment="GMT-03:30" useDaylightTime="1" value="-3.5">(GMT-03:30)
-            Newfoundland
-        </option>
-        <option timeZoneId="22" gmtAdjustment="GMT-03:00" useDaylightTime="1" value="-3">(GMT-03:00) Brasilia
-        </option>
-        <option timeZoneId="23" gmtAdjustment="GMT-03:00" useDaylightTime="0" value="-3">(GMT-03:00) Buenos Aires,
-            Georgetown
-        </option>
-        <option timeZoneId="24" gmtAdjustment="GMT-03:00" useDaylightTime="1" value="-3">(GMT-03:00) Greenland
-        </option>
-        <option timeZoneId="25" gmtAdjustment="GMT-03:00" useDaylightTime="1" value="-3">(GMT-03:00) Montevideo
-        </option>
-        <option timeZoneId="26" gmtAdjustment="GMT-02:00" useDaylightTime="1" value="-2">(GMT-02:00) Mid-Atlantic
-        </option>
-        <option timeZoneId="27" gmtAdjustment="GMT-01:00" useDaylightTime="0" value="-1">(GMT-01:00) Cape Verde
-            Is.
-        </option>
-        <option timeZoneId="28" gmtAdjustment="GMT-01:00" useDaylightTime="1" value="-1">(GMT-01:00) Azores</option>
-        <option timeZoneId="29" gmtAdjustment="GMT+00:00" useDaylightTime="0" value="0">(GMT+00:00) Casablanca,
-            Monrovia, Reykjavik
-        </option>
-        <option timeZoneId="30" gmtAdjustment="GMT+00:00" useDaylightTime="1" value="0">(GMT+00:00) Greenwich Mean
-            Time : Dublin, Edinburgh, Lisbon, London
-        </option>
-        <option timeZoneId="31" gmtAdjustment="GMT+01:00" useDaylightTime="1" value="1">(GMT+01:00) Amsterdam,
-            Berlin, Bern, Rome, Stockholm, Vienna
-        </option>
-        <option timeZoneId="32" gmtAdjustment="GMT+01:00" useDaylightTime="1" value="1">(GMT+01:00) Belgrade,
-            Bratislava, Budapest, Ljubljana, Prague
-        </option>
-        <option timeZoneId="33" gmtAdjustment="GMT+01:00" useDaylightTime="1" value="1">(GMT+01:00) Brussels,
-            Copenhagen, Madrid, Paris
-        </option>
-        <option timeZoneId="34" gmtAdjustment="GMT+01:00" useDaylightTime="1" value="1">(GMT+01:00) Sarajevo,
-            Skopje, Warsaw, Zagreb
-        </option>
-        <option timeZoneId="35" gmtAdjustment="GMT+01:00" useDaylightTime="1" value="1">(GMT+01:00) West Central
-            Africa
-        </option>
-        <option timeZoneId="36" gmtAdjustment="GMT+02:00" useDaylightTime="1" value="2">(GMT+02:00) Amman</option>
-        <option timeZoneId="37" gmtAdjustment="GMT+02:00" useDaylightTime="1" value="2">(GMT+02:00) Athens,
-            Bucharest, Istanbul
-        </option>
-        <option timeZoneId="38" gmtAdjustment="GMT+02:00" useDaylightTime="1" value="2">(GMT+02:00) Beirut</option>
-        <option timeZoneId="39" gmtAdjustment="GMT+02:00" useDaylightTime="1" value="2">(GMT+02:00) Cairo</option>
-        <option timeZoneId="40" gmtAdjustment="GMT+02:00" useDaylightTime="0" value="2">(GMT+02:00) Harare,
-            Pretoria
-        </option>
-        <option timeZoneId="41" gmtAdjustment="GMT+02:00" useDaylightTime="1" value="2">(GMT+02:00) Helsinki, Kyiv,
-            Riga, Sofia, Tallinn, Vilnius
-        </option>
-        <option timeZoneId="42" gmtAdjustment="GMT+02:00" useDaylightTime="1" value="2">(GMT+02:00) Jerusalem
-        </option>
-        <option timeZoneId="43" gmtAdjustment="GMT+02:00" useDaylightTime="1" value="2">(GMT+02:00) Minsk</option>
-        <option timeZoneId="44" gmtAdjustment="GMT+02:00" useDaylightTime="1" value="2">(GMT+02:00) Windhoek
-        </option>
-        <option timeZoneId="45" gmtAdjustment="GMT+03:00" useDaylightTime="0" value="3">(GMT+03:00) Kuwait, Riyadh,
-            Baghdad
-        </option>
-        <option timeZoneId="46" gmtAdjustment="GMT+03:00" useDaylightTime="1" value="3" selected>(GMT+03:00) Moscow,
-            St. Petersburg, Volgograd
-        </option>
-        <option timeZoneId="47" gmtAdjustment="GMT+03:00" useDaylightTime="0" value="3">(GMT+03:00) Nairobi</option>
-        <option timeZoneId="48" gmtAdjustment="GMT+03:00" useDaylightTime="0" value="3">(GMT+03:00) Tbilisi</option>
-        <option timeZoneId="49" gmtAdjustment="GMT+03:30" useDaylightTime="1" value="3.5">(GMT+03:30) Tehran
-        </option>
-        <option timeZoneId="50" gmtAdjustment="GMT+04:00" useDaylightTime="0" value="4">(GMT+04:00) Abu Dhabi,
-            Muscat
-        </option>
-        <option timeZoneId="51" gmtAdjustment="GMT+04:00" useDaylightTime="1" value="4">(GMT+04:00) Baku</option>
-        <option timeZoneId="52" gmtAdjustment="GMT+04:00" useDaylightTime="1" value="4">(GMT+04:00) Yerevan</option>
-        <option timeZoneId="53" gmtAdjustment="GMT+04:30" useDaylightTime="0" value="4.5">(GMT+04:30) Kabul</option>
-        <option timeZoneId="54" gmtAdjustment="GMT+05:00" useDaylightTime="1" value="5">(GMT+05:00) Yekaterinburg
-        </option>
-        <option timeZoneId="55" gmtAdjustment="GMT+05:00" useDaylightTime="0" value="5">(GMT+05:00) Islamabad,
-            Karachi, Tashkent
-        </option>
-        <option timeZoneId="56" gmtAdjustment="GMT+05:30" useDaylightTime="0" value="5.5">(GMT+05:30) Sri
-            Jayawardenapura
-        </option>
-        <option timeZoneId="57" gmtAdjustment="GMT+05:30" useDaylightTime="0" value="5.5">(GMT+05:30) Chennai,
-            Kolkata, Mumbai, New Delhi
-        </option>
-        <option timeZoneId="58" gmtAdjustment="GMT+05:45" useDaylightTime="0" value="5.75">(GMT+05:45) Kathmandu
-        </option>
-        <option timeZoneId="59" gmtAdjustment="GMT+06:00" useDaylightTime="1" value="6">(GMT+06:00) Almaty,
-            Novosibirsk
-        </option>
-        <option timeZoneId="60" gmtAdjustment="GMT+06:00" useDaylightTime="0" value="6">(GMT+06:00) Astana, Dhaka
-        </option>
-        <option timeZoneId="61" gmtAdjustment="GMT+06:30" useDaylightTime="0" value="6.5">(GMT+06:30) Yangon
-            (Rangoon)
-        </option>
-        <option timeZoneId="62" gmtAdjustment="GMT+07:00" useDaylightTime="0" value="7">(GMT+07:00) Bangkok, Hanoi,
-            Jakarta
-        </option>
-        <option timeZoneId="63" gmtAdjustment="GMT+07:00" useDaylightTime="1" value="7">(GMT+07:00) Krasnoyarsk
-        </option>
-        <option timeZoneId="64" gmtAdjustment="GMT+08:00" useDaylightTime="0" value="8">(GMT+08:00) Beijing,
-            Chongqing, Hong Kong, Urumqi
-        </option>
-        <option timeZoneId="65" gmtAdjustment="GMT+08:00" useDaylightTime="0" value="8">(GMT+08:00) Kuala Lumpur,
-            Singapore
-        </option>
-        <option timeZoneId="66" gmtAdjustment="GMT+08:00" useDaylightTime="0" value="8">(GMT+08:00) Irkutsk, Ulaan
-            Bataar
-        </option>
-        <option timeZoneId="67" gmtAdjustment="GMT+08:00" useDaylightTime="0" value="8">(GMT+08:00) Perth</option>
-        <option timeZoneId="68" gmtAdjustment="GMT+08:00" useDaylightTime="0" value="8">(GMT+08:00) Taipei</option>
-        <option timeZoneId="69" gmtAdjustment="GMT+09:00" useDaylightTime="0" value="9">(GMT+09:00) Osaka, Sapporo,
-            Tokyo
-        </option>
-        <option timeZoneId="70" gmtAdjustment="GMT+09:00" useDaylightTime="0" value="9">(GMT+09:00) Seoul</option>
-        <option timeZoneId="71" gmtAdjustment="GMT+09:00" useDaylightTime="1" value="9">(GMT+09:00) Yakutsk</option>
-        <option timeZoneId="72" gmtAdjustment="GMT+09:30" useDaylightTime="0" value="9.5">(GMT+09:30) Adelaide
-        </option>
-        <option timeZoneId="73" gmtAdjustment="GMT+09:30" useDaylightTime="0" value="9.5">(GMT+09:30) Darwin
-        </option>
-        <option timeZoneId="74" gmtAdjustment="GMT+10:00" useDaylightTime="0" value="10">(GMT+10:00) Brisbane
-        </option>
-        <option timeZoneId="75" gmtAdjustment="GMT+10:00" useDaylightTime="1" value="10">(GMT+10:00) Canberra,
-            Melbourne, Sydney
-        </option>
-        <option timeZoneId="76" gmtAdjustment="GMT+10:00" useDaylightTime="1" value="10">(GMT+10:00) Hobart</option>
-        <option timeZoneId="77" gmtAdjustment="GMT+10:00" useDaylightTime="0" value="10">(GMT+10:00) Guam, Port
-            Moresby
-        </option>
-        <option timeZoneId="78" gmtAdjustment="GMT+10:00" useDaylightTime="1" value="10">(GMT+10:00) Vladivostok
-        </option>
-        <option timeZoneId="79" gmtAdjustment="GMT+11:00" useDaylightTime="1" value="11">(GMT+11:00) Magadan,
-            Solomon Is., New Caledonia
-        </option>
-        <option timeZoneId="80" gmtAdjustment="GMT+12:00" useDaylightTime="1" value="12">(GMT+12:00) Auckland,
-            Wellington
-        </option>
-        <option timeZoneId="81" gmtAdjustment="GMT+12:00" useDaylightTime="0" value="12">(GMT+12:00) Fiji,
-            Kamchatka, Marshall Is.
-        </option>
-        <option timeZoneId="82" gmtAdjustment="GMT+13:00" useDaylightTime="0" value="13">(GMT+13:00) Nuku'alofa
-        </option>
-
+    <select class="form-control" onchange="allSettingsSave();" id="timezone">
+        <option value="-12.0"> (GMT -12:00) Эниветок, Кваджалейн </option>
+        <option value="-11.0"> (GMT -11:00) Остров Мидуэй, Самоа </option>
+        <option value="-10.0"> (GMT -10:00) Гавайи </option>
+        <option value="-9.0"> (GMT -9:00) Аляска </option>
+        <option value="-8.0"> (GMT -8:00) Тихоокеанское время (США и Канада) </option>
+        <option value="-7.0"> (GMT -7:00) Горное время (США и Канада) </option>
+        <option value="-6.0"> (GMT -6:00) Центральное время (США и Канада), Мехико</option>
+        <option value="-5.0"> (GMT -5:00) Восточное время (США и Канада), Богота, Лима </option>
+        <option value="-4.0"> (GMT -4:00) Атлантическое время (Канада), Каракас, Ла-Пас </option>
+        <option value="-3.5"> (GMT -3:30) Ньюфаундленд </option>
+        <option value="-3.0"> (GMT -3:00) Бразилия, Буэнос-Айрес, Джорджтаун </option>
+        <option value="-2.0"> (GMT -2:00) Срединно-Атлантического </option>
+        <option value="-1.0"> (GMT -1:00 час) Азорские острова, острова Зеленого Мыса </option>
+        <option value="0.0"> (GMT) Время Западной Европе, Лондон, Лиссабон, Касабланка </option>
+        <option value="1.0"> (GMT +1:00 час) Брюссель, Копенгаген, Мадрид, Париж </option>
+        <option value="2.0"> (GMT +2:00) Киев, Калининград, Южная Африка </option>
+        <option value="3.0"> (GMT +3:00) Багдад, Эр-Рияд, Москва, Санкт-Петербург</option>
+        <option value="3.5"> (GMT +3:30) Тегеран </option>
+        <option value="4.0"> (GMT +4:00) Абу-Даби, Мускат, Баку, Тбилиси</option>
+        <option value="4.5"> (GMT +4:30) Кабул </option>
+        <option value="5.0"> (GMT +5:00) Екатеринбург, Исламабад, Карачи, Ташкент</option>
+        <option value="5.5"> (GMT +5:30) Бомбей, Калькутта, Мадрас, Нью-Дели</option>
+        <option value="5.75"> (GMT +5:45) Катманду</option>
+        <option value="6.0"> (GMT +6:00) Алматы, Дакке, Коломбо </option>
+        <option value="7.0"> (GMT +7:00) Бангкок, Ханой, Джакарта</option>
+        <option value="8.0"> (GMT +8:00) Пекин, Перт, Сингапур, Гонконг</option>
+        <option value="9.0"> (GMT +9:00) Токио, Сеул, Осака, Саппоро, Якутск</option>
+        <option value="9.5"> (GMT +9:30) Аделаида, Дарвин </option>
+        <option value="10.0"> (GMT +10:00) Восточная Австралия, Гуам, Владивосток </option>
+        <option value="11.0"> (GMT +11:00) Магадан, Соломоновы острова, Новая Каледония</option>
+        <option value="12.0"> (GMT +12:00) Окленд, Веллингтон, Фиджи, Камчатка</option>
     </select>
+
+
+
+
+
+
+
+
+
+
 </div>
 <hr class="col-sm-12 col-md-8"/>
 </div>
-<table class="users">
+<table class="users ntp_table">
     <tr>
         <th>
             №
@@ -368,17 +236,23 @@
             {{Lang::get('admin.remove')}}
         </th>
     </tr>
-    <tr>
-        <td class="text-center">1</td>
-        <td><input type="text" class="form-control"/></td>
-        <td class="text-center"><span class="italic">{{Lang::get('admin.not_connect')}}</span>
-            <button class="refresh"><span class="fa fa-refresh"></span></button>
-        </td>
-        <td class="text-center"><span class="fa fa-times"></span></td>
-    </tr>
+
+    <tbody class="ntp_table_tbody">
+        @foreach($admin_ntp_servers as $server)
+        <tr id="ntp_{{$server->id}}" data-id="{{$server->id}}">
+            <td class="text-center">{{$server->id}}</td>
+            <td><input type="text" onkeyup="allNtpSave();" class="form-control ntp" value="{{$server->ntp_server}}"/></td>
+            <td class="text-center"><span class="italic">{{Lang::get('admin.not_connect')}}</span>
+                <button class="refresh" onclick="javascript:ntpRefresh({{$server->id}});"><span class="fa fa-refresh"></span></button>
+            </td>
+            <td class="text-center"><span class="fa fa-times" onclick="removeNtp({{$server->id}});"></span></td>
+        </tr>
+        @endforeach
+    </tbody>
+
     <tr>
         <td colspan="4" class="text-right table-no-border">
-            <button class="btn btn-default"><span class="fa fa-plus"></span> Добавить</button>
+            <button class="btn btn-default" onclick="addNtp();"><span class="fa fa-plus"></span> {{Lang::get('admin.add')}}</button>
         </td>
     </tr>
 </table>
@@ -395,10 +269,10 @@
 
         <div class="row" id="datetime">
             <div class="col-xs-5">
-                <input type="text" class="form-control input-sm" id="date" placeholder="{{Lang::get('admin.date')}}">
+                <input onkeyup="allSettingsSave()" type="text" class="form-control input-sm" id="date" value="{{$admin->date}}" placeholder="{{Lang::get('admin.date')}}">
             </div>
             <div class="col-xs-5">
-                <input type="text" class="form-control input-sm" id="time" placeholder="{{Lang::get('admin.time')}}">
+                <input onkeyup="allSettingsSave()" type="text" class="form-control input-sm" id="time" value="{{$admin->time}}" placeholder="{{Lang::get('admin.time')}}">
             </div>
             <div class="col-xs-2">
                 <button class="btn btn-default btn-sm"><span class="fa fa-times"></span></button>
@@ -409,12 +283,241 @@
 <div class="validation-error">
 
 </div>
-<div class="row">
-    <div class="col-sm-12 col-md-8">
-        <hr/>
-        <input type="submit" class="btn btn-primary" value="{{Lang::get('admin.apply')}}"/>
-    </div>
-</div>
+
 </form>
 </div>
+@stop
+
+@section("add_js")
+<script type="text/javascript">
+
+$(document).ready(function()
+{
+    $.each($("#timezone option"),function(index,value)
+    {
+        if( $(value).val() == '{{$admin->timezone}}' )
+        {
+            $("#timezone").val('{{$admin->timezone}}');
+        }
+    });
+});
+    
+function allSettingsSave () {
+    var jsonData = {};
+    jsonData.hostname = $("#hostname").val();
+    jsonData.location = $("#location").val();
+    jsonData.contacts = $("#contacts").val();
+    jsonData.access_read = $("#access_read").val();
+    jsonData.access_write = $("#access_write").val();
+    jsonData.access_filter = $("#access_filter").val();
+    jsonData.timezone = $("#timezone option:selected").val();
+    jsonData.date = $("#date").val();
+    jsonData.time = $("#time").val();
+
+    console.log(jsonData);
+
+    $.ajax({
+        url:"admin/save",
+        method:"POST",
+        data:jsonData,
+        success:function(data)
+        {
+            console.log("ok");
+        }
+    });
+}
+
+function allUsersSave () {
+
+    var jsonData = {};
+    jsonData.users = [];
+    $.each($(".users_table_tbody tr"),function(index,value)
+    {
+        jsonData.users.push( { id:$(value).attr("data-id"), 
+            username:$(value).find(".username").val(),
+            password:$(value).find(".password").val(),
+            access_level:$(value).find(".access_level").val()
+         } );
+        // console.log(index,value);
+    });
+    
+    console.log(jsonData);
+    // return false;
+
+    jsonData.hostname = $("#hostname").val();
+    jsonData.location = $("#location").val();
+    jsonData.contacts = $("#contacts").val();
+    jsonData.access_read = $("#access_read").val();
+    jsonData.access_write = $("#access_write").val();
+    jsonData.access_filter = $("#access_filter").val();
+    jsonData.timezone = $("#timezone").val();
+    jsonData.date = $("#date").val();
+    jsonData.time = $("#time").val();
+
+    $.ajax({
+        url:"admin/save/users",
+        method:"POST",
+        data:jsonData,
+        success:function(data)
+        {
+            console.log("ok");
+        }
+    });
+}
+
+
+function allSubnetSave()
+{
+    var jsonData = {};
+    jsonData.subnets = [];
+    $.each($(".subnets_table_tbody tr"),function(index,value)
+    {
+        jsonData.subnets.push( { id:$(value).attr("data-id"), 
+            subnet:$(value).find(".subnet").val()
+         } );
+    });
+    
+    console.log(jsonData);
+    // return false;
+
+    $.ajax({
+        url:"admin/save/subnets",
+        method:"POST",
+        data:jsonData,
+        success:function(data)
+        {
+            console.log("ok");
+        }
+    });
+}
+
+function allNtpSave()
+{
+    var jsonData = {};
+    jsonData.ntps = [];
+    $.each($(".ntp_table_tbody tr"),function(index,value)
+    {
+        jsonData.ntps.push( { id:$(value).attr("data-id"), 
+            ntp:$(value).find(".ntp").val()
+         } );
+    });
+    
+    console.log(jsonData);
+    // return false;
+
+    $.ajax({
+        url:"admin/save/ntps",
+        method:"POST",
+        data:jsonData,
+        success:function(data)
+        {
+            console.log("ok");
+        }
+    });
+}
+
+
+
+var usersNum = {{count($admin_users)}};
+function addUser()
+{
+    usersNum++;
+    var userRow = "<tr id=user_"+usersNum+" data-id='"+usersNum+"'>"+
+        '<td class="text-center">'+usersNum+'</td>'+
+        '<td><input type="text" onkeyup="allUsersSave()" class="form-control username" value="" /></td>'+
+        '<td><input type="password" onkeyup="allUsersSave()" value="" class="form-control password"/></td>'+
+        '<td class="text-center">'+
+            '<select class="form-control access_level" onchange="allUsersSave()">'+
+                "<option value='admin'>{{Lang::get('admin.access_level_admin')}}</option>"+
+                "<option value='guest'>{{Lang::get('admin.access_level_guest')}}</option>"+
+            '</select>'+
+        "</td>"+
+        '<td class="text-center"><span class="fa fa-times" onclick="removeUser('+usersNum+')"></span></td>'+
+    "</tr>";
+
+    $(".users_table_tbody").append(userRow);
+
+    //send to server
+    allUsersSave();
+}
+
+function removeUser(id)
+{
+    console.log("removeUser");
+    usersNum--;
+    $("#user_"+id).remove();
+
+    //send to server
+    allUsersSave();
+}
+
+var subnetsNum = {{count($admin_access_subnet)}};
+function addSubnet()
+{
+    subnetsNum++;
+
+    var subnetRow = '<tr id="subnet_'+subnetsNum+'" data-id="'+subnetsNum+'">'+
+        '<td class="text-center">'+subnetsNum+'</td>'+
+        '<td><input type="text" onkeyup="allSubnetSave();" value="" class="form-control subnet"/></td>'+
+        '<td class="text-center"><span class="fa fa-times" onclick="removeSubnet('+subnetsNum+');"></span></td>'+
+    '</tr>';
+
+    $(".subnets_table_tbody").append(subnetRow);
+
+    //send to server
+    allSubnetSave();
+}
+
+function removeSubnet(id)
+{
+    subnetsNum--;
+    $("#subnet_"+id).remove();
+
+    //send to server
+    allSubnetSave();
+}
+
+
+var ntpNum = {{count($admin_ntp_servers)}};
+function addNtp()
+{
+    ntpNum++;
+
+    var ntpRow = '<tr id="ntp_'+ntpNum+'" data-id="'+ntpNum+'">'+
+            '<td class="text-center">'+ntpNum+'</td>'+
+            '<td><input type="text" onkeyup="allNtpSave();" class="form-control ntp" value=""/></td>'+
+            "<td class='text-center'><span class='italic'>{{Lang::get('admin.not_connect')}}</span>"+
+                '<button class="refresh" onclick="javascript:ntp_refresh('+ntpNum+');"><span class="fa fa-refresh"></span></button>'+
+            '</td>'+
+            '<td class="text-center"><span class="fa fa-times" onclick="removeNtp('+ntpNum+')"></span></td>'+
+        '</tr>';
+
+
+    $(".ntp_table_tbody").append(ntpRow);
+
+    //send to server
+    allNtpSave();
+}
+
+function removeNtp(id)
+{
+    console.log("removeNtp");
+    ntpNum--;
+    $("#ntp_"+id).remove();
+
+    //send to server
+    allNtpSave();
+}
+
+function ntpRefresh(id)
+{
+    console.log("ntpRefresh");
+}
+
+
+
+
+</script>
+
+
 @stop
