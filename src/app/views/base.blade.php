@@ -18,16 +18,16 @@
             <div class="row">
                 <div class="col-md-3"><h1>DKST 69</h1></div>
                 <div class="col-md-4 info">
-                    <p>Имя: dkst.localhost</p>
+                    <p>{{Lang::get('base.name')}}: dkst.localhost</p>
 
-                    <p>Адрес: Москва, ул. Пушкина, 17</p>
+                    <p>{{Lang::get('base.address')}}: Москва, ул. Пушкина, 17</p>
                 </div>
                 <div class="col-md-3">
                     <a href="#" class="notifications">Уведомления (3) <span class="fa fa-angle-down"></span></a>
                 </div>
                 <div class="col-md-2 text-right">
                     <p>admin</p>
-                    <a>выход <span class="fa fa-sign-out"></span></a>
+                    <a href="/index.php/logout">{{Lang::get('base.exit')}} <span class="fa fa-sign-out"></span></a>
                 </div>
             </div>
         </div>
@@ -284,5 +284,16 @@
 
 <script src="/js/jquery-2.1.3.min.js"></script>
 <script src="/js/overlay.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+    
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip();
+})
+
+</script>
+
+@yield("add_js")
+
 </body>
 </html>

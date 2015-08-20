@@ -50,6 +50,7 @@ return array(
 			'driver'   => 'sqlite',
 			'database' => __DIR__.'/../database/production.sqlite',
 			'prefix'   => '',
+			
 		),
 
 		'mysql' => array(

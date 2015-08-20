@@ -5,20 +5,20 @@
 
                     <div class="form-group">
                         <label for="hostname" class="col-sm-6 col-md-4 control-label text-left">
-                            Важность<a href="#">
+                            {{Lang::get("log.priority")}}<a href="#">
                                 <span class="form-question fa fa-question"></span>
                             </a>
                         </label>
 
 
-                        <label class="checkbox-inline"><input type="checkbox" id="normal-priority" /> нормальная</label>
-                        <label class="checkbox-inline"><input type="checkbox" id="high-priority" /> высокая</label>
+                        <label class="checkbox-inline"><input type="checkbox" id="normal-priority" /> {{Lang::get("log.normal")}}</label>
+                        <label class="checkbox-inline"><input type="checkbox" id="high-priority" /> {{Lang::get("log.high")}}</label>
 
                         <hr class="col-sm-12 col-md-8" />
                     </div>
                     <div class="form-group">
                         <label for="hostname" class="col-sm-6 col-md-4 control-label text-left">
-                            Дата<a href="#">
+                            {{Lang::get("log.date")}}<a href="#">
                                 <span class="form-question fa fa-question"></span>
                             </a>
                         </label>
@@ -39,12 +39,12 @@
                     <div class="col-sm-12 col-md-8">
                         <table class="sockets">
                             <tr>
-                                <th>Важность</th>
-                                <th>Дата, время</th>
-                                <th>Сообщения</th>
+                                <th>{{Lang::get("log.priority")}}</th>
+                                <th>{{Lang::get("log.date_time")}}</th>
+                                <th>{{Lang::get("log.messages")}}</th>
                             </tr>
                             <tr>
-                                <td class="text-center">нормальная</td>
+                                <td class="text-center">{{Lang::get("log.normal")}}</td>
                                 <td>16.09.2015</td>
                                 <td>вкл</td>
                             </tr>
@@ -55,8 +55,8 @@
                         <hr class="col-sm-12 col-md-8" />
 
                         <div class="col-sm-12 col-md-8">
-                            <a class="btn btn-default">Очистить журнал</a>
-                            <a class="btn btn-default">Скачать журнал</a>
+                            <a class="btn btn-default">{{Lang::get("log.log_clear")}}</a>
+                            <a class="btn btn-default">{{Lang::get("log.log_download")}}</a>
                         </div>
                     </div>
                 </form>
