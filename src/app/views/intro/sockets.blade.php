@@ -1,42 +1,48 @@
 @section("content")
-        <div class="content col-md-8">
-            <h2>Розетки</h2>
+            <p>
+
+            <h2>{{Lang::get("index.sockets")}}</h2>
             <table class="sockets">
                 <tr>
                     <th>#</th>
-                    <th>Нагрузка</th>
-                    <th>Состояние</th>
-                    <th>Управляется</th>
-                    <th>История</th>
-                    <th>Скрыть</th>
+                    <th>{{Lang::get("index.charge")}}</th>
+                    <th>{{Lang::get("index.state")}}</th>
+                    <th>{{Lang::get("index.controlled")}}</th>
+                    <th>{{Lang::get("index.history")}}</th>
+                    <th>{{Lang::get("index.hide")}}</th>
                 </tr>
                 <tr>
                     <td class="text-center">1</td>
                     <td><a href="#">Чайник</a></td>
-                    <td><span class="fa fa-circle condition condition-on"></span>вкл</td>
-                    <td class="text-center">Вручную</td>
+                    <td><span class="fa fa-circle condition condition-on"></span>{{Lang::get("index.on")}}</td>
+                    <td class="text-center">{{Lang::get("index.manual")}}</td>
                     <td>Включено 11.10.2014, сторож</td>
                     <td class="text-center"><span class="fa fa-times hide-socket"></span></td>
                 </tr>
                 <tr>
                     <td class="text-center">2</td>
                     <td><a href="#">Сервер А</a></td>
-                    <td><span class="fa fa-circle condition condition-off"></span>выкл</td>
-                    <td class="text-center">Автоматически</td>
+                    <td><span class="fa fa-circle condition condition-off"></span>{{Lang::get("index.off")}}</td>
+                    <td class="text-center">{{Lang::get("index.automatic")}}</td>
                     <td>Выключено 01.10.2014, автомат защиты</td>
                     <td class="text-center"><span class="fa fa-times hide-socket"></span></td>
                 </tr>
             </table>
-            <button class="show-sockets-btn">
-                Показать скрытые розетки
-            </button>
-            <h2>Датчики</h2>
+            </p>
+            <p>
+                <button class="btn btn-default show-sockets-btn">
+                    {{Lang::get("index.show_hidden_sockets")}}
+                </button>
+            </p>
+            <p>
+
+            <h2>{{Lang::get("index.sensors")}}</h2>
 
             <table class="sensors">
                 <tr>
-                    <th>Датчик</th>
-                    <th>Состояние</th>
-                    <th>Скрыть</th>
+                    <th>{{Lang::get("index.sensor")}}</th>
+                    <th>{{Lang::get("index.state")}}</th>
+                    <th>{{Lang::get("index.hide")}}</th>
                 </tr>
                 <tr>
                     <td class="vert">Датчик температуры</td>
@@ -50,50 +56,52 @@
                     <td class="text-center"><span class="fa fa-times hide-sensor"></span></td>
                 </tr>
             </table>
-            <button class="show-sensors-btn">
-                Показать скрытые датчики
-            </button>
-            <h2>Устройство</h2>
-            <table>
+            </p>
+            <p>
+                <button class="btn btn-default show-sensors-btn">
+                    {{Lang::get("index.show_hidden_sensors")}}
+                </button>
+            </p>
+            <h2>{{Lang::get("index.device")}}</h2>
+            <table class="device">
                 <tr>
-                    <th>Модель устройства</th>
+                    <th>{{Lang::get("index.device_model")}}</th>
                     <td>lorem</td>
                 </tr>
                 <tr>
-                    <th>Серийный номер</th>
+                    <th>{{Lang::get("index.serial_number")}}</th>
                     <td>lorem</td>
                 </tr>
                 <tr>
-                    <th>Версия ПО</th>
+                    <th>{{Lang::get("index.software_version")}}</th>
                     <td>lorem</td>
                 </tr>
                 <tr>
-                    <th>Версия железа</th>
+                    <th>{{Lang::get("index.hard_version")}}</th>
                     <td>lorem</td>
                 </tr>
                 <tr>
-                    <th>Контактные данные</th>
-                    <td>lorem</td>
-                </tr>
-            </table>
-            <h2>Настройка сети</h2>
-            <table>
-                <tr>
-                    <th>MAC-адрес</th>
-                    <td>lorem</td>
-                </tr>
-                <tr>
-                    <th>IP-адрес</th>
-                    <td>lorem</td>
-                </tr>
-                <tr>
-                    <th>Маска подсети</th>
-                    <td>lorem</td>
-                </tr>
-                <tr>
-                    <th>Шлюз</th>
+                    <th>{{Lang::get("index.contacts")}}</th>
                     <td>lorem</td>
                 </tr>
             </table>
-        </div>
+            <h2>{{Lang::get("index.network_config")}}</h2>
+            <table class="network-settings">
+                <tr>
+                    <th>{{Lang::get("index.mac_address")}}</th>
+                    <td>lorem</td>
+                </tr>
+                <tr>
+                    <th>{{Lang::get("index.ip_address")}}</th>
+                    <td>lorem</td>
+                </tr>
+                <tr>
+                    <th>{{Lang::get("index.network_subnet")}}</th>
+                    <td>lorem</td>
+                </tr>
+                <tr>
+                    <th>{{Lang::get("index.gate")}}</th>
+                    <td>lorem</td>
+                </tr>
+            </table>
 @stop

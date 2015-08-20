@@ -6,6 +6,7 @@
 	"require": {
 		"laravel/framework": "4.2.*"
 	},
+
 	"autoload": {
 		"classmap": [
 			"app/commands",
