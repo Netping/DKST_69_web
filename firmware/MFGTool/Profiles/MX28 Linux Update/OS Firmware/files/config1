@@ -1,9 +1,11 @@
-#
-# NetPing config file
-#
 network.device_name=TestDevice
+network.mac_address=00:01:02:03:04:05
 network.dhcp_enable=0
 network.ip_address=192.168.0.100
 network.ip_mask=255.255.255.0
 network.ip_gateway=192.168.0.1
 network.dns_server=8.8.8.8
+network.http_port=80
+network.ntp_server0=0.pool.ntp.org
+network.ntp_server1=1.pool.ntp.org
+network.ntp_server2=2.pool.ntp.org
