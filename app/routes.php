@@ -153,11 +153,56 @@ Route::group(array('before' => 'auth'), function () {
 
 	Route::get("/network",function()
 	{
+		$ip = exec(Config::get('app.cmdpath').' get-devipaddr') | "error_no_data_ip";
+		$mask = exec(Config::get('app.cmdpath').' get-netmask') | "error_no_data_mask";
+		$gateway = exec(Config::get('app.cmdpath').' get-gateway') | "error_no_data_gateway";
+		$mac = exec(Config::get('app.cmdpath').' get-mac') | "error_no_data_mac";
+		$httpport = exec(Config::get('app.cmdpath').' get-httpport') | "error_no_data_httpport";
+		$snmp_agent_port = "error_no_data_snmp_arent_port";//exec(Config::get('app.cmdpath').' get-devipaddr') | "error_no_data";
+		$dns1 = exec(Config::get('app.cmdpath').' get-dns') | "error_no_data_dns1";
+		// $ip = exec(Config::get('app.cmdpath').' get-devipaddr') | "error_no_data";
+		// $ip = exec(Config::get('app.cmdpath').' get-devipaddr') | "error_no_data";
+		// $ip = exec(Config::get('app.cmdpath').' get-devipaddr') | "error_no_data";
+
+		// Config::get('app.cmdpath');
+
 		return View::make("base")
 		->with("currentMenu","network")
-		->nest("conetent","intro.networks_settings",[])
+		->nest("conetent","intro.networks_settings",[
+			"ip"=>$ip,
+			"mask"=>$mask,
+			"gateway"=>$gateway,
+			"mac"=>$mac,
+			"httpport"=>$httpport,
+			"snmp_agent_port"=>$snmp_agent_port,
+			"dns1"=>$dns1
+			])
 		;
 	});
+
+	Route::post("/network/save",function()
+	{
+
+  		$ip = Input::get("ip-address");
+  		$mask = Input::get("mask");
+  		$gateway = Input::get("gateway");
+  		$mac = Input::get("mac-address");
+  		$httpport = Input::get("http-port");
+  		$dns1 = Input::get("dns-server-1");
+
+  		//сохраняем настройки в системе
+  		@exec(Config::get('app.cmdpath').' set devipaddr='.$ip);
+  		@exec(Config::get('app.cmdpath').' set netmask='.$mask);
+  		@exec(Config::get('app.cmdpath').' set gateway='.$gateway);
+  		@exec(Config::get('app.cmdpath').' set macaddr='.$mac);
+  		@exec(Config::get('app.cmdpath').' set httpport='.$httpport);
+  		@exec(Config::get('app.cmdpath').' set macaddr='.$mac);
+  		@exec(Config::get('app.cmdpath').' set dns='.$dns1);
+
+  		return Redirect::back();
+	});
+
+
 
 	Route::get("/notifications/config",function()
 	{
