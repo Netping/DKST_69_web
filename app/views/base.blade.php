@@ -26,7 +26,7 @@
                     <a href="#" class="notifications">Уведомления (3) <span class="fa fa-angle-down"></span></a>
                 </div>
                 <div class="col-md-2 text-right">
-                    <p>admin</p>
+                    <p>{{Auth::user()->username}}</p>
                     <a href="/index.php/logout">{{Lang::get('base.exit')}} <span class="fa fa-sign-out"></span></a>
                 </div>
             </div>
