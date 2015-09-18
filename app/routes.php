@@ -47,7 +47,8 @@ Route::group(array('before' => 'auth'), function () {
 				"admin" => $admin,
 				"admin_users" => $admin_users,
 				"admin_access_subnet" => $admin_access_subnet,
-				"admin_ntp_servers" => $admin_ntp_servers
+				"admin_ntp_servers" => $admin_ntp_servers,
+				"user_id_start" => 1
 			])
 		;
 	});
@@ -64,8 +65,8 @@ Route::group(array('before' => 'auth'), function () {
 		$admin->access_read = Input::get("access_read");
 		$admin->access_write = Input::get("access_write");
 		$admin->access_filter = Input::get("access_filter");
-		$admin->timezone = Input::get("timezone");
-		$admin->datetime_offset	 = Input::get("datetime_offset");
+		// $admin->timezone = Input::get("timezone");
+		// $admin->datetime_offset	 = Input::get("datetime_offset");
 		// $admin->time = Input::get("time");
 		$admin->save();
 
@@ -73,28 +74,297 @@ Route::group(array('before' => 'auth'), function () {
 
 	});
 
+
+	Route::post("/admin/save/time",function()
+	{
+		$admin = Admin::first();
+
+		// dd(Input::get("api_date_time"));//ok
+
+		@exec(Config::get('app.cmdpath').' time-set='.Input::get("api_date_time") );
+		
+		$admin->timezone = Input::get("timezone");
+		$admin->datetime_offset	 = Input::get("datetime_offset");
+		$admin->save();
+		return "ok";
+	});
+
 	Route::post("/admin/save/users",function()
 	{
+		$users = Input::get("users");
+
+		$login_user = Auth::user()->username;
+		$login_user_password = Auth::user()->password;
+
+		// dd($users);
+
+		$db_users = DB::table('admin_users')->get();
 
 		DB::table('admin_users')->truncate();
 
-		$users = Input::get("users");
+		$i = 1;
+		foreach($users as $user)
+		{
+			$password ="";
+			if( $user['password'] =="" || $user['password'] =="undefined")
+			{
+				if($user['hash_password'] =="" || $user['hash_password'] =="undefined")
+				{
+					echo "no hash pass ";
+					// dd($db_users);
+					foreach($db_users as $du)
+					{
+						if($du->username == $user['username'])
+						{
+							$password1 = $du->password;
+							// dd($user['username']. " ".$password1);
+							if(isset($password1))
+							{
+								echo "get pass from db ".$password1;
+								$password = $password1;
+							}
+							else continue;
+						}
+					}
+				}
+				else $password = $user['hash_password'];
+			}
+			else
+			{
+				$password = Hash::make( $user['password'] );
+				$login_user_password = $password;
+			}
 
-		$insert_users_arr = [];
+			$insertUser = 
+			[
+				"id" => $i,
+				"username" => trim($user['username']),
+				"password" => $password,
+				"access_level" => $user['access_level']
+			];
+
+			DB::table("admin_users")->insert($insertUser);
+			$i++;
+		}
+
+		Auth::attempt(['username'=>$login_user,'password'=>$login_user_password]);
+
+		return "ok";
+
+
+
+
+		/////////////////////////////////
+
+
+		$user_send_to_db = [];
 
 
 		foreach($users as $user)
 		{
-			$insert_users_arr[] = 
+			if($user['password'] !="")
+			{
+				$user_send_to_db[$user['id']] = 
+				[
+					"id" => $user['id'],
+					"username" => $user['username'],
+					"password" => Hash::make($user['password']),
+					"access_level" => $user['access_level']
+				];
+			}
+		}
+
+		foreach($db_users as $db_user)
+		{			
+			$user_send_to_db[$db_user->id] = 
 			[
 				"id" => $user['id'],
-				"username" => $user['username'],
-				"password" => Hash::make($user['password']),
-				"access_level" => $user['access_level']
+				"username" => $db_user->username,
+				"password" => $db_user->password,
+				"access_level" => $db_user->access_level
 			];
 		}
 
-		DB::table("admin_users")->insert($insert_users_arr);
+
+		DB::table('admin_users')->truncate();
+
+		$user_send_to_db2 = [];
+		$i = 1;
+		foreach($user_send_to_db as $user)
+		{
+			$user_send_to_db2 = 
+			[
+				"id" => $i,
+				"username" => $user['username'],
+				"password" => $user['password'],
+				"access_level" => $user['access_level']
+			];
+
+			DB::table("admin_users")->insert($user_send_to_db2);
+			$i++;
+		}
+		// dd($user_send_to_db2);
+
+		return "ok";
+		/////////////////////////////////////////
+
+
+		$update_user = 
+		[
+			"id" => $user['id'],
+			"username" => $user['username'],
+			"password" => Hash::make($user['password']),
+			"access_level" => $user['access_level']
+		];
+
+		$is_update = DB::table("admin_users")
+			->where('id', $user['id'])
+			->update($update_user);
+
+		if(is_null($is_update))
+		{
+			DB::table("admin_users")->insert($update_user);
+		}
+		
+
+
+
+
+
+		/////////////////////////////
+		$insert_users_arr = [];
+		$users_db_count = DB::table('admin_users')->count();
+
+		//если добавлены новые пользователи
+		if($users_db_count < count($users))
+		{
+
+			$db_users = DB::table('admin_users')->get();
+			foreach($users as $user)
+			{
+				$is_add = true;
+
+				foreach($db_users as $db_user)
+				{
+					if($db_user->id == $user['id'] )
+					{
+						$is_add = false;
+						continue;
+					}
+				}
+				if($is_add)
+				{
+					if( $user['username'] =="")continue;
+					$insert_user = 
+					[
+						"id" => $user['id'],
+						"username" => $user['username'],
+						"password" => Hash::make($user['password']),
+						"access_level" => $user['access_level']
+					];
+					DB::table("admin_users")->insert($insert_user);
+				}
+			}
+		}
+		//если удалены пользователи
+		else if($users_db_count > count($users))
+		{
+			$db_users = DB::table('admin_users')->get();
+			foreach($db_users as $db_user)
+			{
+				$is_delete = true;
+
+				foreach($users as $user)
+				{
+					if($db_user->id == $user['id'] )
+					{
+						$is_delete = false;
+					}
+				}
+				if($is_delete)
+				{
+					DB::table('admin_users')->where("id", '=', $db_user->id)->delete();
+				}
+			}
+		}
+		//если количество пользователей не изменилось
+		else
+		{
+			foreach($users as $user)
+			{
+
+				// if($user['password'] =="" || is_null($user['password']) ) continue;
+
+				if($user['password'] =="" || is_null($user['password']) )
+				{
+					$update_user = 
+					[
+						"id" => $user['id'],
+						"username" => $user['username'],
+						// "password" => Hash::make($user['password']),
+						"access_level" => $user['access_level']
+					];
+
+					$is_update = DB::table("admin_users")
+						->where('id', $user['id'])
+						->update($update_user);
+
+					if(is_null($is_update))
+					{
+						DB::table("admin_users")->insert($update_user);
+					}				
+				}
+				else
+				{
+					$update_user = 
+					[
+						"id" => $user['id'],
+						"username" => $user['username'],
+						"password" => Hash::make($user['password']),
+						"access_level" => $user['access_level']
+					];
+
+					$is_update = DB::table("admin_users")
+						->where('id', $user['id'])
+						->update($update_user);
+
+					if(is_null($is_update))
+					{
+						DB::table("admin_users")->insert($update_user);
+					}
+				}
+
+
+	/*			$insert_users_arr[] = 
+				[
+					"id" => $user['id'],
+					"username" => $user['username'],
+					"password" => Hash::make($user['password']),
+					"access_level" => $user['access_level']
+				];*/
+
+				$update_user = 
+				[
+					"id" => $user['id'],
+					"username" => $user['username'],
+					"password" => Hash::make($user['password']),
+					"access_level" => $user['access_level']
+				];
+
+				$is_update = DB::table("admin_users")
+					->where('id', $user['id'])
+					->update($update_user);
+
+				if(is_null($is_update))
+				{
+					DB::table("admin_users")->insert($update_user);
+				}
+
+			}
+		}
+
+		// DB::table("admin_users")->insert($insert_users_arr);
+		// DB::table("admin_users")->update($insert_users_arr);
 
 		return "ok";
 
@@ -296,6 +566,7 @@ Route::get("/set/default/settings",function()
 	$admin->save();
 
 	$admin_users = new AdminUser();
+	$admin_users->id = 0;
 	$admin_users->username = "admin";
 	$admin_users->password = Hash::make("admin");
 	$admin_users->access_level = "admin";

@@ -8,7 +8,7 @@
             class="form-question fa fa-question" data-toggle="tooltip"  title="some tooltip"></span></a></label>
 
     <div class="col-sm-6 col-md-4">
-        <input onkeyup="allSettingsSave()" type="text" class="form-control" id="hostname" placeholder="" value="{{$admin->hostname}}">
+        <input onkeyup="return false;" type="text" class="form-control" id="hostname" placeholder="" value="{{$admin->hostname}}">
 
 <!--         <div class="validation-error">
             Допускаются только латинские символы и буквы
@@ -21,7 +21,7 @@
             href="#"><span class="form-question fa fa-question" data-toggle="tooltip"  title="some tooltip"></span></a></label>
 
     <div class="col-sm-6 col-md-4">
-        <input onkeyup="allSettingsSave()" type="text" class="form-control" id="location" value="{{$admin->location}}" placeholder="">
+        <input onkeyup="return false;" type="text" class="form-control" id="location" value="{{$admin->location}}" placeholder="">
 
         <div class="validation-error">
 
@@ -34,7 +34,7 @@
             class="form-question fa fa-question" data-toggle="tooltip"  title="some tooltip"></span></a></label>
 
     <div class="col-sm-6 col-md-4">
-        <input onkeyup="allSettingsSave()" type="text" class="form-control" id="contacts" value="{{$admin->contacts}}" placeholder="">
+        <input onkeyup="return false;" type="text" class="form-control" id="contacts" value="{{$admin->contacts}}" placeholder="">
 
         <div class="validation-error">
 
@@ -65,30 +65,11 @@
     </tr>
     
     <tbody class="users_table_tbody">
-        @foreach($admin_users as $user)
-        <tr id="user_{{$user->id}}" data-id="{{$user->id}}">
-            <td class="text-center">{{$user->id}}</td>
-            <td><input type="text" class="form-control username" onkeyup="allUsersSave()" value="{{$user->username}}" /></td>
-            <td><input type="password" value="{{$user->password}}" onkeyup="allUsersSave()" class="form-control password"/></td>
-            <td class="text-center">
-                <select class="form-control access_level" onchange="allUsersSave()">
-                    @if($user->access_level =="admin")
-                    <option value="admin" selected="">{{Lang::get('admin.access_level_admin')}}</option>
-                    <option value="guest">{{Lang::get('admin.access_level_guest')}}</option>
-                    @else
-                    <option value="admin">{{Lang::get('admin.access_level_admin')}}</option>
-                    <option value="guest" selected="">{{Lang::get('admin.access_level_guest')}}</option>
-                    @endif
-                </select>
-            </td>
-            <td class="text-center"><span class="fa fa-times" onclick="removeUser({{$user->id}})"></span></td>
-        </tr>
-        @endforeach
     </tbody>
 
     <tr>
         <td colspan="5" class="text-right table-no-border">
-            <button class="btn btn-default" onclick="addUser();"><span class="fa fa-plus"></span> {{Lang::get('admin.add')}}</button>
+            <a class="btn btn-default" onclick="addUser();" ><span class="fa fa-plus"></span> {{Lang::get('admin.add')}}</a>
         </td>
     </tr>
 </table>
@@ -100,7 +81,7 @@
             class="form-question fa fa-question" data-toggle="tooltip"  title="some tooltip"></span></a></label>
 
     <div class="col-sm-6 col-md-4">
-        <input onkeyup="allSettingsSave()" type="text" class="form-control" id="access_read" value="{{$admin->access_read}}" placeholder="">
+        <input onkeyup="return false;" type="text" class="form-control" id="access_read" value="{{$admin->access_read}}" placeholder="">
 
         <div class="validation-error">
 
@@ -115,7 +96,7 @@
             class="form-question fa fa-question" data-toggle="tooltip"  title="some tooltip"></span></a></label>
 
     <div class="col-sm-6 col-md-4">
-        <input onkeyup="allSettingsSave()" type="text" class="form-control" id="access_write" value="{{$admin->access_write}}" placeholder="">
+        <input onkeyup="return false;" type="text" class="form-control" id="access_write" value="{{$admin->access_write}}" placeholder="">
 
         <div class="validation-error">
 
@@ -128,7 +109,7 @@
             href="#"><span class="form-question fa fa-question" data-toggle="tooltip"  title="some tooltip"></span></a></label>
 
     <div class="col-sm-6 col-md-4">
-        <input onkeyup="allSettingsSave()" type="text" class="form-control" id="access_filter" value="{{$admin->access_filter}}" placeholder="">
+        <input onkeyup="return false;" type="text" class="form-control" id="access_filter" value="{{$admin->access_filter}}" placeholder="">
 
         <div class="validation-error">
 
@@ -154,7 +135,7 @@
         @foreach($admin_access_subnet as $subnet)
         <tr id="subnet_{{$subnet->id}}" data-id="{{$subnet->id}}">
             <td class="text-center">{{$subnet->id}}</td>
-            <td><input type="text" value="{{$subnet->subnet}}" class="form-control subnet" onkeyup="allSubnetSave();" /></td>
+            <td><input type="text" value="{{$subnet->subnet}}" class="form-control subnet" onkeyup="return false;allSubnetSave();" /></td>
             <td class="text-center"><span class="fa fa-times" onclick="removeSubnet({{$subnet->id}});"></span></td>
         </tr>
         @endforeach
@@ -162,7 +143,7 @@
 
     <tr>
         <td colspan="3" class="text-right table-no-border">
-            <button class="btn btn-default" onclick="addSubnet();"><span class="fa fa-plus"></span> {{Lang::get('admin.add')}}</button>
+            <a class="btn btn-default" onclick="addSubnet();"><span class="fa fa-plus"></span> {{Lang::get('admin.add')}}</a>
         </td>
     </tr>
 
@@ -175,7 +156,7 @@
 
 <div class="col-sm-6 col-md-4">
 
-    <select class="form-control" onchange="allSettingsSave();" id="timezone">
+    <select class="form-control" onchange="changeTimeZone();" id="timezone">
         <option value="-12.0"> (GMT -12:00) Эниветок, Кваджалейн </option>
         <option value="-11.0"> (GMT -11:00) Остров Мидуэй, Самоа </option>
         <option value="-10.0"> (GMT -10:00) Гавайи </option>
@@ -241,9 +222,9 @@
         @foreach($admin_ntp_servers as $server)
         <tr id="ntp_{{$server->id}}" data-id="{{$server->id}}">
             <td class="text-center">{{$server->id}}</td>
-            <td><input type="text" onkeyup="allNtpSave();" class="form-control ntp" value="{{$server->ntp_server}}"/></td>
+            <td><input type="text" onkeyup="return false;allNtpSave();" class="form-control ntp" value="{{$server->ntp_server}}"/></td>
             <td class="text-center"><span class="italic">{{Lang::get('admin.not_connect')}}</span>
-                <button class="refresh" onclick="javascript:ntpRefresh({{$server->id}});"><span class="fa fa-refresh"></span></button>
+                <a class="btn btn-default refresh" onclick="javascript:ntpRefresh({{$server->id}});"><span class="fa fa-refresh"></span></a>
             </td>
             <td class="text-center"><span class="fa fa-times" onclick="removeNtp({{$server->id}});"></span></td>
         </tr>
@@ -252,7 +233,7 @@
 
     <tr>
         <td colspan="4" class="text-right table-no-border">
-            <button class="btn btn-default" onclick="addNtp();"><span class="fa fa-plus"></span> {{Lang::get('admin.add')}}</button>
+            <a class="btn btn-default" onclick="addNtp();"><span class="fa fa-plus"></span> {{Lang::get('admin.add')}}</a>
         </td>
     </tr>
 </table>
@@ -264,7 +245,7 @@
 
     <div class="col-sm-6 col-md-4">
         <p class="form-control-static"><span id="showDate">{{date("d.m.Y",time() - $admin->datetime_offset)}}</span>, <span id="showTime">{{date("G:i:s",time() - $admin->datetime_offset)}}</span>
-            <button class="datetime-edit" onclick="showChangeDateTime();"><span class="fa fa-pencil"></span></button>
+            <a class="btn btn-default datetime-edit" onclick="showChangeDateTime();"><span class="fa fa-pencil"></span></a>
         </p>
 
         <div class="row hidden" id="datetime">
@@ -275,13 +256,20 @@
                 <input onkeyup="dateTimeChange()" type="text" class="form-control input-sm" id="time" value="" placeholder="">
             </div>
             <div class="col-xs-2">
-                <button class="btn btn-default btn-sm" onclick="hideChangeDateTime()"><span class="fa fa-times"></span></button>
+                <a class="btn btn-default btn-sm" onclick="hideChangeDateTime()"><span class="fa fa-times"></span></a>
             </div>
         </div>
     </div>
 </div>
 <div class="validation-error">
 
+</div>
+
+<div class="row">
+    <div class="col-sm-12 col-md-8">       
+        <hr/>      
+        <input type="submit" onclick="saveSettings()" class="btn btn-primary" value="{{Lang::get('admin.apply')}}"/>        
+    </div>     
 </div>
 
 </form>
@@ -293,6 +281,9 @@
 
 
 var datetime_offset = parseInt({{$admin->datetime_offset}})*1000;
+
+var current_timezone = '{{$admin->timezone}}';
+
 
 $(document).ready(function()
 {
@@ -339,10 +330,14 @@ function checkTime(i)
 }
 //
 
+function saveSettings()
+{
+ console.log("saveSettings");
 
-function allSettingsSave () {
-    console.log("allSettingsSave",datetime_offset);
+    generateUsers(getAllUsers());
+
     var jsonData = {};
+
     jsonData.hostname = $("#hostname").val();
     jsonData.location = $("#location").val();
     jsonData.contacts = $("#contacts").val();
@@ -351,13 +346,174 @@ function allSettingsSave () {
     jsonData.access_filter = $("#access_filter").val();
     jsonData.timezone = $("#timezone option:selected").val();
     jsonData.datetime_offset = parseInt( datetime_offset / 1000 );
-    // jsonData.date = $("#date").val();
-    // jsonData.time = $("#time").val();
-
-    console.log(jsonData);
 
     $.ajax({
         url:"admin/save",
+        method:"POST",
+        data:jsonData,
+        success:function(data)
+        {
+            console.log("ok");
+        }
+    });
+
+    //subnets
+    allSubnetSave();
+
+    //ntps
+    allNtpSave();
+
+    //users
+    allUsersSave();
+}
+
+
+function changeTimeZone()
+{
+    // TODO: здесь использовать библиотеку вроде этой:
+    // http://yapro.ru/uploads/Files/jquery.yapro.Datepicker/index.html
+
+
+    console.log($("#timezone option:selected").val() - current_timezone);
+    return false;
+
+
+    var diff_hours = $("#timezone option:selected").val() - current_timezone;
+
+    var rawDate = $("#showDate").text();
+    var rawTime = $("#showTime").text();
+
+    var curDate = $("#date").val();
+    var date_arr = rawDate.split(".");
+
+    // console.log(date_arr);
+
+    
+
+    var time_api_arr = rawTime.split(":");
+    var newTimeHours;
+    var newTimeMinutes;
+
+
+    var newDay;
+
+    if( diff_hours )//если перевели вперед по времени
+    {
+        newTimeHours = parseFloat(time_api_arr[0]) + parseFloat(diff_hours);//изменяем количество часов
+        if(newTimeHours.toString().split(".")[1] !=undefined)
+        {
+            newTimeHours = newTimeHours.toString().split(".")[0];
+            newTimeMinutes = 30;            
+        }
+    }
+    else//если перевели назад по времени
+    {
+        newTimeHours = parseFloat(time_api_arr[0]) + parseFloat(diff_hours);//изменяем количество часов
+        if(newTimeHours.toString().split(".")[1] !=undefined)
+        {
+            newTimeHours = newTimeHours.toString().split(".")[0];
+            newTimeMinutes = 30;
+        }
+    }
+    // console.log(newTimeHours,newTimeMinutes);
+    var tempNewHours =  parseFloat(time_api_arr[0])+diff_hours;
+    if(tempNewHours >24)//переход на следующий день
+    {
+        tempNewHours =  tempNewHours - 24;
+        if(newTimeMinutes == 30)
+        {
+            var tempNewMinutes = parseFloat(time_api_arr[1]) +30;
+            if(tempNewMinutes >60)
+            {
+                tempNewMinutes = tempNewMinutes - 60;
+                tempNewHours +=1;
+                if(tempNewHours >24)
+                {
+                    tempNewHours = tempNewHours - 24;
+                }
+            }
+        }
+        newDay = parseInt(date_arr[0]) + 1;
+    }
+    else if(newTimeHours < 0 )//переход на предыдущий день
+    {
+        tempNewHours = 24+tempNewHours;//<24
+        if(newTimeMinutes == 30)
+        {
+            var tempNewMinutes = parseFloat(time_api_arr[1]) -30;
+            if(tempNewMinutes <0)
+            {
+                tempNewMinutes = 60 + tempNewMinutes;
+                tempNewHours -=1;
+                if(tempNewHours <0)
+                {
+                    tempNewHours = 24+tempNewHours;
+                }
+            }
+        }
+        newDay = parseInt(date_arr[0]) - 1;
+    }
+    console.log("tempNewHours",tempNewHours);
+
+
+    var hours = tempNewHours;
+    var minutes = parseFloat(time_api_arr[1]);//tempNewMinutes;
+
+
+    // $("#datetime").removeClass("hidden");
+    // $("#date").val( $("#showDate").text() );
+    // $("#time").val( $("#showTime").text() );
+    clearTimeout(t);
+    $("#showTime").html(hours+":"+minutes);
+    $("#showDate").html(newDay+"."+date_arr[1]+"."+date_arr[2]);
+    // startTime();
+
+    return false;
+    var jsonData ={};
+    // TODO: добавить случаи когда происходит переход на следующий месяц или на следующий год
+    jsonData.api_date_time = date_arr[2]+date_arr[1]+date_arr[0]+tempNewHours+tempNewMinutes;
+
+    //пробавляем поправку во времени к текущему времени и если надо переводим дату
+
+
+    $.ajax({
+        url:"admin/save/time",
+        method:"POST",
+        data:jsonData,
+        success:function(data)
+        {
+            console.log("ok");
+        }
+    });
+
+}
+
+function timeSave () {
+    // console.log("timeSave",datetime_offset);
+    var jsonData = {};
+    jsonData.timezone = $("#timezone option:selected").val();
+    jsonData.datetime_offset = parseInt( datetime_offset / 1000 );
+
+
+    var rawDate = $("#showDate").text();
+    var rawTime = $("#showTime").text();
+    console.log("timeSave",rawDate,rawTime);
+
+    var curDate = $("#date").val();
+    var date_arr = rawDate.split(".");
+
+    console.log(date_arr);
+
+    var newDatetime = new Date(date_arr[1]+"/"+date_arr[0]+"/"+date_arr[2]+" "+ $("#time").val() );//+" "+$("#time").val()).getTime();
+
+    var time_api = rawTime.replace(/:/g, "");
+    console.log("newDatetime",date_arr[2]+date_arr[1]+date_arr[0]+time_api,time_api,rawTime);
+
+    jsonData.api_date_time = date_arr[2]+date_arr[1]+date_arr[0]+time_api;
+
+
+    $.ajax({
+        url:"admin/save/time",
         method:"POST",
         data:jsonData,
         success:function(data)
@@ -376,6 +532,7 @@ function allUsersSave () {
         jsonData.users.push( { id:$(value).attr("data-id"), 
             username:$(value).find(".username").val(),
             password:$(value).find(".password").val(),
+            hash_password:$(value).find(".hash_password").val(),
             access_level:$(value).find(".access_level").val()
          } );
         // console.log(index,value);
@@ -445,16 +602,34 @@ function allNtpSave()
 
 
 
-var usersNum = {{count($admin_users)}};
+var usersNum = {{count($admin_users) -1}};
 function addUser()
 {
+    var newUser = {
+            id:"",//getAllUsers().length+1, 
+            username:"",
+            password:"",
+            hash_password:"",
+            access_level:"guest",
+            isNew:true
+    };
+
+    var users = getAllUsers();
+    users.push(newUser);
+
+    generateUsers(users);
+
+
+    return false;
+
+
     usersNum++;
     var userRow = "<tr id=user_"+usersNum+" data-id='"+usersNum+"'>"+
         '<td class="text-center">'+usersNum+'</td>'+
-        '<td><input type="text" onkeyup="allUsersSave()" class="form-control username" value="" /></td>'+
-        '<td><input type="password" onkeyup="allUsersSave()" value="" class="form-control password"/></td>'+
+        '<td><input type="text" onkeyup="return false;allUsersSave()" class="form-control username" value="" /></td>'+
+        '<td><input type="password" value="" class="form-control password"/></td>'+
         '<td class="text-center">'+
-            '<select class="form-control access_level" onchange="allUsersSave()">'+
+            '<select class="form-control access_level" onchange="return false;allUsersSave()">'+
                 "<option value='admin'>{{Lang::get('admin.access_level_admin')}}</option>"+
                 "<option value='guest'>{{Lang::get('admin.access_level_guest')}}</option>"+
             '</select>'+
@@ -465,17 +640,33 @@ function addUser()
     $(".users_table_tbody").append(userRow);
 
     //send to server
-    allUsersSave();
+    // allUsersSave();
 }
 
 function removeUser(id)
 {
-    console.log("removeUser");
-    usersNum--;
-    $("#user_"+id).remove();
+    // console.log("removeUser");
+    var users = getAllUsers();
+
+    // usersNum--;
+    // $("#user_"+id).remove();
+
+    var index = 0;
+    for(var i in users )
+    {
+        console.log(users[i]);
+        if(users[i].id == id)
+        {
+            delete users[index];
+            console.log("remove");
+        }
+        index++;
+    }
+    console.log("users",users);
+    generateUsers(users);
 
     //send to server
-    allUsersSave();
+    // allUsersSave();
 }
 
 var subnetsNum = {{count($admin_access_subnet)}};
@@ -485,7 +676,7 @@ function addSubnet()
 
     var subnetRow = '<tr id="subnet_'+subnetsNum+'" data-id="'+subnetsNum+'">'+
         '<td class="text-center">'+subnetsNum+'</td>'+
-        '<td><input type="text" onkeyup="allSubnetSave();" value="" class="form-control subnet"/></td>'+
+        '<td><input type="text" onkeyup="return false;allSubnetSave();" value="" class="form-control subnet"/></td>'+
         '<td class="text-center"><span class="fa fa-times" onclick="removeSubnet('+subnetsNum+');"></span></td>'+
     '</tr>';
 
@@ -512,7 +703,7 @@ function addNtp()
 
     var ntpRow = '<tr id="ntp_'+ntpNum+'" data-id="'+ntpNum+'">'+
             '<td class="text-center">'+ntpNum+'</td>'+
-            '<td><input type="text" onkeyup="allNtpSave();" class="form-control ntp" value=""/></td>'+
+            '<td><input type="text" onkeyup="return false;allNtpSave();" class="form-control ntp" value=""/></td>'+
             "<td class='text-center'><span class='italic'>{{Lang::get('admin.not_connect')}}</span>"+
                 '<button class="refresh" onclick="javascript:ntp_refresh('+ntpNum+');"><span class="fa fa-refresh"></span></button>'+
             '</td>'+
@@ -567,7 +758,7 @@ function hideChangeDateTime()
 
     startTime();
 
-    allSettingsSave();
+    timeSave();
 }
 
 function dateTimeChange()
@@ -576,7 +767,111 @@ function dateTimeChange()
     $("#showDate").html( $("#date").val() );
     $("#showTime").html( $("#time").val() );
 
-    // allSettingsSave();
+    // ;
+}
+
+
+$(function()
+{
+    init();
+});
+
+
+function init()
+{
+    var users = {{$admin_users}};
+
+    for(var i in users)
+    {
+        users[i].hash_password = users[i].password;
+    }
+
+    generateUsers(users);
+}
+
+function generateUsers(users)
+{
+    $(".users_table_tbody").html("");
+    var userId=0;
+    var isGuest="";
+    for(var index in users)
+    {
+        if(users[index].isNew )
+        {
+
+            isGuest ="<option value='admin'>{{Lang::get('admin.access_level_admin')}}</option>"+
+                        "<option value='guest'>{{Lang::get('admin.access_level_guest')}}</option>";
+
+
+            if( users[index].access_level =="guest")
+            {
+                isGuest ="<option value='admin'>{{Lang::get('admin.access_level_admin')}}</option>"+
+                "<option value='guest' selected='selected'>{{Lang::get('admin.access_level_guest')}}</option>";                
+            }
+
+            var userRow = "<tr id=user_"+userId+" data-id='"+userId+"'>"+
+                '<td class="text-center">'+userId+'</td>'+
+                '<td><input type="text" onkeyup="return false;allUsersSave()" class="form-control username" value="'+users[index].username+'"/></td>'+
+                '<td><input type="password" value="" placeholder="**************************" class="form-control password"/> <input type="hidden" class="hash_password" value="'+users[index].hash_password+'" </td>'+
+                '<td class="text-center">'+
+                    '<select class="form-control access_level" onchange="return false;allUsersSave()">'+
+                        isGuest+
+                        // "<option value='admin'>{{Lang::get('admin.access_level_admin')}}</option>"+
+                        // "<option value='guest'>{{Lang::get('admin.access_level_guest')}}</option>"+
+                    '</select>'+
+                "</td>"+
+                '<td class="text-center"><span class="fa fa-times" onclick="removeUser('+userId+')"></span></td>'+
+            "</tr>";
+        }
+        else
+        {
+
+            isGuest ="<option value='admin'>{{Lang::get('admin.access_level_admin')}}</option>"+
+                        "<option value='guest'>{{Lang::get('admin.access_level_guest')}}</option>";
+
+            if( users[index].access_level =="guest")
+            {
+                isGuest ="<option value='admin'>{{Lang::get('admin.access_level_admin')}}</option>"+
+                "<option value='guest' selected='selected'>{{Lang::get('admin.access_level_guest')}}</option>";                
+            }
+
+
+            var userRow = "<tr id=user_"+userId+" data-id='"+userId+"'>"+
+                '<td class="text-center">'+userId+'</td>'+
+                '<td><input type="text" onkeyup="return false;allUsersSave()" class="form-control username" disabled="disabled" value="'+users[index].username+'"/></td>'+
+                '<td><input type="password" value="" placeholder="**************************" class="form-control password"/> <input type="hidden" class="hash_password" value="'+users[index].hash_password+'" </td>'+
+                '<td class="text-center">'+
+                    '<select class="form-control access_level" onchange="return false;allUsersSave()">'+
+                        isGuest+
+                        // "<option value='admin'>{{Lang::get('admin.access_level_admin')}}</option>"+
+                        // "<option value='guest'>{{Lang::get('admin.access_level_guest')}}</option>"+
+                    '</select>'+
+                "</td>"+
+                '<td class="text-center"><span class="fa fa-times" onclick="removeUser('+userId+')"></span></td>'+
+            "</tr>";
+        }
+
+        $(".users_table_tbody").append(userRow);
+        userId++;
+    }
+}
+
+function getAllUsers()
+{
+    var users = [];
+    $.each($(".users_table_tbody tr"),function(index,value)
+    {
+        users.push( 
+            { id:$(value).attr("data-id"), 
+            username:$(value).find(".username").val(),
+            password:$(value).find(".password").val(),
+            hash_password:$(value).find(".hash_password").val(),
+            access_level:$(value).find(".access_level").val()
+         } );
+    });
+    
+
+    return users;
 }
 
 </script>
