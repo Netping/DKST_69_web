@@ -2,6 +2,12 @@
 
 return array(
 
+	/*DKST69 addons*/
+	'cmdpath'=> '/usr/bin/pwr220_16',
+
+	/**/
+
+
 	/*
 	|--------------------------------------------------------------------------
 	| Application Debug Mode
