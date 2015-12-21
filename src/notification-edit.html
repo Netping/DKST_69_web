@@ -1,0 +1,571 @@
+﻿<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/font-awesome.css">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="header row">
+            <div class="logo col-md-4">
+                <img src="img/logo_text.png" alt="Netping Logo">
+            </div>
+            <div class="info col-md-8">
+                <div class="row">
+                    <div class="col-md-3"><h1>DKST 69</h1></div>
+                    <div class="col-md-4 info">
+                        <p>Имя: dkst.localhost</p>
+
+                        <p>Адрес: Москва, ул. Пушкина, 17</p>
+                    </div>
+                    <div class="col-md-3">
+                        <a href="#" class="notifications">Уведомления (3) <span class="fa fa-angle-down"></span></a>
+                    </div>
+                    <div class="col-md-2 text-right">
+                        <p>admin</p>
+                        <a>выход <span class="fa fa-sign-out"></span></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="page row">
+
+            <div class="menu col-md-3">
+                <ul>
+                    <li>
+                        <a href="index.html">Главная страница</a>
+                    </li>
+                    <li>
+                        <a href="admin.html">Администрирование</a>
+                    </li>
+                    <li>
+                        <a href="network-settings.html">Сетевые параметры</a>
+                    </li>
+                    <li>
+                        <a href="notifications-settings.html">Способы уведомлений</a>
+                    </li>
+                    <li>
+                        <a href="firmware.html">Прошивка</a>
+                    </li>
+                    <li>
+                        <a href="log.html">Журнал</a>
+                    </li>
+                    <li>
+                        <a href="sockets.html">Розетки</a>
+                    </li>
+                    <li>
+                        <a href="sensors.html">Датчики</a>
+                    </li>
+                    <li class="active">
+                        <a href="notifications.html">Уведомления</a>
+                    </li>
+                    <li>
+                        <a href="reports.html">Отчёты</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="content col-md-9">
+                <div class="row">
+                    <h1></h1>
+                    <div class="col-sm-12">
+
+                        <div class="row">
+                            <div class="col-md-12 col-lg-10 col-xl-8">
+                                <div class="notification-panel-edit notification-name-edit">
+                                    <div class="notification-name">Название</div>
+
+                                    <input type="text" placeholder="название уведомления" />
+                                </div>
+
+                                <div class="notification-panel-edit notification-if-edit">
+                                    <div class="notification-name">Если</div>
+                                    <select>
+                                        <option>
+                                            Термодатчик 1
+                                        </option>
+                                        <option>Термодатчик 2</option>
+                                        <option>Датчик влажности</option>
+                                        <option>Датчик дыма</option>
+                                        <option>IO-линия 0</option>
+                                    </select>
+                                    <select>
+                                        <option>></option>
+                                        <option>=</option>
+                                        <option><</option>
+                                    </select>
+                                    <input name="number" value="" />
+                                    <select>
+                                        <option>И</option>
+                                        <option>ИЛИ</option>
+                                    </select>
+                                    <span class="fa fa-remove"></span>
+                                    <select>
+                                        <option>
+                                            Термодатчик 1
+                                        </option>
+                                        <option>Термодатчик 2</option>
+                                        <option>Датчик влажности</option>
+                                        <option>Датчик дыма</option>
+                                        <option>IO-линия 0</option>
+                                    </select>
+                                    <select>
+                                        <option>></option>
+                                        <option>=</option>
+                                        <option><</option>
+                                    </select>
+                                    <input name="number" value="" />
+                                    <div class="fa fa-plus-circle">
+                                        <div class="notification-operand-menu">
+                                            <ul>
+                                                <li>И</li>
+                                                <li>ИЛИ</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <span class="fa fa-remove"></span>
+                                </div>
+
+                                <div class="notification-panel-edit notification-else-edit">
+                                    <div class="notification-name">То</div>
+                                    <select>
+                                        <option selected>Послать e-mail</option>
+                                        <option>Послать SMS</option>
+                                        <option>Отправить SNMP TRAP</option>
+                                        <option>Сделать запись в SYSLOG</option>
+                                    </select>
+                                    <input type="email" placeholder="Адрес e-mail" />
+                                    <input type="email" placeholder="Тема письма" />
+                                    <textarea placeholder="Шаблон уведомления"></textarea>
+                                </div>
+
+                                <div class="notification-panel-edit notification-else-edit">
+                                    <div class="notification-name">То</div>
+                                    <select>
+                                        <option>Послать e-mail</option>
+                                        <option selected>Послать SMS</option>
+                                        <option>Отправить SNMP TRAP</option>
+                                        <option>Сделать запись в SYSLOG</option>
+                                    </select>
+                                    <input type="tel" placeholder="Номер телефона" />
+                                    <textarea placeholder="Шаблон уведомления"></textarea>
+                                </div>
+
+                                <div class="notification-panel-edit notification-else-edit">
+                                    <div class="notification-name">То</div>
+                                    <select>
+                                        <option>Послать e-mail</option>
+                                        <option>Послать SMS</option>
+                                        <option selected>Отправить SNMP TRAP</option>
+                                        <option>Сделать запись в SYSLOG</option>
+                                    </select>
+                                    <input type="text" placeholder="IP для SNMP TRAP" />
+                                    <input type="text" placeholder="Community" />
+                                    <input type="number" placeholder="0 - 65535" min="0" max="65535" />
+                                </div>
+
+                                <div class="notification-panel-edit notification-else-edit">
+                                    <div class="notification-name">То</div>
+                                    <select>
+                                        <option>Послать e-mail</option>
+                                        <option>Послать SMS</option>
+                                        <option>Отправить SNMP TRAP</option>
+                                        <option selected>Сделать запись в SYSLOG</option>
+                                    </select>
+                                    <input type="text" placeholder="IP SYSLOG-сервера" />
+                                </div>
+
+                                <div class="notification-panel-edit notification-schedule-edit">
+                                    <div class="notification-name">Расписание</div>
+                                    <select>
+                                        <option selected>Однократно</option>
+                                        <option>Ежедневно</option>
+                                        <option>Еженедельно</option>
+                                        <option>Ежемесячно</option>
+                                    </select>
+                                    В течение:
+                                    <select>
+                                        <option>Бесконечно</option>
+                                        <option>15 мин.</option>
+                                        <option>30 мин.</option>
+                                        <option>1 час</option>
+                                        <option>12 часов</option>
+                                        <option>1 день</option>
+                                        <option selected>Свой интервал</option>
+                                    </select>
+                                    <input type="number" min="0" />
+                                    мин.
+                                </div>
+
+                                <div class="notification-panel-edit notification-schedule-edit">
+                                    <div class="notification-name">Расписание</div>
+                                    <select>
+                                        <option>Однократно</option>
+                                        <option selected>Ежедневно</option>
+                                        <option>Еженедельно</option>
+                                        <option>Ежемесячно</option>
+                                    </select>
+                                    Начать:
+                                    <input type="text" class="input-narrow" placeholder="01.02.2015" />
+                                    &nbsp;
+                                    &nbsp;
+                                    c:
+                                    <input type="text" class="input-narrow" placeholder="10:00:00" />
+                                    до:
+                                    <input type="text" class="input-narrow" placeholder="20:00:00" />
+                                    &nbsp;
+                                    &nbsp;
+                                    повторять каждые:
+                                    <input type="number" class="input-narrow" min="1" value="1" /> дн.
+                                </div>
+
+                                <div class="notification-panel-edit notification-schedule-edit">
+                                    <div class="notification-name">Расписание</div>
+                                    <select>
+                                        <option>Однократно</option>
+                                        <option>Ежедневно</option>
+                                        <option selected>Еженедельно</option>
+                                        <option>Ежемесячно</option>
+                                    </select>
+                                    Начать:
+                                    <input type="text" class="input-narrow" placeholder="01.02.2015" />
+                                    &nbsp;
+                                    &nbsp;
+                                    c:
+                                    <input type="text" class="input-narrow" placeholder="10:00:00" />
+                                    до:
+                                    <input type="text" class="input-narrow" placeholder="20:00:00" />
+                                    &nbsp;
+                                    &nbsp;
+                                    повторять каждую:
+                                    <input type="number" class="input-narrow" min="1" value="1" /> неделю
+                                    <br />
+                                    <div class="weekdays form-inline">
+                                        <label><input type="checkbox" class="checkbox" />понедельник</label>
+                                        <label><input type="checkbox" class="checkbox" />вторник</label>
+                                        <label><input type="checkbox" class="checkbox" />среда</label>
+                                        <label><input type="checkbox" class="checkbox" />четверг</label>
+                                        <label><input type="checkbox" class="checkbox" />пятница</label>
+                                        <label><input type="checkbox" class="checkbox" />суббота</label>
+                                        <label><input type="checkbox" class="checkbox" />воскресенье</label>
+                                    </div>
+                                </div>
+
+                                <div class="notification-panel-edit notification-schedule-edit">
+                                    <div class="notification-name">Расписание</div>
+                                    <select>
+                                        <option>Однократно</option>
+                                        <option>Ежедневно</option>
+                                        <option>Еженедельно</option>
+                                        <option selected>Ежемесячно</option>
+                                    </select>
+                                    <label class="notification-schedule-edit-label">
+                                        Начать:
+                                    </label>
+                                    <input type="text" class="input-narrow" placeholder="01.02.2015" />
+                                    &nbsp;
+                                    &nbsp;
+                                    c:
+                                    <input type="text" class="input-narrow" placeholder="10:00:00" />
+                                    до:
+                                    <input type="text" class="input-narrow" placeholder="20:00:00" />
+                                    &nbsp;
+                                    &nbsp;
+                                    <br />
+                                    <div class="months form-inline">
+                                        <label class="notification-schedule-edit-label">
+                                            Месяцы:
+                                        </label>
+                                        <div class="dropdown-checkbox">
+                                            <div class="select-box">
+                                                <a class="btn btn-default">
+                                                    &nbsp;
+                                                    <span class="caret"></span>
+                                                </a>
+
+                                            </div>
+                                            <div class="select-list">
+                                                <ul>
+                                                    <li>
+                                                        <label><input type="checkbox" /> [Все месяцы]</label>
+                                                    </li>
+                                                    <li>
+                                                        <label><input type="checkbox" /> Январь</label>
+                                                    </li>
+                                                    <li>
+                                                        <label><input type="checkbox" /> Февраль</label>
+                                                    </li>
+                                                    <li>
+                                                        <label><input type="checkbox" /> Март</label>
+                                                    </li>
+                                                    <li>
+                                                        <label><input type="checkbox" /> Апрель</label>
+                                                    </li>
+                                                    <li>
+                                                        <label><input type="checkbox" /> Май</label>
+                                                    </li>
+                                                    <li>
+                                                        <label><input type="checkbox" /> Июнь</label>
+                                                    </li>
+                                                    <li>
+                                                        <label><input type="checkbox" /> Июль</label>
+                                                    </li>
+                                                    <li>
+                                                        <label><input type="checkbox" /> Август</label>
+                                                    </li>
+                                                    <li>
+                                                        <label><input type="checkbox" /> Сентябрь</label>
+                                                    </li>
+                                                    <li>
+                                                        <label><input type="checkbox" /> Октябрь</label>
+                                                    </li>
+                                                    <li>
+                                                        <label><input type="checkbox" /> Ноябрь</label>
+                                                    </li>
+                                                    <li>
+                                                        <label><input type="checkbox" /> Декабрь</label>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="months form-inline">
+                                        <label class="notification-schedule-edit-label">
+                                            <input type="radio" /> Дни:
+                                        </label>
+                                        <div class="dropdown-checkbox days">
+                                            <div class="select-box">
+                                                <a class="btn btn-default">
+                                                    &nbsp;
+                                                    <span class="caret"></span>
+                                                </a>
+
+                                            </div>
+                                            <div class="select-list">
+                                                <ul>
+                                                    <li>
+                                                        <label><input type="checkbox" /> [Все дни]</label>
+                                                    </li>
+                                                    <li>
+                                                        <label><input type="checkbox" /> 1</label>
+                                                    </li>
+                                                    <li>
+                                                        <label><input type="checkbox" /> 2</label>
+                                                    </li>
+                                                    <li>
+                                                        <label><input type="checkbox" /> 3</label>
+                                                    </li>
+                                                    <li>
+                                                        <label><input type="checkbox" /> 4</label>
+                                                    </li>
+                                                    <li>
+                                                        <label><input type="checkbox" /> 5</label>
+                                                    </li>
+                                                    <li>
+                                                        <label><input type="checkbox" /> 6</label>
+                                                    </li>
+                                                    <li>
+                                                        <label><input type="checkbox" /> 7</label>
+                                                    </li>
+                                                    <li>
+                                                        <label><input type="checkbox" /> 8</label>
+                                                    </li>
+                                                    <li>
+                                                        <label><input type="checkbox" /> 9</label>
+                                                    </li>
+                                                    <li>
+                                                        <label><input type="checkbox" /> 10</label>
+                                                    </li>
+                                                    <li>
+                                                        <label><input type="checkbox" /> 11</label>
+                                                    </li>
+                                                    <li>
+                                                        <label><input type="checkbox" /> 12</label>
+                                                    </li>
+                                                    <li>
+                                                        <label><input type="checkbox" /> 13</label>
+                                                    </li>
+                                                    <li>
+                                                        <label><input type="checkbox" /> 14</label>
+                                                    </li>
+                                                    <li>
+                                                        <label><input type="checkbox" /> 15</label>
+                                                    </li>
+                                                    <li>
+                                                        <label><input type="checkbox" /> 16</label>
+                                                    </li>
+                                                    <li>
+                                                        <label><input type="checkbox" /> 17</label>
+                                                    </li>
+                                                    <li>
+                                                        <label><input type="checkbox" /> 18</label>
+                                                    </li>
+                                                    <li>
+                                                        <label><input type="checkbox" /> 19</label>
+                                                    </li>
+                                                    <li>
+                                                        <label><input type="checkbox" /> 20</label>
+                                                    </li>
+                                                    <li>
+                                                        <label><input type="checkbox" /> 21</label>
+                                                    </li>
+                                                    <li>
+                                                        <label><input type="checkbox" /> 22</label>
+                                                    </li>
+                                                    <li>
+                                                        <label><input type="checkbox" /> 23</label>
+                                                    </li>
+                                                    <li>
+                                                        <label><input type="checkbox" /> 24</label>
+                                                    </li>
+                                                    <li>
+                                                        <label><input type="checkbox" /> 25</label>
+                                                    </li>
+                                                    <li>
+                                                        <label><input type="checkbox" /> 26</label>
+                                                    </li>
+                                                    <li>
+                                                        <label><input type="checkbox" /> 27</label>
+                                                    </li>
+                                                    <li>
+                                                        <label><input type="checkbox" /> 28</label>
+                                                    </li>
+                                                    <li>
+                                                        <label><input type="checkbox" /> 29</label>
+                                                    </li>
+                                                    <li>
+                                                        <label><input type="checkbox" /> 30</label>
+                                                    </li>
+                                                    <li>
+                                                        <label><input type="checkbox" /> 31</label>
+                                                    </li>
+                                                    <li>
+                                                        <label><input type="checkbox" /> последний</label>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="months form-inline">
+                                        <label class="notification-schedule-edit-label">
+                                            <input type="radio" /> В:
+                                        </label>
+                                        <div class="dropdown-checkbox weeks">
+                                            <div class="select-box">
+                                                <a class="btn btn-default">
+                                                    &nbsp;
+                                                    <span class="caret"></span>
+                                                </a>
+
+                                            </div>
+                                            <div class="select-list">
+                                                <ul>
+                                                    <li>
+                                                        <label><input type="checkbox" /> 1</label>
+                                                    </li>
+                                                    <li>
+                                                        <label><input type="checkbox" /> 2</label>
+                                                    </li>
+                                                    <li>
+                                                        <label><input type="checkbox" /> 3</label>
+                                                    </li>
+                                                    <li>
+                                                        <label><input type="checkbox" /> 4</label>
+                                                    </li>
+                                                    <li>
+                                                        <label><input type="checkbox" /> Последний</label>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="dropdown-checkbox weeks">
+                                            <div class="select-box">
+                                                <a class="btn btn-default">
+                                                    &nbsp;
+                                                    <span class="caret"></span>
+                                                </a>
+
+                                            </div>
+                                            <div class="select-list">
+                                                <ul>
+                                                    <li>
+                                                        <label><input type="checkbox" /> [Все дни]</label>
+                                                    </li>
+                                                    <li>
+                                                        <label><input type="checkbox" /> понедельник</label>
+                                                    </li>
+                                                    <li>
+                                                        <label><input type="checkbox" /> вторник</label>
+                                                    </li>
+                                                    <li>
+                                                        <label><input type="checkbox" /> среда</label>
+                                                    </li>
+                                                    <li>
+                                                        <label><input type="checkbox" /> четверг</label>
+                                                    </li>
+                                                    <li>
+                                                        <label><input type="checkbox" /> пятница</label>
+                                                    </li>
+                                                    <li>
+                                                        <label><input type="checkbox" /> суббота</label>
+                                                    </li>
+                                                    <li>
+                                                        <label><input type="checkbox" /> воскресенье</label>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="notification-panel-edit notification-schedule-edit">
+                                    <div class="notification-name">Повторы</div>
+                                    <select>
+                                        <option>Не повторять</option>
+                                        <option>Каждые 5 минут</option>
+                                        <option>Каждые 10 минут</option>
+                                        <option>Каждые 30 минут</option>
+                                        <option>Каждый час</option>
+                                        <option selected>Повторять каждые</option>
+                                    </select>
+                                    <input type="number" min="0"/>
+                                    мин.
+                                    &nbsp;&nbsp;
+                                    В течение:
+                                    <select>
+                                        <option>Бесконечно</option>
+                                        <option>15 мин.</option>
+                                        <option>30 мин.</option>
+                                        <option>1 час</option>
+                                        <option>12 часов</option>
+                                        <option>1 день</option>
+                                        <option selected>Свой интервал</option>
+                                    </select>
+                                    <input type="number" min="0" />
+                                    мин.
+                                </div>
+
+                                <input type="submit" value="Сохранить" class="btn btn-default"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="col-xs-6">Copyright © ЗАО "Алентис Электроникс"</div>
+        <div class="col-xs-6 text-right">Время непрерывной работы: 3 д 14 ч 33 м 15 с</div>
+    </div>
+
+    <script src="js/jquery-2.1.3.min.js"></script>
+    <script src="js/dropdown-checkboxes.js"></script>
+    <script src="js/overlay.js"></script>
+</body>
+</html>
