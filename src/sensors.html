@@ -1,0 +1,369 @@
+﻿<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/font-awesome.css">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="header row">
+            <div class="logo col-md-4">
+                <img src="img/logo_text.png" alt="Netping Logo">
+            </div>
+            <div class="info col-md-8">
+                <div class="row">
+                    <div class="col-md-3"><h1>DKST 69</h1></div>
+                    <div class="col-md-4 info">
+                        <p>Имя: dkst.localhost</p>
+
+                        <p>Адрес: Москва, ул. Пушкина, 17</p>
+                    </div>
+                    <div class="col-md-3">
+                        <a href="#" class="notifications">Уведомления (3) <span class="fa fa-angle-down"></span></a>
+                    </div>
+                    <div class="col-md-2 text-right">
+                        <p>admin</p>
+                        <a>выход <span class="fa fa-sign-out"></span></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="page row">
+
+            <div class="menu col-md-3">
+                <ul>
+                    <li>
+                        <a href="index.html">Главная страница</a>
+                    </li>
+                    <li>
+                        <a href="admin.html">Администрирование</a>
+                    </li>
+                    <li>
+                        <a href="network-settings.html">Сетевые параметры</a>
+                    </li>
+                    <li>
+                        <a href="notifications-settings.html">Способы уведомлений</a>
+                    </li>
+                    <li>
+                        <a href="firmware.html">Прошивка</a>
+                    </li>
+                    <li>
+                        <a href="log.html">Журнал</a>
+                    </li>
+                    <li>
+                        <a href="sockets.html">Розетки</a>
+                    </li>
+                    <li class="active">
+                        <a href="sensors.html">Датчики</a>
+                    </li>
+                    <li>
+                        <a href="notifications.html">Уведомления</a>
+                    </li>
+                    <li>
+                        <a href="reports.html">Отчёты</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="content col-md-9">
+                <div class="row">
+                    <h1></h1>
+                    <div class="col-sm-12">
+                        <h3>Датчики</h3>
+
+                        <div class="row">
+                            <div class="col-md-12 col-lg-10 col-xl-8">
+                                <button class="btn text-center add-sensor">
+                                    <span class="fa fa-plus"></span> Добавить новый датчик
+                                </button>
+
+                                <div class="sensor">
+                                    <div class="sensor-name"><span class="fa fa-thumb-tack sensor-pin"></span>Термодатчик 1</div>
+                                    <div class="sensor-chart-thumb">
+                                        <img src="img/chart_thumb_normal.png" />
+                                    </div>
+                                    <div class="sensor-state">
+                                        <div class="sensor-state-value">Значение: <span>15°C</span></div>
+                                        <div class="sensor-state-status">Статус: <span>Норма</span></div>
+                                    </div>
+                                    <div class="sensor-buttons">
+                                        <a title="Редактировать" class="fa fa-pencil"></a>
+                                        <a href="sensor-status.html" title="Статус датчика" class="fa fa-info"></a>
+                                        <a title="Удалить" class="fa fa-remove"></a>
+                                    </div>
+                                </div>
+
+                                <div class="sensor">
+                                    <div class="sensor-name"><span class="fa fa-thumb-tack sensor-pin"></span>Термодатчик 2</div>
+                                    <div class="sensor-chart-thumb">
+                                        <img src="img/chart_thumb_overflow.png" />
+                                    </div>
+                                    <div class="sensor-state">
+                                        <div class="sensor-state-value">Значение: <span>35°C</span></div>
+                                        <div class="sensor-state-status">Статус: <span>Выше нормы</span></div>
+                                    </div>
+                                    <div class="sensor-buttons">
+                                        <a title="Редактировать" class="fa fa-pencil"></a>
+                                        <a href="sensor-status.html" title="Статус датчика" class="fa fa-info"></a>
+                                        <a title="Удалить" class="fa fa-remove"></a>
+                                    </div>
+                                </div>
+
+                                <div class="sensor">
+                                    <div class="sensor-name"><span class="fa fa-thumb-tack sensor-pin"></span>Датчик влажности</div>
+                                    <div class="sensor-chart-thumb">
+                                        <img src="img/chart_thumb_not_working.png" />
+                                    </div>
+                                    <div class="sensor-state">
+                                        <div class="sensor-state-value">Значение: <span>0%</span></div>
+                                        <div class="sensor-state-status">Статус: <span>Не работает</span></div>
+                                    </div>
+                                    <div class="sensor-buttons">
+                                        <a title="Редактировать" class="fa fa-pencil"></a>
+                                        <a href="sensor-status.html" title="Статус датчика" class="fa fa-info"></a>
+                                        <a title="Удалить" class="fa fa-remove"></a>
+                                    </div>
+                                </div>
+
+                                <div class="sensor">
+                                    <div class="sensor-name"><span class="fa fa-thumb-tack sensor-pin"></span>Датчик дыма</div>
+                                    <div class="sensor-chart-thumb">
+                                        <img src="img/chart_thumb_failure.png" />
+                                    </div>
+                                    <div class="sensor-state">
+                                        <div class="sensor-state-value">Значение: <span>-</span></div>
+                                        <div class="sensor-state-status">Статус: <span>Отказ датчика, либо датчик отсутствует на 1-wire шине</span></div>
+                                    </div>
+                                    <div class="sensor-buttons">
+                                        <a title="Редактировать" class="fa fa-pencil"></a>
+                                        <a href="sensor-status.html" title="Статус датчика" class="fa fa-info"></a>
+                                        <a title="Удалить" class="fa fa-remove"></a>
+                                    </div>
+                                </div>
+
+                                <div class="sensor">
+                                    <div class="sensor-name"><span class="fa fa-thumb-tack sensor-pin"></span>IO линия 0</div>
+                                    <div class="sensor-chart-thumb">
+                                        <img src="img/chart_thumb_logic.png" />
+                                    </div>
+                                    <div class="sensor-state">
+                                        <div class="sensor-state-value">Значение: <span>Включено (1)</span></div>
+                                        <div class="sensor-state-status">Статус: <span>Выход логики</span></div>
+                                    </div>
+                                    <div class="sensor-buttons">
+                                        <a title="Редактировать" class="fa fa-pencil"></a>
+                                        <a href="sensor-status.html" title="Статус датчика" class="fa fa-info"></a>
+                                        <a title="Удалить" class="fa fa-remove"></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="col-xs-6">Copyright © ЗАО "Алентис Электроникс"</div>
+        <div class="col-xs-6 text-right">Время непрерывной работы: 3 д 14 ч 33 м 15 с</div>
+    </div>
+
+    <div class="overlay active">
+        <div class="window">
+            <div class="content">
+                <div class="row">
+
+                    <!-- Локальный датчик -->
+                    <form class="form-horizontal" style="display:none;">
+                        <h3 class="col-xs-12">
+                            Редактирование датчика
+                        </h3>
+                        <h4 class="col-xs-12">Настройки</h4>
+                        <div class="form-group col-xs-12 form-group-border">
+                            <label for="sensor-name" class="control-label col-md-6">
+                                Название<a href="#"><span class="form-question fa fa-question"></span></a>
+                            </label>
+                            <div class="col-md-6">
+                                <input type="text" name="name" id="sensor-name" value="" class="form-control" />
+                            </div>
+                        </div>
+
+                        <div class="form-group col-xs-12 form-group-border">
+                            <label for="sensor-type" class="control-label col-md-6">
+                                Тип датчика<a href="#"><span class="form-question fa fa-question"></span></a>
+                            </label>
+                            <div class="col-md-6">
+                                <select name="type" id="sensor-type" class="form-control dropdown">
+                                    <option>Локальный</option>
+                                    <option>Удалённый</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-xs-12 form-group-border">
+                            <label for="sensor-connection" class="control-label col-md-6">
+                                Подключение датчика<a href="#"><span class="form-question fa fa-question"></span></a>
+                            </label>
+                            <div class="col-md-6">
+                                <select name="connection" id="sensor-connection" class="form-control dropdown">
+                                    <option>IO линия</option>
+                                    <option>Шина 1-Wire</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-xs-12 form-group-border">
+                            <label for="sensor-line" class="control-label col-md-6">
+                                Номер Input линии датчика<a href="#"><span class="form-question fa fa-question"></span></a>
+                            </label>
+                            <div class="col-md-6">
+                                <select name="line" id="sensor-line" class="form-control dropdown">
+                                    <option>Input 1</option>
+                                    <option>Input 2</option>
+                                    <option>Input 3</option>
+                                    <option>Input 4</option>
+                                    <option>Input 5</option>
+                                    <option>Input 6</option>
+                                    <option>Input 7</option>
+                                    <option>Input 8</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-xs-12 form-group-border">
+                            <label for="sensor-logic0" class="control-label col-md-6">
+                                Расшифровка лог.0<a href="#"><span class="form-question fa fa-question"></span></a>
+                            </label>
+                            <div class="col-md-6">
+                                <select name="logic0" id="sensor-logic0" class="form-control dropdown">
+                                    <option>Вход</option>
+                                    <option>Выход</option>
+                                    <option>Выход логики</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-xs-12 form-group-border">
+                            <label for="sensor-logic1" class="control-label col-md-6">
+                                Расшифровка лог.1<a href="#"><span class="form-question fa fa-question"></span></a>
+                            </label>
+                            <div class="col-md-6">
+                                <select name="logic1" id="sensor-logic1" class="form-control dropdown">
+                                    <option>Вход</option>
+                                    <option>Выход</option>
+                                    <option>Выход логики</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <h4 class="col-xs-12">
+                            Уведомления
+                        </h4>
+
+                        <div class="col-xs-12">
+                            <div class="sensor-notifications">
+                                <div class="sensor-notification">
+                                    Температура в блоке А
+                                    <div class="fa fa-pencil"></div>
+                                </div>
+                                <div class="sensor-notification">
+                                    Серверная
+                                    <div class="fa fa-pencil"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                    <!-- Удалённый датчик -->
+                    <form class="form-horizontal">
+                        <h3 class="col-xs-12">
+                            Редактирование датчика
+                        </h3>
+                        <h4 class="col-xs-12">Настройки</h4>
+                        <div class="form-group col-xs-12 form-group-border">
+                            <label for="sensor-name" class="control-label col-md-6">
+                                Название<a href="#"><span class="form-question fa fa-question"></span></a>
+                            </label>
+                            <div class="col-md-6">
+                                <input type="text" name="name" id="sensor-name" value="" class="form-control" />
+                            </div>
+                        </div>
+
+                        <div class="form-group col-xs-12 form-group-border">
+                            <label for="sensor-type" class="control-label col-md-6">
+                                Тип датчика<a href="#"><span class="form-question fa fa-question"></span></a>
+                            </label>
+                            <div class="col-md-6">
+                                <select name="type" id="sensor-type" class="form-control dropdown">
+                                    <option>Локальный</option>
+                                    <option>Удалённый</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-xs-12 form-group-border">
+                            <label for="sensor-ip" class="control-label col-md-6">
+                                IP<a href="#"><span class="form-question fa fa-question"></span></a>
+                            </label>
+                            <div class="col-md-6">
+                                <input type="text" name="ip" id="sensor-ip" value="" class="form-control" />
+                            </div>
+                        </div>
+
+                        <div class="form-group col-xs-12 form-group-border">
+                            <label for="sensor-community" class="control-label col-md-6">
+                                Community<a href="#"><span class="form-question fa fa-question"></span></a>
+                            </label>
+                            <div class="col-md-6">
+                                <input type="text" name="community" id="sensor-community" value="" class="form-control" />
+                            </div>
+                        </div>
+
+                        <div class="form-group col-xs-12 form-group-border">
+                            <label for="sensor-port" class="control-label col-md-6">
+                                Номер порта<a href="#"><span class="form-question fa fa-question"></span></a>
+                            </label>
+                            <div class="col-md-6">
+                                <input type="number" min="0" max="65536" name="port" id="sensor-port" value="" class="form-control" placeholder="0 - 65536" />
+                            </div>
+                        </div>
+
+                        <h4 class="col-xs-12">
+                            Уведомления
+                        </h4>
+                        <div class="col-xs-12">
+                            <div class="sensor-notifications">
+                                <div class="sensor-notification">
+                                    Температура в блоке А
+                                    <div class="fa fa-pencil"></div>
+                                </div>
+                                <div class="sensor-notification">
+                                    Серверная
+                                    <div class="fa fa-pencil"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+
+                </div>
+            </div>
+            <div class="buttons">
+                <button class="btn btn-default">
+                    Применить
+                </button>
+                <button class="btn btn-default cancel">
+                    Отмена
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/jquery-2.1.3.min.js"></script>
+    <script src="js/overlay.js"></script>
+</body>
+</html>

@@ -8,6 +8,10 @@ $(document).ready(function () {
     $('.window .buttons .cancel').click(function () {
         hideModal();
     })
+
+    $('.socket-history-link').click(function () {
+        showModal();
+    })
 })
 
 function showModal() {

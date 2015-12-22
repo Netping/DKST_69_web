@@ -1,0 +1,832 @@
+﻿<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/font-awesome.css">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body class="noscroll">
+    <div class="container-fluid">
+        <div class="header row">
+            <div class="logo col-md-4">
+                <img src="img/logo_text.png" alt="Netping Logo">
+            </div>
+            <div class="info col-md-8">
+                <div class="row">
+                    <div class="col-md-3"><h1>DKST 69</h1></div>
+                    <div class="col-md-4 info">
+                        <p>Имя: dkst.localhost</p>
+
+                        <p>Адрес: Москва, ул. Пушкина, 17</p>
+                    </div>
+                    <div class="col-md-3">
+                        <a href="#" class="notifications">Уведомления (3) <span class="fa fa-angle-down"></span></a>
+                    </div>
+                    <div class="col-md-2 text-right">
+                        <p>admin</p>
+                        <a>выход <span class="fa fa-sign-out"></span></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="page row">
+
+            <div class="menu col-md-3">
+                <ul>
+                    <li>
+                        <a href="index.html">Главная страница</a>
+                    </li>
+                    <li>
+                        <a href="admin.html">Администрирование</a>
+                    </li>
+                    <li>
+                        <a href="network-settings.html">Сетевые параметры</a>
+                    </li>
+                    <li>
+                        <a href="notifications-settings.html">Способы уведомлений</a>
+                    </li>
+                    <li>
+                        <a href="firmware.html">Прошивка</a>
+                    </li>
+                    <li>
+                        <a href="log.html">Журнал</a>
+                    </li>
+                    <li class="active">
+                        <a href="sockets.html">Розетки</a>
+                    </li>
+                    <li>
+                        <a href="sensors.html">Датчики</a>
+                    </li>
+                    <li>
+                        <a href="notifications.html">Уведомления</a>
+                    </li>
+                    <li>
+                        <a href="reports.html">Отчёты</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="content col-md-9">
+                <h3>
+                    Настройка розетки №1: Чайник
+                </h3>
+                <form class="form-horizontal socket-edit-form">
+
+                    <div class="form-group col-md-10 col-lg-8 form-group-border">
+                        <label for="socket-name" class="control-label col-md-6">
+                            Что подключено<a href="#"><span class="form-question fa fa-question"></span></a>
+                        </label>
+                        <div class="col-md-6">
+                            <input type="text" name="name" id="socket-name" value="" class="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-10 col-lg-8 form-group-border">
+                        <label for="socket-type" class="control-label col-md-6">
+                            Тип розетки<a href="#"><span class="form-question fa fa-question"></span></a>
+                        </label>
+                        <div class="col-md-6">
+                            <select type="text" name="type" id="socket-type" class="form-control dropdown">
+                                <option value="local">Локальная</option>
+                                <option value="remote">Удаленная</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-10 col-lg-8 form-group-border">
+                        <label for="socket-ip-fqdn" class="control-label col-md-6">
+                            IP/FQDN<a href="#"><span class="form-question fa fa-question"></span></a>
+                        </label>
+                        <div class="col-md-6">
+                            <input type="text" name="ip-fqdn" id="socket-ip-fqdn" value="" class="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-10 col-lg-8 form-group-border">
+                        <label for="socket-snmp" class="control-label col-md-6">
+                            SNMP community<a href="#"><span class="form-question fa fa-question"></span></a>
+                        </label>
+                        <div class="col-md-6">
+                            <input type="text" name="snmp" id="socket-snmp" value="" class="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-10 col-lg-8 form-group-border">
+                        <label for="socket-port" class="control-label col-md-6">
+                            Номер порта<a href="#"><span class="form-question fa fa-question"></span></a>
+                        </label>
+                        <div class="col-md-6">
+                            <input type="number" name="port" id="socket-port" value="" class="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-10 col-lg-8 form-group-border">
+                        <label for="socket-delay-minutes" class="control-label col-md-6">
+                            Задержка перед включением<a href="#"><span class="form-question fa fa-question"></span></a>
+                        </label>
+                        <div class="col-md-6">
+                            <input type="number" name="delay-minutes" min="0" max="59" id="socket-delay-minutes" value="" class="form-control form-control-narrow" placeholder="0-59" /> мин
+                            <input type="number" name="delay-seconds" min="0" max="59" id="socket-delay-seconds" value="" class="form-control form-control-narrow" placeholder="0-59" /> сек
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-10 col-lg-8 form-group-border">
+                        <label for="socket-port" class="control-label col-md-6">
+                            Логика<a href="#"><span class="form-question fa fa-question"></span></a>
+                        </label>
+                        <div class="col-md-6">
+                            <input type="checkbox" name="logic" id="socket-logic" class="checkbox" />
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-10 col-lg-8">
+                        <h4>Правила логики</h4>
+                    </div>
+
+                    <div class="form-group col-md-10 col-lg-8 form-group-border">
+                        <label for="socket-name" class="control-label col-md-6">
+                            Состояние модуля "Логика"<a href="#"><span class="form-question fa fa-question"></span></a>
+                        </label>
+                        <div class="col-md-6">
+                            <div type="text" name="name" id="socket-name" value="" class="form-control-static danger">
+                                <span class="fa fa-times condition condition-off"></span>неактивна
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-10 col-lg-8">
+                        <h5>Правила</h5>
+                        <a href="socket-edit-rule.html" class="btn btn-default">
+                            Добавить правило
+                        </a>
+                    </div>
+
+                    <div class="form-group col-md-10 col-lg-8">
+                        <h4>
+                            Список сторожей
+                        </h4>
+                        <table class="table">
+                            <tr>
+                                <th>Название</th>
+                                <th>Серверы</th>
+                                <th>Изменить</th>
+                                <th>Удалить</th>
+                            </tr>
+                            <tr>
+                                <td>Локальный сторож</td>
+                                <td>192.168.0.1, 192.168.0.10, 192.168.0.80</td>
+                                <td class="text-center"><a href="#" class="fa fa-pencil"></a></td>
+                                <td class="text-center"><a href="#" class="fa fa-remove"></a></td>
+                            </tr>
+                            <tr>
+                                <td>Сторож 2</td>
+                                <td>192.168.0.1, 192.168.0.10, 192.168.0.80</td>
+                                <td class="text-center"><a href="#" class="fa fa-pencil"></a></td>
+                                <td class="text-center"><a href="#" class="fa fa-remove"></a></td>
+                            </tr>
+                        </table>
+                        <button class="btn btn-default">
+                            Добавить сторожа
+                        </button>
+                    </div>
+
+                    <div class="form-group col-md-10 col-lg-8">
+                        <h4>
+                            Пингеры
+                        </h4>
+                        <table class="table">
+                            <tr>
+                                <th>Название</th>
+                                <th>Адрес сервера</th>
+                                <th>Статус</th>
+                                <th>Изменить</th>
+                                <th>Удалить</th>
+                            </tr>
+                            <tr>
+                                <td>Пингер 1</td>
+                                <td>192.168.0.1, 192.168.0.10, 192.168.0.80</td>
+                                <td class="text-center"><span class="fa fa-times condition condition-off"></span>молчит</td>
+                                <td class="text-center"><a href="#" class="fa fa-pencil"></a></td>
+                                <td class="text-center"><a href="#" class="fa fa-remove"></a></td>
+                            </tr>
+                            <tr>
+                                <td>Пингер 2</td>
+                                <td>192.168.0.1, 192.168.0.10, 192.168.0.80</td>
+                                <td class="text-center"><span class="fa fa-times condition condition-on"></span>отвечает</td>
+                                <td class="text-center"><a href="#" class="fa fa-pencil"></a></td>
+                                <td class="text-center"><a href="#" class="fa fa-remove"></a></td>
+                            </tr>
+                        </table>
+                        <button class="btn btn-default">
+                            Добавить пингер
+                        </button>
+                    </div>
+
+                    <div class="form-group col-md-10 col-lg-8">
+                        <h4>
+                            Расписания
+                        </h4>
+                        <table class="table">
+                            <tr>
+                                <th>Название</th>
+                                <th>Изменить</th>
+                                <th>Удалить</th>
+                            </tr>
+                            <tr>
+                                <td>Основное расписание</td>
+                                <td class="text-center"><a href="#" class="fa fa-pencil"></a></td>
+                                <td class="text-center"><a href="#" class="fa fa-remove"></a></td>
+                            </tr>
+                            <tr>
+                                <td>Расписание 2</td>
+                                <td class="text-center"><a href="#" class="fa fa-pencil"></a></td>
+                                <td class="text-center"><a href="#" class="fa fa-remove"></a></td>
+                            </tr>
+                        </table>
+                        <button class="btn btn-default">
+                            Добавить расписание
+                        </button>
+                    </div>
+
+                    <div class="form-group col-md-10 col-lg-8">
+                        <h4>
+                            Термо(гиро)статы
+                        </h4>
+                        <table class="table">
+                            <tr>
+                                <th>Название</th>
+                                <th>Статус</th>
+                                <th>Изменить</th>
+                                <th>Удалить</th>
+                            </tr>
+                            <tr>
+                                <td>Термостат 1</td>
+                                <td class="text-center">выше (порог 10)</td>
+                                <td class="text-center"><a href="#" class="fa fa-pencil"></a></td>
+                                <td class="text-center"><a href="#" class="fa fa-remove"></a></td>
+                            </tr>
+                            <tr>
+                                <td>Термостат 2</td>
+                                <td class="text-center">сбой датчика</td>
+                                <td class="text-center"><a href="#" class="fa fa-pencil"></a></td>
+                                <td class="text-center"><a href="#" class="fa fa-remove"></a></td>
+                            </tr>
+                        </table>
+                        <button class="btn btn-default">
+                            Добавить термостат
+                        </button>
+                    </div>
+
+                    <div class="form-group col-md-10 col-lg-8">
+                        <input type="submit" value="Применить" class="btn btn-default" />
+                        <button class="btn btn-default">Отмена</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="col-xs-6">Copyright © ЗАО "Алентис Электроникс"</div>
+        <div class="col-xs-6 text-right">Время непрерывной работы: 3 д 14 ч 33 м 15 с</div>
+    </div>
+
+    <div class="overlay active">
+        <div class="window">
+            <div class="content">
+                <div class="row">
+                    <!-- Настройка сторожа-->
+                    <form class="form-horizontal socket-guard-edit-form" style="display:none;">
+
+                        <h3 class="col-xs-12">
+                            Настройка сторожа
+                        </h3>
+                        <div class="form-group col-xs-12 form-group-border">
+                            <label for="socket-guard-name" class="control-label col-md-6">
+                                Название<a href="#"><span class="form-question fa fa-question"></span></a>
+                            </label>
+                            <div class="col-md-6">
+                                <input type="text" name="name" id="socket-guard-name" value="" class="form-control" />
+                            </div>
+                        </div>
+
+                        <div class="form-group col-xs-12 form-group-border">
+                            <label class="control-label col-md-6">
+                                Опрашиваемые адреса<a href="#"><span class="form-question fa fa-question"></span></a>
+                            </label>
+                            <div class="col-md-6">
+                                <input type="text" name="name" id="socket-name" value="" class="form-control" />
+                            </div>
+                        </div>
+
+                        <div class="form-group col-xs-12 form-group-border">
+                            <label class="control-label col-md-6">
+                                Счетчик сброса канала<a href="#"><span class="form-question fa fa-question"></span></a>
+                            </label>
+                            <div class="col-md-6">
+                                <div class="form-control-static">0</div>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-xs-12 form-group-border">
+                            <label for="socket-guard-call-period" class="control-label col-md-6">
+                                Период опроса пингом, с<a href="#"><span class="form-question fa fa-question"></span></a>
+                            </label>
+                            <div class="col-md-6">
+                                <input type="number" min="10" max="300" name="period" id="socket-guard-call-period" value="" class="form-control" placeholder="10 - 300" />
+                            </div>
+                        </div>
+
+                        <div class="form-group col-xs-12 form-group-border">
+                            <label for="socket-guard-call-timeout" class="control-label col-md-6">
+                                Таймаут перед повтором пинга,мс<a href="#"><span class="form-question fa fa-question"></span></a>
+                            </label>
+                            <div class="col-md-6">
+                                <input type="number" min="600" max="9000" name="timeout" id="socket-guard-call-timeout" value="" class="form-control" placeholder="600 - 9000" />
+                            </div>
+                        </div>
+
+                        <div class="form-group col-xs-12 form-group-border">
+                            <label for="socket-guard-call-repeats" class="control-label col-md-6">
+                                Максимальное число повторов при таймауте<a href="#"><span class="form-question fa fa-question"></span></a>
+                            </label>
+                            <div class="col-md-6">
+                                <input type="number" min="0" name="repeats" id="socket-guard-call-repeats" value="" class="form-control" />
+                            </div>
+                        </div>
+
+                        <div class="form-group col-xs-12 form-group-border">
+                            <label for="socket-guard-call-pause" class="control-label col-md-6">
+                                Пауза после сброса перед возобновлением пингов, с<a href="#"><span class="form-question fa fa-question"></span></a>
+                            </label>
+                            <div class="col-md-6">
+                                <input type="number" min="1" max="3600" name="pause" id="socket-guard-call-pause" value="" class="form-control" placeholder="1 - 3600" />
+                            </div>
+                        </div>
+
+                        <div class="form-group col-xs-12 form-group-border">
+                            <label for="socket-guard-call-fault-restrict" class="control-label col-md-6">
+                                Ограничение числа сбросов подряд<a href="#"><span class="form-question fa fa-question"></span></a>
+                            </label>
+                            <div class="col-md-6">
+                                <input type="number" min="0" max="255" name="fault-restrict" id="socket-guard-call-fault-restrict" value="" class="form-control" placeholder="0 - выкл; 1 - 255" />
+                            </div>
+                        </div>
+
+                        <div class="form-group col-xs-12 form-group-border">
+                            <label for="socket-guard-call-period" class="control-label col-md-6">
+                                Логика срабатывания сброса<a href="#"><span class="form-question fa fa-question"></span></a>
+                            </label>
+                            <div class="col-md-6">
+                                <label class="control-label"><input type="radio" value="" name="fault-logic" class="radio-inline" /> не ответил хотя бы один опрашиваемый адрес (A, B, C)</label>
+                                <label class="control-label"><input type="radio" value="" name="fault-logic" class="radio-inline" /> не ответил ни один из опрашиваемых адресов (A, B, C)</label>
+                                <label class="control-label"><input type="radio" value="" name="fault-logic" class="radio-inline" /> не ответил адрес A и один из B или C</label>
+                                <label class="control-label"><input type="radio" value="" name="fault-logic" class="radio-inline" /> не ответил адрес А, однако ответил B или C</label>
+                            </div>
+                        </div>
+
+                    </form>
+
+                    <!--Настройка пингера-->
+                    <form class="form-horizontal socket-pinger-edit-form" style="display:none;">
+
+                        <h3 class="col-xs-12">
+                            Пингер
+                        </h3>
+
+                        <div class="form-group col-xs-12 form-group-border">
+                            <label for="socket-pinger-name" class="control-label col-md-6">
+                                Название<a href="#"><span class="form-question fa fa-question"></span></a>
+                            </label>
+                            <div class="col-md-6">
+                                <input type="text" name="name" id="socket-pinger-name" value="" class="form-control" />
+                            </div>
+                        </div>
+
+                        <div class="form-group col-xs-12 form-group-border">
+                            <label for="socket-pinger-server" class="control-label col-md-6">
+                                Адрес сервера<a href="#"><span class="form-question fa fa-question"></span></a>
+                            </label>
+                            <div class="col-md-6">
+                                <input type="text" name="server" id="socket-pinger-server" value="" class="form-control" />
+                            </div>
+                        </div>
+
+                        <div class="form-group col-xs-12 form-group-border">
+                            <label for="socket-pinger-period" class="control-label col-md-6">
+                                Период опрос, с<a href="#"><span class="form-question fa fa-question"></span></a>
+                            </label>
+                            <div class="col-md-6">
+                                <input type="number" min="5" max="900" name="period" id="socket-pinger-period" value="" class="form-control" placeholder="5 - 900" />
+                            </div>
+                        </div>
+
+                        <div class="form-group col-xs-12 form-group-border">
+                            <label for="socket-pinger-timeout" class="control-label col-md-6">
+                                Таймаут одного пинга, мс<a href="#"><span class="form-question fa fa-question"></span></a>
+                            </label>
+                            <div class="col-md-6">
+                                <input type="number" min="100" max="10000" name="timeout" id="socket-pinger-timeout" value="" class="form-control" placeholder="100 - 10000" />
+                            </div>
+                        </div>
+
+                        <div class="form-group col-xs-12 form-group-border">
+                            <label for="socket-pinger-status" class="control-label col-md-6">
+                                Статус<a href="#"><span class="form-question fa fa-question"></span></a>
+                            </label>
+                            <div class="col-md-6">
+                                <div id="socket-pinger-status" class="form-control-static"><span class="fa fa-remove condition condition-off"></span>молчит</div>
+                            </div>
+                        </div>
+                    </form>
+
+                    <!--Настройка расписания-->
+                    <form class="form-horizontal socket-schedule-edit-form">
+
+                        <h3 class="col-xs-12">
+                            Расписание
+                        </h3>
+
+                        <h4 class="col-xs-12">Статус</h4>
+
+                        <div class="form-group col-xs-12 form-group-border">
+                            <label for="socket-schedule-localtime" class="control-label col-md-6">
+                                Локальное время в устройстве<a href="#"><span class="form-question fa fa-question"></span></a>
+                            </label>
+                            <div class="col-md-6">
+                                <div id="socket-schedule-localtime" class="form-control-static">7:18:28, Чт, 30 июн 2015</div>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-xs-12 form-group-border">
+                            <label for="socket-schedule-timezone" class="control-label col-md-6">
+                                Сдвиг локального времени в устройстве<a href="#"><span class="form-question fa fa-question"></span></a>
+                            </label>
+                            <div class="col-md-6">
+                                <div id="socket-schedule-timezone" class="form-control-static">UTC+0</div>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-xs-12 form-group-border">
+                            <label for="socket-schedule-ntp-status" class="control-label col-md-6">
+                                Статус NTP<a href="#"><span class="form-question fa fa-question"></span></a>
+                            </label>
+                            <div class="col-md-6">
+                                <div id="socket-schedule-ntp-status" class="form-control-static">время установлено от основного NTP-сервера</div>
+                            </div>
+                        </div>
+
+                        <h4 class="col-xs-12">Состояние реле по умолчанию</h4>
+
+                        <div class="form-group col-xs-12 form-group-border">
+                            <label for="socket-schedule-default" class="control-label col-md-6">
+                                Состояние реле при сбое установки времени<a href="#"><span class="form-question fa fa-question"></span></a>
+                            </label>
+                            <div class="col-md-6">
+                                <select name="schedule-default" id="socket-schedule-default" class="form-control dropdown">
+                                    <option>Постоянно выкл.</option>
+                                    <option>Постоянно вкл.</option>
+                                    <option>Игнорировать сбой</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <h4 class="col-xs-12">Расписание</h4>
+
+                        <div class="col-xs-12">
+                            <table class="schedule table">
+                                <tr>
+                                    <th>День недели</th>
+                                    <th>Время работы</th>
+                                    <th>Время работы</th>
+                                    <th>Время работы</th>
+                                    <th>Время работы</th>
+                                    <th>Скопировать из предыдущего дня</th>
+                                </tr>
+                                <tr>
+                                    <td class="text-center">
+                                        <div class="form-control-static">пн</div>
+                                    </td>
+                                    <td class="text-center">
+                                        <input type="text" class="form-control form-control-narrow" placeholder="чч:мм" /> - <input type="text" class="form-control form-control-narrow" placeholder="чч:мм" />
+                                    </td>
+                                    <td class="text-center">
+                                        <input type="text" class="form-control form-control-narrow" placeholder="чч:мм" /> - <input type="text" class="form-control form-control-narrow" placeholder="чч:мм" />
+                                    </td>
+                                    <td class="text-center">
+                                        <input type="text" class="form-control form-control-narrow" placeholder="чч:мм" /> - <input type="text" class="form-control form-control-narrow" placeholder="чч:мм" />
+                                    </td>
+                                    <td class="text-center">
+                                        <input type="text" class="form-control form-control-narrow" placeholder="чч:мм" /> - <input type="text" class="form-control form-control-narrow" placeholder="чч:мм" />
+                                    </td>
+                                    <td class="text-center">
+                                        <button class="btn btn-lg btn-default fa fa-copy"></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center">
+                                        <div class="form-control-static">вт</div>
+                                    </td>
+                                    <td class="text-center">
+                                        <input type="text" class="form-control form-control-narrow" placeholder="чч:мм" /> - <input type="text" class="form-control form-control-narrow" placeholder="чч:мм" />
+                                    </td>
+                                    <td class="text-center">
+                                        <input type="text" class="form-control form-control-narrow" placeholder="чч:мм" /> - <input type="text" class="form-control form-control-narrow" placeholder="чч:мм" />
+                                    </td>
+                                    <td class="text-center">
+                                        <input type="text" class="form-control form-control-narrow" placeholder="чч:мм" /> - <input type="text" class="form-control form-control-narrow" placeholder="чч:мм" />
+                                    </td>
+                                    <td class="text-center">
+                                        <input type="text" class="form-control form-control-narrow" placeholder="чч:мм" /> - <input type="text" class="form-control form-control-narrow" placeholder="чч:мм" />
+                                    </td>
+                                    <td class="text-center">
+                                        <button class="btn btn-lg btn-default fa fa-copy"></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center">
+                                        <div class="form-control-static">ср</div>
+                                    </td>
+                                    <td class="text-center">
+                                        <input type="text" class="form-control form-control-narrow" placeholder="чч:мм" /> - <input type="text" class="form-control form-control-narrow" placeholder="чч:мм" />
+                                    </td>
+                                    <td class="text-center">
+                                        <input type="text" class="form-control form-control-narrow" placeholder="чч:мм" /> - <input type="text" class="form-control form-control-narrow" placeholder="чч:мм" />
+                                    </td>
+                                    <td class="text-center">
+                                        <input type="text" class="form-control form-control-narrow" placeholder="чч:мм" /> - <input type="text" class="form-control form-control-narrow" placeholder="чч:мм" />
+                                    </td>
+                                    <td class="text-center">
+                                        <input type="text" class="form-control form-control-narrow" placeholder="чч:мм" /> - <input type="text" class="form-control form-control-narrow" placeholder="чч:мм" />
+                                    </td>
+                                    <td class="text-center">
+                                        <button class="btn btn-lg btn-default fa fa-copy"></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center">
+                                        <div class="form-control-static">чт</div>
+                                    </td>
+                                    <td class="text-center">
+                                        <input type="text" class="form-control form-control-narrow" placeholder="чч:мм" /> - <input type="text" class="form-control form-control-narrow" placeholder="чч:мм" />
+                                    </td>
+                                    <td class="text-center">
+                                        <input type="text" class="form-control form-control-narrow" placeholder="чч:мм" /> - <input type="text" class="form-control form-control-narrow" placeholder="чч:мм" />
+                                    </td>
+                                    <td class="text-center">
+                                        <input type="text" class="form-control form-control-narrow" placeholder="чч:мм" /> - <input type="text" class="form-control form-control-narrow" placeholder="чч:мм" />
+                                    </td>
+                                    <td class="text-center">
+                                        <input type="text" class="form-control form-control-narrow" placeholder="чч:мм" /> - <input type="text" class="form-control form-control-narrow" placeholder="чч:мм" />
+                                    </td>
+                                    <td class="text-center">
+                                        <button class="btn btn-lg btn-default fa fa-copy"></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center">
+                                        <div class="form-control-static">пт</div>
+                                    </td>
+                                    <td class="text-center">
+                                        <input type="text" class="form-control form-control-narrow" placeholder="чч:мм" /> - <input type="text" class="form-control form-control-narrow" placeholder="чч:мм" />
+                                    </td>
+                                    <td class="text-center">
+                                        <input type="text" class="form-control form-control-narrow" placeholder="чч:мм" /> - <input type="text" class="form-control form-control-narrow" placeholder="чч:мм" />
+                                    </td>
+                                    <td class="text-center">
+                                        <input type="text" class="form-control form-control-narrow" placeholder="чч:мм" /> - <input type="text" class="form-control form-control-narrow" placeholder="чч:мм" />
+                                    </td>
+                                    <td class="text-center">
+                                        <input type="text" class="form-control form-control-narrow" placeholder="чч:мм" /> - <input type="text" class="form-control form-control-narrow" placeholder="чч:мм" />
+                                    </td>
+                                    <td class="text-center">
+                                        <button class="btn btn-lg btn-default fa fa-copy"></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center">
+                                        <div class="form-control-static">сб</div>
+                                    </td>
+                                    <td class="text-center">
+                                        <input type="text" class="form-control form-control-narrow" placeholder="чч:мм" /> - <input type="text" class="form-control form-control-narrow" placeholder="чч:мм" />
+                                    </td>
+                                    <td class="text-center">
+                                        <input type="text" class="form-control form-control-narrow" placeholder="чч:мм" /> - <input type="text" class="form-control form-control-narrow" placeholder="чч:мм" />
+                                    </td>
+                                    <td class="text-center">
+                                        <input type="text" class="form-control form-control-narrow" placeholder="чч:мм" /> - <input type="text" class="form-control form-control-narrow" placeholder="чч:мм" />
+                                    </td>
+                                    <td class="text-center">
+                                        <input type="text" class="form-control form-control-narrow" placeholder="чч:мм" /> - <input type="text" class="form-control form-control-narrow" placeholder="чч:мм" />
+                                    </td>
+                                    <td class="text-center">
+                                        <button class="btn btn-lg btn-default fa fa-copy"></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center">
+                                        <div class="form-control-static">вс</div>
+                                    </td>
+                                    <td class="text-center">
+                                        <input type="text" class="form-control form-control-narrow" placeholder="чч:мм" /> - <input type="text" class="form-control form-control-narrow" placeholder="чч:мм" />
+                                    </td>
+                                    <td class="text-center">
+                                        <input type="text" class="form-control form-control-narrow" placeholder="чч:мм" /> - <input type="text" class="form-control form-control-narrow" placeholder="чч:мм" />
+                                    </td>
+                                    <td class="text-center">
+                                        <input type="text" class="form-control form-control-narrow" placeholder="чч:мм" /> - <input type="text" class="form-control form-control-narrow" placeholder="чч:мм" />
+                                    </td>
+                                    <td class="text-center">
+                                        <input type="text" class="form-control form-control-narrow" placeholder="чч:мм" /> - <input type="text" class="form-control form-control-narrow" placeholder="чч:мм" />
+                                    </td>
+                                    <td class="text-center">
+                                        <button class="btn btn-lg btn-default fa fa-copy"></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="6"></td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center">
+                                        <div class="form-control-static">П1</div>
+                                    </td>
+                                    <td class="text-center">
+                                        <input type="text" class="form-control form-control-narrow" placeholder="чч:мм" /> - <input type="text" class="form-control form-control-narrow" placeholder="чч:мм" />
+                                    </td>
+                                    <td class="text-center">
+                                        <input type="text" class="form-control form-control-narrow" placeholder="чч:мм" /> - <input type="text" class="form-control form-control-narrow" placeholder="чч:мм" />
+                                    </td>
+                                    <td class="text-center">
+                                        <input type="text" class="form-control form-control-narrow" placeholder="чч:мм" /> - <input type="text" class="form-control form-control-narrow" placeholder="чч:мм" />
+                                    </td>
+                                    <td class="text-center">
+                                        <input type="text" class="form-control form-control-narrow" placeholder="чч:мм" /> - <input type="text" class="form-control form-control-narrow" placeholder="чч:мм" />
+                                    </td>
+                                    <td class="text-center">
+                                        <button class="btn btn-lg btn-default fa fa-copy"></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center">
+                                        <div class="form-control-static">П2</div>
+                                    </td>
+                                    <td class="text-center">
+                                        <input type="text" class="form-control form-control-narrow" placeholder="чч:мм" /> - <input type="text" class="form-control form-control-narrow" placeholder="чч:мм" />
+                                    </td>
+                                    <td class="text-center">
+                                        <input type="text" class="form-control form-control-narrow" placeholder="чч:мм" /> - <input type="text" class="form-control form-control-narrow" placeholder="чч:мм" />
+                                    </td>
+                                    <td class="text-center">
+                                        <input type="text" class="form-control form-control-narrow" placeholder="чч:мм" /> - <input type="text" class="form-control form-control-narrow" placeholder="чч:мм" />
+                                    </td>
+                                    <td class="text-center">
+                                        <input type="text" class="form-control form-control-narrow" placeholder="чч:мм" /> - <input type="text" class="form-control form-control-narrow" placeholder="чч:мм" />
+                                    </td>
+                                    <td class="text-center">
+                                        <button class="btn btn-lg btn-default fa fa-copy"></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center">
+                                        <div class="form-control-static">П3</div>
+                                    </td>
+                                    <td class="text-center">
+                                        <input type="text" class="form-control form-control-narrow" placeholder="чч:мм" /> - <input type="text" class="form-control form-control-narrow" placeholder="чч:мм" />
+                                    </td>
+                                    <td class="text-center">
+                                        <input type="text" class="form-control form-control-narrow" placeholder="чч:мм" /> - <input type="text" class="form-control form-control-narrow" placeholder="чч:мм" />
+                                    </td>
+                                    <td class="text-center">
+                                        <input type="text" class="form-control form-control-narrow" placeholder="чч:мм" /> - <input type="text" class="form-control form-control-narrow" placeholder="чч:мм" />
+                                    </td>
+                                    <td class="text-center">
+                                        <input type="text" class="form-control form-control-narrow" placeholder="чч:мм" /> - <input type="text" class="form-control form-control-narrow" placeholder="чч:мм" />
+                                    </td>
+                                    <td class="text-center">
+                                        <button class="btn btn-lg btn-default fa fa-copy"></button>
+                                    </td>
+                                </tr>
+
+                            </table>
+                        </div>
+
+                        <h4 class="col-xs-12">Подмена праздников</h4>
+
+                        <div class="col-sm-6">
+                            <table>
+                                <tr>
+                                    <th width="30%">Дата</th>
+                                    <th>Подмена</th>
+                                    <th>Удалить</th>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <input type="text" placeholder="дд.мм.гггг" class="form-control" value="" />
+                                    </td>
+                                    <td>
+                                        <select class="form-control dropdown">
+                                            <option>Понедельник</option>
+                                            <option>Вторник</option>
+                                            <option>Среда</option>
+                                            <option>Четверг</option>
+                                            <option>Пятница</option>
+                                            <option>Суббота</option>
+                                            <option>Воскресенье</option>
+                                        </select>
+                                    </td>
+                                    <td class="text-center">
+                                        <a href="#"><span class="fa fa-remove"></span></a>
+                                    </td>
+                                </tr>
+                            </table>
+                            <br />
+                        </div>
+                        <div class="col-xs-12">
+                            <button class="btn-default btn">
+                                Добавить
+                            </button>
+                        </div>
+
+                    </form>
+
+                    <!--Настройка термо(гиро)стата-->
+                    <form class="form-horizontal socket-thermostat-edit-form" style="display:none;">
+
+                        <h3 class="col-xs-12">
+                            Термо(гиро)стат
+                        </h3>
+
+                        <h4 class="col-xs-12">Статус</h4>
+
+                        <div class="form-group col-xs-12 form-group-border">
+                            <label for="socket-thermostat-status" class="control-label col-md-6">
+                                Статус<a href="#"><span class="form-question fa fa-question"></span></a>
+                            </label>
+                            <div class="col-md-6">
+                                <div id="socket-thermostat-status" class="form-control-static">выше (порог 10)</div>
+                            </div>
+                        </div>
+                        <div class="form-group col-xs-12 form-group-border">
+                            <label for="socket-thermostat-current-value" class="control-label col-md-6">
+                                Текущее значение<a href="#"><span class="form-question fa fa-question"></span></a>
+                            </label>
+                            <div class="col-md-6">
+                                <div id="socket-thermostat-current-value" class="form-control-static">20°C</div>
+                            </div>
+                        </div>
+
+                        <h4 class="col-xs-12">Настройки</h4>
+
+                        <div class="form-group col-xs-12 form-group-border">
+                            <label for="socket-thermostat-sensor" class="control-label col-md-6">
+                                Датчик<a href="#"><span class="form-question fa fa-question"></span></a>
+                            </label>
+                            <div class="col-md-6">
+                                <select name="sensor" id="socket-thermostat-sensor" class="form-control dropdown">
+                                    <option>Термостат 1</option>
+                                    <option>Термостат 2</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-xs-12 form-group-border">
+                            <label for="socket-thermostat-limit" class="control-label col-md-6">
+                                Порог, °C или % отн. влажности<a href="#"><span class="form-question fa fa-question"></span></a>
+                            </label>
+                            <div class="col-md-6">
+                                <input type="number" min="1" max="1000" name="limit" id="socket-thermostat-limit" value="" class="form-control" placeholder="" />
+                            </div>
+                        </div>
+
+                        <div class="form-group col-xs-12 form-group-border">
+                            <label for="socket-thermostat-hysteresis" class="control-label col-md-6">
+                                Гистерезис переключения, °C или % отн. влажности<a href="#"><span class="form-question fa fa-question"></span></a>
+                            </label>
+                            <div class="col-md-6">
+                                <input type="number" min="1" max="1000" name="hysteresis" id="socket-thermostat-hysteresis" value="" class="form-control" placeholder="" />
+                            </div>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+            <div class="buttons">
+                <button class="btn btn-default">
+                    Применить
+                </button>
+                <button class="btn btn-default cancel">
+                    Отмена
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/jquery-2.1.3.min.js"></script>
+    <script src="js/overlay.js"></script>
+
+</body>
+</html>

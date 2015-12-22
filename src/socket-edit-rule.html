@@ -1,0 +1,638 @@
+﻿<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/font-awesome.css">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body class="noscroll">
+    <div class="container-fluid">
+        <div class="header row">
+            <div class="logo col-md-4">
+                <img src="img/logo_text.png" alt="Netping Logo">
+            </div>
+            <div class="info col-md-8">
+                <div class="row">
+                    <div class="col-md-3"><h1>DKST 69</h1></div>
+                    <div class="col-md-4 info">
+                        <p>Имя: dkst.localhost</p>
+
+                        <p>Адрес: Москва, ул. Пушкина, 17</p>
+                    </div>
+                    <div class="col-md-3">
+                        <a href="#" class="notifications">Уведомления (3) <span class="fa fa-angle-down"></span></a>
+                    </div>
+                    <div class="col-md-2 text-right">
+                        <p>admin</p>
+                        <a>выход <span class="fa fa-sign-out"></span></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="page row">
+
+            <div class="menu col-md-3">
+                <ul>
+                    <li>
+                        <a href="index.html">Главная страница</a>
+                    </li>
+                    <li>
+                        <a href="admin.html">Администрирование</a>
+                    </li>
+                    <li>
+                        <a href="network-settings.html">Сетевые параметры</a>
+                    </li>
+                    <li>
+                        <a href="notifications-settings.html">Способы уведомлений</a>
+                    </li>
+                    <li>
+                        <a href="firmware.html">Прошивка</a>
+                    </li>
+                    <li>
+                        <a href="log.html">Журнал</a>
+                    </li>
+                    <li class="active">
+                        <a href="sockets.html">Розетки</a>
+                    </li>
+                    <li>
+                        <a href="sensors.html">Датчики</a>
+                    </li>
+                    <li>
+                        <a href="notifications.html">Уведомления</a>
+                    </li>
+                    <li>
+                        <a href="reports.html">Отчёты</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="content col-md-9">
+                <h3>
+                    Настройка розетки №1: Чайник
+                </h3>
+                <form class="form-horizontal socket-edit-form">
+
+                    <div class="form-group col-md-10 col-lg-8 form-group-border">
+                        <label for="socket-name" class="control-label col-md-6">
+                            Что подключено<a href="#"><span class="form-question fa fa-question"></span></a>
+                        </label>
+                        <div class="col-md-6">
+                            <input type="text" name="name" id="socket-name" value="" class="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-10 col-lg-8 form-group-border">
+                        <label for="socket-type" class="control-label col-md-6">
+                            Тип розетки<a href="#"><span class="form-question fa fa-question"></span></a>
+                        </label>
+                        <div class="col-md-6">
+                            <select type="text" name="type" id="socket-type" class="form-control dropdown">
+                                <option value="local">Локальная</option>
+                                <option value="remote">Удаленная</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-10 col-lg-8 form-group-border">
+                        <label for="socket-ip-fqdn" class="control-label col-md-6">
+                            IP/FQDN<a href="#"><span class="form-question fa fa-question"></span></a>
+                        </label>
+                        <div class="col-md-6">
+                            <input type="text" name="ip-fqdn" id="socket-ip-fqdn" value="" class="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-10 col-lg-8 form-group-border">
+                        <label for="socket-snmp" class="control-label col-md-6">
+                            SNMP community<a href="#"><span class="form-question fa fa-question"></span></a>
+                        </label>
+                        <div class="col-md-6">
+                            <input type="text" name="snmp" id="socket-snmp" value="" class="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-10 col-lg-8 form-group-border">
+                        <label for="socket-port" class="control-label col-md-6">
+                            Номер порта<a href="#"><span class="form-question fa fa-question"></span></a>
+                        </label>
+                        <div class="col-md-6">
+                            <input type="number" name="port" id="socket-port" value="" class="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-10 col-lg-8 form-group-border">
+                        <label for="socket-delay-minutes" class="control-label col-md-6">
+                            Задержка перед включением<a href="#"><span class="form-question fa fa-question"></span></a>
+                        </label>
+                        <div class="col-md-6">
+                            <input type="number" name="delay-minutes" min="0" max="59" id="socket-delay-minutes" value="" class="form-control form-control-narrow" placeholder="0-59" /> мин
+                            <input type="number" name="delay-seconds" min="0" max="59" id="socket-delay-seconds" value="" class="form-control form-control-narrow" placeholder="0-59" /> сек
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-10 col-lg-8 form-group-border">
+                        <label for="socket-port" class="control-label col-md-6">
+                            Логика<a href="#"><span class="form-question fa fa-question"></span></a>
+                        </label>
+                        <div class="col-md-6">
+                            <input type="checkbox" name="logic" id="socket-logic" class="checkbox" />
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-10 col-lg-8">
+                        <h4>Правила логики</h4>
+                    </div>
+
+                    <div class="form-group col-md-10 col-lg-8 form-group-border">
+                        <label for="socket-name" class="control-label col-md-6">
+                            Состояние модуля "Логика"<a href="#"><span class="form-question fa fa-question"></span></a>
+                        </label>
+                        <div class="col-md-6">
+                            <div type="text" name="name" id="socket-name" value="" class="form-control-static danger">
+                                <span class="fa fa-times condition condition-off"></span>неактивна
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-10 col-lg-8">
+                        <h5>Правила</h5>
+                        <button class="btn btn-default">
+                            Добавить правило
+                        </button>
+                    </div>
+
+                    <div class="form-group col-md-10 col-lg-8">
+                        <h4>
+                            Список сторожей
+                        </h4>
+                        <table class="table">
+                            <tr>
+                                <th>Название</th>
+                                <th>Серверы</th>
+                                <th>Изменить</th>
+                                <th>Удалить</th>
+                            </tr>
+                            <tr>
+                                <td>Локальный сторож</td>
+                                <td>192.168.0.1, 192.168.0.10, 192.168.0.80</td>
+                                <td class="text-center"><a href="#" class="fa fa-pencil"></a></td>
+                                <td class="text-center"><a href="#" class="fa fa-remove"></a></td>
+                            </tr>
+                            <tr>
+                                <td>Сторож 2</td>
+                                <td>192.168.0.1, 192.168.0.10, 192.168.0.80</td>
+                                <td class="text-center"><a href="#" class="fa fa-pencil"></a></td>
+                                <td class="text-center"><a href="#" class="fa fa-remove"></a></td>
+                            </tr>
+                        </table>
+                        <button class="btn btn-default">
+                            Добавить сторожа
+                        </button>
+                    </div>
+
+                    <div class="form-group col-md-10 col-lg-8">
+                        <h4>
+                            Пингеры
+                        </h4>
+                        <table class="table">
+                            <tr>
+                                <th>Название</th>
+                                <th>Адрес сервера</th>
+                                <th>Статус</th>
+                                <th>Изменить</th>
+                                <th>Удалить</th>
+                            </tr>
+                            <tr>
+                                <td>Пингер 1</td>
+                                <td>192.168.0.1, 192.168.0.10, 192.168.0.80</td>
+                                <td class="text-center"><span class="fa fa-times condition condition-off"></span>молчит</td>
+                                <td class="text-center"><a href="#" class="fa fa-pencil"></a></td>
+                                <td class="text-center"><a href="#" class="fa fa-remove"></a></td>
+                            </tr>
+                            <tr>
+                                <td>Пингер 2</td>
+                                <td>192.168.0.1, 192.168.0.10, 192.168.0.80</td>
+                                <td class="text-center"><span class="fa fa-times condition condition-on"></span>отвечает</td>
+                                <td class="text-center"><a href="#" class="fa fa-pencil"></a></td>
+                                <td class="text-center"><a href="#" class="fa fa-remove"></a></td>
+                            </tr>
+                        </table>
+                        <button class="btn btn-default">
+                            Добавить пингер
+                        </button>
+                    </div>
+
+                    <div class="form-group col-md-10 col-lg-8">
+                        <h4>
+                            Расписания
+                        </h4>
+                        <table class="table">
+                            <tr>
+                                <th>Название</th>
+                                <th>Изменить</th>
+                                <th>Удалить</th>
+                            </tr>
+                            <tr>
+                                <td>Основное расписание</td>
+                                <td class="text-center"><a href="#" class="fa fa-pencil"></a></td>
+                                <td class="text-center"><a href="#" class="fa fa-remove"></a></td>
+                            </tr>
+                            <tr>
+                                <td>Расписание 2</td>
+                                <td class="text-center"><a href="#" class="fa fa-pencil"></a></td>
+                                <td class="text-center"><a href="#" class="fa fa-remove"></a></td>
+                            </tr>
+                        </table>
+                        <button class="btn btn-default">
+                            Добавить расписание
+                        </button>
+                    </div>
+
+                    <div class="form-group col-md-10 col-lg-8">
+                        <h4>
+                            Термо(гиро)статы
+                        </h4>
+                        <table class="table">
+                            <tr>
+                                <th>Название</th>
+                                <th>Статус</th>
+                                <th>Изменить</th>
+                                <th>Удалить</th>
+                            </tr>
+                            <tr>
+                                <td>Термостат 1</td>
+                                <td class="text-center">выше (порог 10)</td>
+                                <td class="text-center"><a href="#" class="fa fa-pencil"></a></td>
+                                <td class="text-center"><a href="#" class="fa fa-remove"></a></td>
+                            </tr>
+                            <tr>
+                                <td>Термостат 2</td>
+                                <td class="text-center">сбой датчика</td>
+                                <td class="text-center"><a href="#" class="fa fa-pencil"></a></td>
+                                <td class="text-center"><a href="#" class="fa fa-remove"></a></td>
+                            </tr>
+                        </table>
+                        <button class="btn btn-default">
+                            Добавить термостат
+                        </button>
+                    </div>
+
+                    <div class="form-group col-md-10 col-lg-8">
+                        <input type="submit" value="Применить" class="btn btn-default" />
+                        <button class="btn btn-default">Отмена</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="col-xs-6">Copyright © ЗАО "Алентис Электроникс"</div>
+        <div class="col-xs-6 text-right">Время непрерывной работы: 3 д 14 ч 33 м 15 с</div>
+    </div>
+
+    <div class="overlay active">
+        <div class="window">
+            <div class="content">
+                <div class="row">
+                    <!-- Настройка сторожа-->
+                    <form class="form-horizontal socket-rule-edit">
+
+                        <div class="col-xs-12">
+                            <h4>
+                                Правила
+                            </h4>
+                        </div>
+
+                        <div class="col-xs-12">
+
+                            <div class="socket-rule">
+                                <span>Если</span>
+                                <div class="socket-rule-condition">
+                                    <span class="fa fa-pencil"></span>
+                                </div>
+                                <div class="fa fa-plus-circle"></div>
+                                <span>то</span>
+                                <div class="socket-rule-condition socket-rule-condition-result">
+                                    Включить "Чайник"
+                                    <span class="fa fa-pencil"></span>
+                                </div>
+                                <span class="fa fa-remove"></span>
+                            </div>
+
+                            <div class="socket-rule">
+                                <span>Если</span>
+                                <div class="socket-rule-condition">
+                                    <select class="socket-rule-condition-name">
+                                        <option>RESET</option>
+                                    </select>
+                                    =
+                                    <select class="socket-rule-condition-value">
+                                        <option>Да</option>
+                                        <option>Нет</option>
+                                    </select>
+                                    <span class="fa fa-check-circle"></span>
+                                    <span class="fa fa-times-circle"></span>
+                                </div>
+                                <div class="fa fa-plus-circle"></div>
+
+                                <span>то</span>
+                                <div class="socket-rule-condition socket-rule-condition-result">
+                                    Включить "Чайник"
+                                    <span class="fa fa-pencil"></span>
+                                </div>
+                                <span class="fa fa-remove"></span>
+                            </div>
+
+                            <div class="socket-rule">
+                                <span>Если</span>
+                                <div class="socket-rule-condition">
+                                    <select class="socket-rule-condition-name">
+                                        <option>Термостат 1</option>
+                                    </select>
+                                    <select>
+                                        <option>=</option>
+                                        <option><</option>
+                                        <option>></option>
+                                        <option>≠</option>
+                                    </select>
+                                    <input type="text" class="socket-rule-condition-value" />
+                                    <span class="fa fa-check-circle"></span>
+                                    <span class="fa fa-times-circle"></span>
+                                </div>
+                                <div class="fa fa-plus-circle"></div>
+
+                                <span>то</span>
+                                <div class="socket-rule-condition socket-rule-condition-result">
+                                    Включить "Чайник"
+                                    <span class="fa fa-pencil"></span>
+                                </div>
+                                <span class="fa fa-remove"></span>
+                            </div>
+
+                            <div class="socket-rule">
+                                <span>Если</span>
+                                <div class="socket-rule-condition">
+                                    <select class="socket-rule-condition-name">
+                                        <option>Локальный сторож</option>
+                                    </select>
+                                    =
+                                    <select class="socket-rule-condition-value">
+                                        <option>Норма</option>
+                                        <option>Не отвечает</option>
+                                    </select>
+                                    <span class="fa fa-check-circle"></span>
+                                    <span class="fa fa-times-circle"></span>
+                                </div>
+                                <div class="fa fa-plus-circle"></div>
+
+                                <span>то</span>
+                                <div class="socket-rule-condition socket-rule-condition-result">
+                                    Включить "Чайник"
+                                    <span class="fa fa-pencil"></span>
+                                </div>
+                                <span class="fa fa-remove"></span>
+                            </div>
+
+                            <div class="socket-rule">
+                                <span>Если</span>
+                                <div class="socket-rule-condition">
+                                    <select class="socket-rule-condition-name">
+                                        <option>Пингер 1</option>
+                                    </select>
+                                    =
+                                    <select class="socket-rule-condition-value">
+                                        <option>Молчит</option>
+                                        <option>Не отвечает</option>
+                                    </select>
+                                    <span class="fa fa-check-circle"></span>
+                                    <span class="fa fa-times-circle"></span>
+                                </div>
+                                <div class="fa fa-plus-circle"></div>
+
+                                <span>то</span>
+                                <div class="socket-rule-condition socket-rule-condition-result">
+                                    Включить "Чайник"
+                                    <span class="fa fa-pencil"></span>
+                                </div>
+                                <span class="fa fa-remove"></span>
+                            </div>
+
+                            <div class="socket-rule">
+                                <span>Если</span>
+                                <div class="socket-rule-condition">
+                                    <select class="socket-rule-condition-name">
+                                        <option>Основное расписание</option>
+                                    </select>
+                                    =
+                                    <select class="socket-rule-condition-value">
+                                        <option>Включено</option>
+                                        <option>Выключено</option>
+                                    </select>
+                                    <span class="fa fa-check-circle"></span>
+                                    <span class="fa fa-times-circle"></span>
+                                </div>
+                                <div class="fa fa-plus-circle"></div>
+
+                                <span>то</span>
+                                <div class="socket-rule-condition socket-rule-condition-result">
+                                    Включить "Чайник"
+                                    <span class="fa fa-pencil"></span>
+                                </div>
+                                <span class="fa fa-remove"></span>
+                            </div>
+
+                            <div class="socket-rule">
+                                <span>Если</span>
+                                <div class="socket-rule-condition">
+                                    <span class="socket-rule-condition-name">"Основное расписание"</span>
+                                    =
+                                    <span class="socket-rule-condition-value">Включено</span>
+                                    <span class="fa fa-pencil"></span>
+                                </div>
+                                <div class="fa fa-plus-circle"></div>
+                                <div class="socket-rule-operand">или</div>
+                                <div class="fa fa-chevron-circle-down"></div>
+                                <div class="socket-rule-condition">
+                                    <span class="socket-rule-condition-name">"Расписание 2"</span>
+                                    =
+                                    <span class="socket-rule-condition-value">Выключено</span>
+                                    <span class="fa fa-pencil"></span>
+                                </div>
+                                <div class="fa fa-plus-circle"></div>
+
+                                <span>то</span>
+                                <div class="socket-rule-condition socket-rule-condition-result">
+                                    Перезагрузить "Чайник" на 5 сек
+                                    <span class="fa fa-pencil"></span>
+                                </div>
+                                <span class="fa fa-remove"></span>
+                            </div>
+
+                            <div class="socket-rule">
+                                <span>Если</span>
+                                <div class="socket-rule-condition">
+                                    <span class="socket-rule-condition-name">"Основное расписание"</span>
+                                    =
+                                    <span class="socket-rule-condition-value">Включено</span>
+                                    <span class="fa fa-pencil"></span>
+                                </div>
+                                <div class="fa fa-plus-circle"></div>
+                                <div class="socket-rule-operand">или</div>
+                                <div class="fa fa-chevron-circle-down"></div>
+                                <div class="socket-rule-condition">
+                                    <span class="socket-rule-condition-name">"Расписание 2"</span>
+                                    =
+                                    <span class="socket-rule-condition-value">Выключено</span>
+                                    <span class="fa fa-pencil"></span>
+                                </div>
+                                <div class="fa fa-plus-circle"></div>
+
+                                <span>то</span>
+                                <div class="socket-rule-condition socket-rule-condition-result">
+                                    <select>
+                                        <option>Включить "Чайник"</option>
+                                        <option>Выключить "Чайник"</option>
+                                        <option>Перезагрузить "Чайник" на</option>
+                                    </select>
+                                    <span class="fa fa-check-circle"></span>
+                                    <span class="fa fa-times-circle"></span>
+                                </div>
+                                <span class="fa fa-remove"></span>
+                            </div>
+
+                            <div class="socket-rule">
+                                <span>Если</span>
+                                <div class="socket-rule-condition">
+                                    <span class="socket-rule-condition-name">"Основное расписание"</span>
+                                    =
+                                    <span class="socket-rule-condition-value">Включено</span>
+                                    <span class="fa fa-pencil"></span>
+                                </div>
+                                <div class="fa fa-plus-circle"></div>
+                                <div class="socket-rule-operand">или</div>
+                                <div class="fa fa-chevron-circle-down"></div>
+                                <div class="socket-rule-condition">
+                                    <span class="socket-rule-condition-name">"Расписание 2"</span>
+                                    =
+                                    <span class="socket-rule-condition-value">Выключено</span>
+                                    <span class="fa fa-pencil"></span>
+                                </div>
+                                <div class="fa fa-plus-circle"></div>
+
+                                <span>то</span>
+                                <div class="socket-rule-condition socket-rule-condition-result">
+                                    <select>
+                                        <option>Включить "Чайник"</option>
+                                        <option>Выключить "Чайник"</option>
+                                        <option selected>Перезагрузить "Чайник" на</option>
+                                    </select>
+                                    <input type="text" class="form-control-narrow" />
+                                    секунд
+                                    <span class="fa fa-check-circle"></span>
+                                    <span class="fa fa-times-circle"></span>
+                                </div>
+                                <span class="fa fa-remove"></span>
+                            </div>
+
+                            <div class="socket-rule">
+                                <span>Если</span>
+                                <div class="socket-rule-condition">
+                                    <span class="socket-rule-condition-name">"Основное расписание"</span>
+                                    =
+                                    <span class="socket-rule-condition-value">Включено</span>
+                                    <span class="fa fa-pencil"></span>
+                                </div>
+                                <div class="fa fa-plus-circle"></div>
+                                <div class="socket-rule-operand">
+                                    или
+
+                                </div>
+                                <div class="fa fa-chevron-circle-down">
+                                    <div class="socket-rule-operand-menu">
+                                        <ul>
+                                            <li>Удалить</li>
+                                            <li>И</li>
+                                            <li>ИЛИ</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="socket-rule-condition">
+                                    <span class="socket-rule-condition-name">"Расписание 2"</span>
+                                    =
+                                    <span class="socket-rule-condition-value">Выключено</span>
+                                    <span class="fa fa-pencil"></span>
+                                </div>
+                                <div class="fa fa-plus-circle"></div>
+
+                                <span>то</span>
+                                <div class="socket-rule-condition socket-rule-condition-result">
+                                    Перезагрузить "Чайник" на 5 сек
+                                    <span class="fa fa-pencil"></span>
+                                </div>
+                                <span class="fa fa-remove"></span>
+                            </div>
+
+                            <div class="socket-rule">
+                                <span>Если</span>
+                                <div class="socket-rule-condition">
+                                    <span class="socket-rule-condition-name">"Основное расписание"</span>
+                                    =
+                                    <span class="socket-rule-condition-value">Включено</span>
+                                    <span class="fa fa-pencil"></span>
+                                </div>
+                                <div class="fa fa-plus-circle">
+                                    <div class="socket-rule-operand-menu">
+                                        <ul>
+                                            <li>И</li>
+                                            <li>ИЛИ</li>
+                                            <li>И()</li>
+                                            <li>ИЛИ()</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="socket-rule-operand">
+                                    или
+                                </div>
+                                <div class="fa fa-chevron-circle-down"></div>
+                                <div class="socket-rule-condition">
+                                    <span class="socket-rule-condition-name">"Расписание 2"</span>
+                                    =
+                                    <span class="socket-rule-condition-value">Выключено</span>
+                                    <span class="fa fa-pencil"></span>
+                                </div>
+                                <div class="fa fa-plus-circle"></div>
+
+                                <span>то</span>
+                                <div class="socket-rule-condition socket-rule-condition-result">
+                                    Перезагрузить "Чайник" на 5 сек
+                                    <span class="fa fa-pencil"></span>
+                                </div>
+                                <span class="fa fa-remove"></span>
+                            </div>
+
+                            <br />
+                            <button class="btn btn-default">Добавить правило</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+            <div class="buttons">
+                <button class="btn btn-default">
+                    Применить
+                </button>
+                <button class="btn btn-default cancel">
+                    Отмена
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/jquery-2.1.3.min.js"></script>
+    <script src="js/overlay.js"></script>
+</body>
+</html>
